@@ -1,0 +1,3 @@
+import { ApplicationForm } from '@/components/site/application-form';
+export const metadata={title:'1시간 무료 상담 신청',description:'사업의 주소와 가장 먼저 해결하고 싶은 문제를 알려주세요. 내용 확인 후 상담 일정을 조율합니다.'};
+export default function Apply(){return <main id="main" className="container application-layout"><section className="application-intro"><p className="eyebrow">첫 상담 1시간 무료</p><h1>지금 막힌 일부터<br/>이야기해요.</h1><p className="lead">사업의 상황과 가장 큰 문제,<br/>코칭 참여 여건과 진행 방향을 확인합니다.</p><ol className="apply-steps"><li><span>01</span> 신청 내용 확인</li><li><span>02</span> 카카오톡 연락 · 일정 조율</li><li><span>03</span> Zoom으로 1시간 상담</li></ol><p className="meta">상세 진단 보고서와 실제 수정·제작은 유료 코칭에서 진행합니다. 고객 계정 비밀번호나 불필요한 개인 자료는 적지 마세요.</p></section><ApplicationForm/></main>}
