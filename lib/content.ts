@@ -119,15 +119,44 @@ export const notes: Note[] = [
 
 ];
 
-export const caseSummaries = [
+export type CaseSummary = {
+  slug: string;
+  tag: string;
+  title: string;
+  summary: string;
+  category: 'customer' | 'self';
+  listed?: boolean;
+  recordKind?: 'ai' | 'search';
+  period?: string;
+  image: string;
+  alt: string;
+};
+
+export const caseSummaries: CaseSummary[] = [
+  {
+    slug: 'ai-search-visits', tag: '고객 사례 · 생활용품 쇼핑몰', category: 'customer', recordKind: 'ai',
+    title: 'AI 검색에서 들어온\n방문 기록',
+    summary: 'ChatGPT 경로로 기록된 유입을 살펴봤습니다. 일별 등락과 함께 기간 후반에 유입이 늘어난 흐름을 확인할 수 있습니다. 작업을 이어간 기간과 숫자를 읽을 때 알아둘 점을 함께 설명합니다.',
+    period: 'GA4 · 2026.01.01–09.12',
+    image: '/images/household-chatgpt-2026.png', alt: '2026년 1월 1일~9월 12일 GA4 세션 소스·매체 보고서: GPT 필터를 적용한 일별 유입과 참여 지표',
+  },
+  {
+    slug: 'sports-search-records', tag: '고객 사례 · 스포츠용품 쇼핑몰', category: 'customer', recordKind: 'search',
+    title: '구글 검색 클릭\n1,270회 → 1,860회',
+    summary: '같은 기간을 1년 전과 비교한 기록입니다. 노출은 4.3만 회에서 6.23만 회로, 평균 순위는 6.9위에서 5.7위로 올랐습니다. 상품 정보를 정비하며 확인한 자료입니다.',
+    period: '서치콘솔 · 2025년·2026년 5월 11일~6월 12일 비교',
+    image: '/images/sports-search-2025-2026.png', alt: '스포츠용품 쇼핑몰의 서치콘솔 전년 동기 비교: 클릭 1.27천→1.86천, 노출 4.3만→6.23만, 평균 순위 6.9→5.7',
+  },
   {
     slug: 'search-records', tag: '고객 사례 · 식품 쇼핑몰',
+    category: 'customer', listed: false,
     title: '식품 쇼핑몰의 상품 정보와\n구글 검색 기록',
     summary: '상품 제목과 설명, 이미지 정보를 정비하면서 확인한 자료입니다. 같은 쇼핑몰의 검색 클릭과 자연검색 매출을 각각 어떤 기간에 비교했는지 설명합니다.',
     image: '/images/search-2022.webp', alt: '2022년 구글 서치콘솔 원본 화면',
   },
   {
     slug: 'content-workflow', tag: '세온비즈 자체 제작',
+    category: 'self',
     title: '써둔 원고로\n25초 영상 만들기',
     summary: '상세페이지 HTML 변환에 관한 원고를 짧은 영상으로 만들었습니다. 어떤 내용을 남기고 장면을 어떻게 나눴는지 소개합니다.',
     image: '/images/content-poster.png', alt: '직접 만든 짧은 영상의 표지',

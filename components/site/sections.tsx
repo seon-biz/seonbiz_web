@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { CaseEvidence } from "./case-evidence";
 export function Reveal({children,className=""}:{children:React.ReactNode;className?:string}){const ref=useRef<HTMLDivElement>(null);useEffect(()=>{const el=ref.current;if(!el||matchMedia('(prefers-reduced-motion: reduce)').matches)return;el.classList.add('reveal-ready');const observer=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){el.classList.add('revealed');observer.disconnect()}},{threshold:.12});observer.observe(el);return()=>observer.disconnect()},[]);return <div ref={ref} className={className}>{children}</div>}
 export function SearchFigures(){return <div className="search-figures"><figure><figcaption><span>2021.05.23 — 06.22</span><strong>클릭 651회</strong></figcaption><img src="/images/search-2021.webp" width="1024" height="457" alt="2021년 서치콘솔: 웹 검색 클릭 651회, 노출 3.25만 회" loading="lazy"/></figure><figure><figcaption><span>2022.05.23 — 06.22</span><strong>클릭 약 2,840회</strong></figcaption><img src="/images/search-2022.webp" width="1024" height="456" alt="2022년 서치콘솔: 웹 검색 클릭 2.84천 회, 노출 19.1만 회" loading="lazy"/></figure></div>}
 export function WorkShowcase() {
@@ -47,20 +48,14 @@ export function WorkShowcase() {
         </TabsList>
         <div className="work-stage">
           <TabsContent value="ai" id="work-panel-ai" aria-labelledby="work-tab-ai" className="work-panel">
-            <div className="case-summary ai-case-summary" aria-label="생활용품 쇼핑몰 AI 유입 사례 요약">
-              <p className="kicker">GA4 · 2026년 1~9월 · 사례 요약</p>
-              <dl><div><dt>AI 검색 유입</dt><dd><strong>증가 추세</strong><span>방문 기록을 꾸준히 확인</span></dd></div><div><dt>방문자의 참여율</dt><dd><strong>약 두 배</strong><span>사이트 평균 대비</span></dd></div><div><dt>머무는 시간</dt><dd><strong>더 길게</strong><span>사이트 평균 대비</span></dd></div></dl>
-              <p>기간 내 추세와 참여 품질을 정리한 요약입니다. 여러 요인이 반영된 결과이며, 특정 수정 하나의 효과를 뜻하지는 않습니다.</p>
-            </div>
-            <div className="work-caption"><div><p className="kicker">고객 사례 · 생활용품 쇼핑몰</p><h3>AI 검색에서 들어온 방문이<br/>계속 늘고 있습니다</h3></div><div><p>1월부터 9월까지 꾸준히 늘었고, 7월 이후 뚜렷하게 올라갔습니다. 이 방문자들은 사이트 평균보다 참여율이 약 두 배 높고, 머무는 시간도 깁니다.</p><p>GEO 작업을 꾸준히 이어간 기간의 기록입니다. 여러 요인이 반영된 결과이며, 특정 수정 하나의 효과를 뜻하지는 않습니다.</p></div></div>
+            <CaseEvidence kind="ai"/>
+            <div className="work-caption"><div><p className="kicker">고객 사례 · 생활용품 쇼핑몰</p><h3>ChatGPT를 거친<br/>방문 기록입니다</h3></div><div><p>2026년 1월 1일부터 9월 12일까지 GA4에서 “GPT”를 검색한 결과입니다. 화면의 참여율은 사이트 전체 평균보다 약 두 배 높고, 세션당 평균 참여 시간도 깁니다.</p><p>AI 검색을 위한 작업을 이어간 기간의 기록입니다. 일별 등락과 소스/매체 표기를 함께 확인하며, 특정 수정 하나의 효과나 모든 AI 서비스의 유입을 뜻하지는 않습니다.</p></div></div>
+            <a href="/cases/ai-search-visits" className="text-link">작업 내용과 자료 보기 <ArrowRight size={18}/></a>
           </TabsContent>
           <TabsContent value="search" id="work-panel-search" aria-labelledby="work-tab-search" className="work-panel">
-            <div className="case-summary" aria-label="스포츠용품 쇼핑몰 전년 동기 대비 검색 기록 요약">
-              <p className="kicker">구글 서치콘솔 · 전년 동기 대비 · 사례 요약</p>
-              <dl><div><dt>검색 클릭</dt><dd><span>1,270회 →</span><strong>1,860회</strong></dd></div><div><dt>검색 노출</dt><dd><span>4.3만 회 →</span><strong>6.23만 회</strong></dd></div><div><dt>평균 순위</dt><dd><span>6.9위 →</span><strong>5.7위</strong></dd></div></dl>
-              <p>같은 기간을 1년 전과 비교한 요약입니다. 여러 요인이 반영된 결과이며, 특정 수정 하나의 효과를 뜻하지는 않습니다.</p>
-            </div>
-            <div className="work-caption"><div><p className="kicker">고객 사례 · 스포츠용품 쇼핑몰</p><h3>구글 검색 클릭<br/>1,270회 → 1,860회</h3></div><div><p>같은 기간을 1년 전과 비교한 기록입니다. 노출은 4.3만 회에서 6.23만 회로, 평균 순위는 6.9위에서 5.7위로 올랐습니다.</p><p>상품 제목과 설명, 이미지 정보를 정비하며 살펴본 결과입니다. 여러 요인이 반영된 결과이며, 특정 수정 하나의 효과를 뜻하지는 않습니다.</p></div></div>
+            <CaseEvidence kind="search"/>
+            <div className="work-caption"><div><p className="kicker">고객 사례 · 스포츠용품 쇼핑몰</p><h3>구글 검색 클릭<br/>1,270회 → 1,860회</h3></div><div><p>2025년과 2026년 각각 5월 11일~6월 12일을 비교한 기록입니다. 노출은 4.3만 회에서 6.23만 회로, 평균 순위는 6.9위에서 5.7위로 올랐습니다.</p><p>상품 제목과 설명, 이미지 정보를 정비하며 살펴본 결과입니다. 클릭 수는 화면의 반올림 표기를 풀어 쓴 값이며, 특정 수정 하나의 효과를 뜻하지는 않습니다.</p></div></div>
+            <a href="/cases/sports-search-records" className="text-link">작업 내용과 자료 보기 <ArrowRight size={18}/></a>
           </TabsContent>
           <TabsContent value="content" id="work-panel-content" aria-labelledby="work-tab-content" className="work-panel">
             <div className="content-scene"><div><p className="kicker">세온비즈 자체 제작</p><h3>써둔 원고로<br/>25초 영상 만들기</h3><p>원고에서 꼭 필요한 내용을 골라<br/>약 25초짜리 영상으로 만들었습니다.</p></div><img src="/images/content-poster.png" width="1080" height="1920" loading="lazy" alt="직접 제작한 영상 표지: HTML 변환, 주력 상품부터?"/><img src="/images/content-scene.png" width="1080" height="1920" loading="lazy" alt="영상의 다음 장면: 계속 팔 수 있어야 하니까"/></div>
