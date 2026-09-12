@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { notes } from "@/lib/content";
+import { ContentFormatsChecklist, ContentFormatsCoachingLinks, ContentFormatsPreview } from "@/components/site/content-formats-note";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -22,7 +23,7 @@ export default async function NoteDetail({ params }: Props) {
       <header className="article-header">
         <a href="/notes" className="back-link">코칭 노트</a>
         <p className="eyebrow">{note.tag}</p>
-        <h1 className={slug === 'customer-questions' ? 'customer-questions-title' : undefined}>{note.title}</h1>
+        <h1 className={slug === 'customer-questions' || slug === 'content-formats' ? 'balanced-note-title' : undefined}>{note.title}</h1>
         <p className="article-meta">세온비즈 · <time dateTime="2026-09-12">2026.09.12</time></p>
       </header>
       <article className="article-body">
@@ -32,6 +33,8 @@ export default async function NoteDetail({ params }: Props) {
             <span className="step-index">{String(i + 1).padStart(2, '0')}</span>
             <h2>{title}</h2>
             {paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            {slug === 'content-formats' && i === 1 && <ContentFormatsPreview />}
+            {slug === 'content-formats' && i === 2 && <ContentFormatsChecklist />}
             {note.example?.afterSection === i + 1 && (
               <aside className="article-example" aria-labelledby="article-example-title">
                 <h3 id="article-example-title">{note.example.title}</h3>
@@ -50,6 +53,7 @@ export default async function NoteDetail({ params }: Props) {
         <div className="article-next">
           <p>실제 작업과 진행 안내도 함께 확인해보세요.</p>
           <a className="text-link" href={related}>{label}<ArrowRight size={18} /></a>
+          {slug === 'content-formats' && <ContentFormatsCoachingLinks />}
         </div>
       </article>
     </main>

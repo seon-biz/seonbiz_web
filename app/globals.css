@@ -254,7 +254,27 @@
 .service-coaching .illustrated-hero .lead{white-space:pre-line}
 .notes-page .illustrated-hero .lead{white-space:pre-line}
 .article-example{margin:35px 0 15px;padding:30px 32px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:16px}
-.article-header .customer-questions-title{text-wrap:balance}
+.article-header .balanced-note-title{text-wrap:balance}
+.note-content-preview{margin:35px 0 15px;padding:30px 32px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:16px}
+.note-content-preview h3{font-size:1.3rem;line-height:1.5}
+.note-content-preview .note-preview-label{font-size:.875rem;color:var(--blue);margin-bottom:10px}
+.note-preview-scenes{display:grid;grid-template-columns:repeat(2,minmax(0,220px));justify-content:center;gap:24px;margin:28px 0}
+.note-preview-scenes figure{margin:0;min-width:0}
+.note-preview-scenes a{display:block;border-radius:10px;overflow:hidden}
+.note-preview-scenes img{width:100%;height:auto}
+.note-preview-scenes figcaption{font-size:.875rem;line-height:1.65;margin-top:12px;color:var(--muted-foreground);word-break:keep-all}
+.note-content-preview>p:not(.note-preview-label){font-size:1rem}
+.note-content-preview .text-link{font-size:1rem;max-width:100%}
+.note-content-preview svg,.note-coaching-links svg{flex-shrink:0}
+.note-publish-checklist{border:0;margin:30px 0;padding:0;min-width:0}
+.note-publish-checklist legend{font-size:1.125rem;font-weight:500;margin-bottom:16px}
+.note-publish-checklist>div{border-top:1px solid var(--border)}
+.note-publish-checklist label{display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-bottom:1px solid var(--border);font-size:1rem;line-height:1.8;cursor:pointer;word-break:keep-all}
+.note-publish-checkbox{width:21px;height:21px;margin-top:4px;flex-shrink:0}
+.note-coaching-links{margin-top:30px;padding-top:26px;border-top:1px solid var(--border)}
+.note-coaching-links>div{display:flex;flex-wrap:wrap;gap:14px 30px}
+.note-coaching-links .text-link{font-size:1rem}
+@media(max-width:760px){.note-content-preview{padding:24px 20px}.note-content-preview h3{font-size:1.125rem}.note-preview-scenes{gap:14px;margin-block:24px}.note-coaching-links>div{display:grid;justify-items:start}.note-publish-checklist label{gap:12px}}
 .article-example h3{font-size:1.25rem;line-height:1.6;letter-spacing:-.035em;margin-bottom:12px}
 .article-example .example-disclosure,.article-example .example-note{font-size:.875rem;line-height:1.8;color:var(--muted-foreground)}
 .article-example dl{margin:24px 0}
