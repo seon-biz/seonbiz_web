@@ -1,0 +1,1 @@
+ALTER TABLE `applications` ADD `business_type` text;

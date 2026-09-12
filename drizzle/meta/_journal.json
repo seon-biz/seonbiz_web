@@ -8,6 +8,13 @@
       "when": 1789126901910,
       "tag": "0000_futuristic_golden_guardian",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1789216706104,
+      "tag": "0001_daily_bullseye",
+      "breakpoints": true
     }
   ]
 }
