@@ -269,6 +269,18 @@
 .website-choice-comparison caption{font-size:.875rem;line-height:1.8;text-align:left;padding-top:18px;word-break:keep-all}
 .article-next .website-process-link{display:flex;width:fit-content;margin-top:15px}
 .website-process-link svg{flex-shrink:0}
+.ai-search-record-preview{margin:35px 0 15px;padding:30px 32px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:16px}
+.ai-search-record-preview h3{font-size:1.3rem;line-height:1.6;margin-bottom:20px}
+.ai-search-record-preview>p{font-size:1rem}
+.ai-search-record-preview .ai-search-record-label{font-size:.875rem;color:var(--blue);margin-bottom:10px}
+.ai-search-record-preview figure{margin:26px 0}
+.ai-search-record-preview figure a{display:block;border:1px solid #d9e2f4;border-radius:8px;overflow:hidden}
+.ai-search-record-preview img{display:block;width:100%;height:auto}
+.ai-search-record-preview figcaption{font-size:.875rem;line-height:1.7;color:var(--muted-foreground);margin-top:12px;word-break:keep-all}
+.ai-search-record-preview .ai-search-record-scope{font-size:.9375rem}
+.ai-search-record-preview .text-link{font-size:1rem}
+.ai-search-record-preview svg{flex-shrink:0}
+@media(max-width:760px){.ai-search-record-preview{padding:24px 20px}.ai-search-record-preview h3{font-size:1.125rem}}
 .ad-platform-terms{margin-top:35px}
 .ad-platform-terms h3{font-size:1.3rem;line-height:1.6;margin-bottom:22px}
 .ad-platform-terms table{table-layout:fixed;font-size:1rem;line-height:1.8}

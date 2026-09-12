@@ -4,6 +4,7 @@ import { notes } from "@/lib/content";
 import { ContentFormatsChecklist, ContentFormatsCoachingLinks, ContentFormatsPreview } from "@/components/site/content-formats-note";
 import { WebsiteChoiceComparison, WebsiteChoiceSituations } from "@/components/site/website-choice-note";
 import { AdLandingChecklist, AdPlatformTerms } from "@/components/site/ad-numbers-note";
+import { AiSearchCoachingLink, AiSearchRecordPreview, AiSearchTextChecklist } from "@/components/site/ai-search-note";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -25,7 +26,7 @@ export default async function NoteDetail({ params }: Props) {
       <header className="article-header">
         <a href="/notes" className="back-link">코칭 노트</a>
         <p className="eyebrow">{note.tag}</p>
-        <h1 className={['customer-questions', 'content-formats', 'website-or-agency', 'read-ad-numbers'].includes(slug) ? 'balanced-note-title' : undefined}>{note.title}</h1>
+        <h1 className={['customer-questions', 'content-formats', 'website-or-agency', 'read-ad-numbers', 'ai-search-basics'].includes(slug) ? 'balanced-note-title' : undefined}>{note.title}</h1>
         <p className="article-meta">세온비즈 · <time dateTime="2026-09-12">2026.09.12</time></p>
       </header>
       <article className="article-body">
@@ -43,6 +44,8 @@ export default async function NoteDetail({ params }: Props) {
             {slug === 'website-or-agency' && i === 3 && <WebsiteChoiceComparison />}
             {slug === 'read-ad-numbers' && i === 0 && <AdLandingChecklist />}
             {slug === 'read-ad-numbers' && i === 2 && <AdPlatformTerms />}
+            {slug === 'ai-search-basics' && i === 1 && <AiSearchTextChecklist />}
+            {slug === 'ai-search-basics' && i === 3 && <AiSearchRecordPreview />}
             {note.example?.afterSection === i + 1 && (
               <aside className="article-example" aria-labelledby="article-example-title">
                 <h3 id="article-example-title">{note.example.title}</h3>
@@ -62,6 +65,7 @@ export default async function NoteDetail({ params }: Props) {
           <p>실제 작업과 진행 안내도 함께 확인해보세요.</p>
           <a className="text-link" href={related}>{label}<ArrowRight size={18} /></a>
           {slug === 'content-formats' && <ContentFormatsCoachingLinks />}
+          {slug === 'ai-search-basics' && <AiSearchCoachingLink />}
           {['website-or-agency', 'read-ad-numbers'].includes(slug) && <a className="text-link website-process-link" href="/process">진행 방식과 비용 확인하기 <ArrowRight size={18} aria-hidden="true" /></a>}
         </div>
       </article>
