@@ -269,6 +269,18 @@
 .website-choice-comparison caption{font-size:.875rem;line-height:1.8;text-align:left;padding-top:18px;word-break:keep-all}
 .article-next .website-process-link{display:flex;width:fit-content;margin-top:15px}
 .website-process-link svg{flex-shrink:0}
+.ad-platform-terms{margin-top:35px}
+.ad-platform-terms h3{font-size:1.3rem;line-height:1.6;margin-bottom:22px}
+.ad-platform-terms table{table-layout:fixed;font-size:1rem;line-height:1.8}
+.ad-platform-terms th,.ad-platform-terms td{white-space:normal;padding:18px 12px;vertical-align:top;word-break:keep-all;overflow-wrap:break-word}
+.ad-platform-terms thead{background:#edf1fa}
+.ad-platform-terms thead th:first-child{width:20%}
+.ad-platform-terms tbody th{color:var(--blue)}
+.ad-platform-terms caption{font-size:.875rem;line-height:1.8;text-align:left;padding-top:18px;word-break:keep-all}
+.ad-platform-terms>p{margin-top:22px;font-size:1rem}
+.ad-platform-terms .ad-platform-sources{font-size:.875rem;color:var(--muted-foreground)}
+.ad-platform-sources a{color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+@media(max-width:760px){.ad-platform-terms h3{font-size:1.125rem}.ad-platform-terms table{font-size:.875rem;line-height:1.8}.ad-platform-terms th,.ad-platform-terms td{padding:14px 6px}}
 @media(max-width:760px){.website-choice-situations{font-size:1rem;padding-left:21px}.website-choice-comparison h3{font-size:1.125rem}.website-choice-comparison th,.website-choice-comparison td{padding:14px 9px}.website-choice-comparison thead th:first-child{width:25%}.website-choice-comparison tbody th{font-size:.875rem}}
 .note-content-preview{margin:35px 0 15px;padding:30px 32px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:16px}
 .note-content-preview h3{font-size:1.3rem;line-height:1.5}

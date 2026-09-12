@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { notes } from "@/lib/content";
 import { ContentFormatsChecklist, ContentFormatsCoachingLinks, ContentFormatsPreview } from "@/components/site/content-formats-note";
 import { WebsiteChoiceComparison, WebsiteChoiceSituations } from "@/components/site/website-choice-note";
+import { AdLandingChecklist, AdPlatformTerms } from "@/components/site/ad-numbers-note";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -24,11 +25,12 @@ export default async function NoteDetail({ params }: Props) {
       <header className="article-header">
         <a href="/notes" className="back-link">코칭 노트</a>
         <p className="eyebrow">{note.tag}</p>
-        <h1 className={['customer-questions', 'content-formats', 'website-or-agency'].includes(slug) ? 'balanced-note-title' : undefined}>{note.title}</h1>
+        <h1 className={['customer-questions', 'content-formats', 'website-or-agency', 'read-ad-numbers'].includes(slug) ? 'balanced-note-title' : undefined}>{note.title}</h1>
         <p className="article-meta">세온비즈 · <time dateTime="2026-09-12">2026.09.12</time></p>
       </header>
       <article className="article-body">
         <p className="article-intro">{note.intro}</p>
+        {slug === 'read-ad-numbers' && <p>네이버 검색광고, 구글 애즈, 메타 광고(인스타그램·페이스북) 등 어떤 곳을 쓰시든 확인하는 순서는 비슷합니다. 화면 이름과 용어, 숫자를 세는 기준은 다를 수 있습니다.</p>}
         {note.sections.map(([title, ...paragraphs], i) => (
           <section key={title}>
             <span className="step-index">{String(i + 1).padStart(2, '0')}</span>
@@ -39,6 +41,8 @@ export default async function NoteDetail({ params }: Props) {
             {slug === 'content-formats' && i === 1 && <ContentFormatsPreview />}
             {slug === 'content-formats' && i === 2 && <ContentFormatsChecklist />}
             {slug === 'website-or-agency' && i === 3 && <WebsiteChoiceComparison />}
+            {slug === 'read-ad-numbers' && i === 0 && <AdLandingChecklist />}
+            {slug === 'read-ad-numbers' && i === 2 && <AdPlatformTerms />}
             {note.example?.afterSection === i + 1 && (
               <aside className="article-example" aria-labelledby="article-example-title">
                 <h3 id="article-example-title">{note.example.title}</h3>
@@ -58,7 +62,7 @@ export default async function NoteDetail({ params }: Props) {
           <p>실제 작업과 진행 안내도 함께 확인해보세요.</p>
           <a className="text-link" href={related}>{label}<ArrowRight size={18} /></a>
           {slug === 'content-formats' && <ContentFormatsCoachingLinks />}
-          {slug === 'website-or-agency' && <a className="text-link website-process-link" href="/process">진행 방식과 비용 확인하기 <ArrowRight size={18} aria-hidden="true" /></a>}
+          {['website-or-agency', 'read-ad-numbers'].includes(slug) && <a className="text-link website-process-link" href="/process">진행 방식과 비용 확인하기 <ArrowRight size={18} aria-hidden="true" /></a>}
         </div>
       </article>
     </main>
