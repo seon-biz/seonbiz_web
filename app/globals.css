@@ -120,8 +120,8 @@
 .legal-body{max-width:850px}.legal-body section{scroll-margin-top:120px}.legal-body h2{font-size:1.65rem;margin-top:52px}
 .policy-toc{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;padding:28px;background:#edf1fa;border-radius:12px;margin:35px 0}
 .policy-toc a{font-size:.9375rem;text-decoration:none!important}
-.privacy-review-note{margin:28px 0;padding:25px;background:#fff7e1;border-left:3px solid #b18418}
-.privacy-review-note strong{font-size:1rem;font-weight:500}.privacy-review-note p{font-size:.9375rem;margin:14px 0 0}
+
+
 .contact-details{background:#fff;border:1px solid var(--border);padding:10px 24px;border-radius:12px}.contact-details>div{display:grid;grid-template-columns:180px 1fr;gap:20px;padding:15px 0;border-bottom:1px solid var(--border)}.contact-details>div:last-child{border:0}.contact-details dt{font-size:.9375rem;color:var(--muted-foreground)}.contact-details dd{margin:0}
 .source-note{font-size:.875rem!important;margin-top:36px}
 @media(max-width:1100px){.desktop-nav{gap:18px}.scope-overview,.preparation,.policies{gap:55px}.illustrated-hero{gap:40px}.price-row{gap:25px}.price-amount>strong{font-size:2.2rem}.pricing-summary{gap:50px}.about-principles article{grid-template-columns:35px 1fr 1fr;gap:22px}.hero{gap:32px}}
@@ -141,7 +141,7 @@
 .about-principles article{grid-template-columns:26px 1fr;gap:20px;padding:32px 0}.about-principles h2{font-size:1.5rem}.about-principles p{grid-column:2}
 .about-proof,.about-coder{display:block}.about-proof>div+div,.about-coder>div+div{margin-top:28px}
 .footer-company{display:grid;gap:10px;font-size:.8125rem}.footer-bottom{font-size:.8125rem}
-.policy-toc{grid-template-columns:1fr;padding:22px}.legal-body h2{font-size:1.4rem}.contact-details>div{display:block}.contact-details dd{margin-top:7px}.privacy-review-note{padding:22px}
+.policy-toc{grid-template-columns:1fr;padding:22px}.legal-body h2{font-size:1.4rem}.contact-details>div{display:block}.contact-details dd{margin-top:7px}
 .consult-cta p:not(.eyebrow){font-size:1rem}.home-notes .text-link{font-size:.9375rem}
 }
 @media(prefers-reduced-motion:reduce){.reveal-ready{opacity:1;transform:none}.hero-art img,.art-label{transform:none!important}}
@@ -380,3 +380,5 @@
   .service-hosting-note{margin-top:26px;padding-top:24px}
   .service-hosting-note h3{font-size:1.15rem}.service-case-note{font-size:.875rem}
 }
+
+.privacy-delete-list{list-style:disc;padding-left:1.25em;margin:20px 0}.privacy-delete-list li+li{margin-top:8px}

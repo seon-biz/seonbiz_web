@@ -60,7 +60,7 @@ export default function About() {
       <section className="container section about-practice" aria-labelledby="about-practice-title">
         <div><p className="eyebrow">제 사업에도 적용합니다</p><h2 id="about-practice-title">지금도 직접<br />하고 있습니다.</h2></div>
         <div>
-          <p className="about-own-site">이 사이트도 같은 방식으로 만들었습니다.</p>
+          <p className="about-own-site">이 사이트도 AI로 초안을 만들고 직접 수정·확인하며 완성했습니다.</p>
           <div className="about-built-service">
             <p className="eyebrow">상세페이지 제작 서비스 · 세온코더</p>
             <h3>직접 만든 서비스</h3>
