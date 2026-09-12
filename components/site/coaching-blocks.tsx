@@ -41,8 +41,8 @@ export function PricingSummary() {
   return <section className="container section pricing-summary"><div><p className="eyebrow">코칭 신청 안내</p><h2>첫 상담에서<br/>진행할 일을 정합니다.</h2><p className="lead">1시간 무료 상담 후 코칭을 선택하세요.</p></div><div><dl><div><dt>월 코칭 <span>4회 × 2시간</span></dt><dd>132만 원</dd></div><div><dt>단독 코칭 <span>1회 2시간</span></dt><dd>44만 원</dd></div></dl><p className="meta">부가세 포함 · AI 구독료와 운영 비용은 사용 계정과 항목에 따라 별도 부담</p><a href="/process" className="text-link">진행 방식·포함 내용·비용 자세히 보기 <ArrowRight size={18}/></a></div></section>;
 }
 
-export function FAQ({subset,additions=[]}:{subset?:number[];additions?:{q:string;a:string}[]}={}) {
-  const items=[...(subset?subset.map(i=>faqs[i]):faqs),...additions];
+export function FAQ({subset,additions=[],items:customItems}:{subset?:number[];additions?:{q:string;a:string}[];items?:{q:string;a:string}[]}={}) {
+  const items=customItems??[...(subset?subset.map(i=>faqs[i]):faqs),...additions];
   return <section className="container section faq-section"><div><p className="eyebrow">신청 전에 궁금한 점</p><h2>미리 확인하세요.</h2><p className="faq-intro">설명으로 충분하지 않은 부분은<br/>무료 상담에서 함께 이야기합니다.</p></div><Accordion type="single" collapsible className="faq-list">{items.map((item,i)=><AccordionItem value={`faq-${i}`} key={item.q}><AccordionTrigger id={`faq-question-${i}`}>{item.q}</AccordionTrigger><AccordionContent>{item.a}</AccordionContent></AccordionItem>)}</Accordion></section>;
 }
 

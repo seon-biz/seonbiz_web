@@ -8,6 +8,15 @@ export function WorkShowcase() {
   const [scene, setScene] = useState("ai");
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
+    const syncCaseLink = () => {
+      const linkedScene = window.location.hash === "#work-search" ? "search" : window.location.hash === "#work-ai" ? "ai" : null;
+      if (linkedScene) setScene(linkedScene);
+    };
+    syncCaseLink();
+    window.addEventListener("hashchange", syncCaseLink);
+    return () => window.removeEventListener("hashchange", syncCaseLink);
+  }, []);
+  useEffect(() => {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const el = ref.current;
     if (!el) return;
@@ -26,6 +35,8 @@ export function WorkShowcase() {
   }, []);
 
   return <section ref={ref} className="work-showcase" data-scene={scene}>
+    <span id="work-ai" className="work-case-anchor" aria-hidden="true"/>
+    <span id="work-search" className="work-case-anchor" aria-hidden="true"/>
     <div className="container work-inner">
       <Reveal><div className="work-heading"><div><p className="eyebrow">세온비즈가 해온 일</p><h2>직접 작업한 내용과<br/>결과를 보여드립니다.</h2></div><p>AI 검색에서 들어온 방문과 구글 검색 기록,<br/>원고로 만든 짧은 영상을 소개합니다.</p></div></Reveal>
       <Tabs value={scene} onValueChange={setScene} className="work-tabs">

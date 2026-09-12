@@ -184,3 +184,43 @@
   .ai-case-summary dt{margin-bottom:10px}
   .ai-case-summary dd span{display:block;margin:6px 0 0}
 }
+
+/* Shopping coaching: problem scenes and product information */
+.shop-coaching .illustrated-hero .lead{white-space:pre-line}
+.shop-coaching .task-section{padding-bottom:0}
+.shop-problems{display:grid;grid-template-columns:.85fr 1.15fr;gap:90px;border-top:1px solid var(--border)}
+.shop-problems .section-heading{align-self:start;position:sticky;top:140px}
+.shop-problem-list article{padding:28px 0;border-top:1px solid var(--border)}
+.shop-problem-list article:first-child{padding-top:0;border-top:0}
+.shop-problem-list article:last-child{padding-bottom:0}
+.shop-problem-list h3{font-size:1.3rem;line-height:1.6;letter-spacing:-.035em}
+.shop-problem-list p{display:flex;gap:14px;align-items:start;margin-top:15px;color:var(--muted-foreground)}
+.shop-problem-list svg{flex-shrink:0;margin-top:6px;color:var(--blue)}
+.shop-platform-note{color:var(--blue);padding-top:32px;padding-bottom:16px;border-top:1px solid var(--border);max-width:none}
+.shop-page-explanation{display:grid;grid-template-columns:1fr 1fr;gap:85px;padding-bottom:55px}
+.shop-page-explanation h2{font-size:clamp(1.8rem,2.8vw,2.8rem);line-height:1.45}
+.shop-explanation-copy{font-size:1.0625rem;color:var(--muted-foreground)}
+.shop-explanation-copy p+p{margin-top:26px}
+.shop-explanation-copy .shop-sign-analogy{color:var(--foreground)}
+.shop-coder-box{display:flex;gap:45px;align-items:center;justify-content:space-between;padding:34px 40px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:16px;margin-bottom:35px}
+.shop-coder-box h2{font-size:1.45rem;margin-bottom:15px}
+.shop-coder-box p{color:var(--muted-foreground)}
+.shop-coder-box .button{flex-shrink:0;white-space:nowrap}
+.shop-case-links>div{display:flex;flex-wrap:wrap;gap:15px 35px;margin-top:16px}
+.shop-case-links .text-link{font-size:1rem}
+.shop-case-links svg{flex-shrink:0}
+.work-showcase{position:relative}
+.work-case-anchor{position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none}
+@media(max-width:1100px){.shop-problems{gap:55px}.shop-page-explanation{gap:45px}.shop-coder-box{gap:28px;padding:30px}.shop-coder-box .button{font-size:.9375rem}}
+@media(max-width:900px){.shop-coder-box{display:block}.shop-coder-box .button{margin-top:24px}}
+@media(max-width:760px){
+  .shop-problems{display:block}.shop-problems .section-heading{position:static;margin-bottom:36px}
+  .shop-problem-list h3{font-size:1.2rem}.shop-problem-list article{padding-block:25px}
+  .shop-problem-list p{gap:12px}.shop-platform-note{padding-top:25px}
+  .shop-page-explanation{grid-template-columns:1fr;gap:28px;padding-bottom:32px}
+  .shop-page-explanation h2{font-size:clamp(1.65rem,6.4vw,2rem)}
+  .shop-explanation-copy{font-size:1rem}.shop-explanation-copy p+p{margin-top:22px}
+  .shop-coder-box{padding:26px 22px;margin-bottom:20px}
+  .shop-coder-box h2{font-size:1.3rem}.shop-coder-box .button{max-width:100%;white-space:normal;gap:16px}
+  .shop-case-links>div{display:grid;gap:14px}.shop-case-links .text-link{justify-content:space-between;font-size:.9375rem}
+}
