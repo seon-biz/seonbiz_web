@@ -9,9 +9,8 @@ export const metadata = {
 
 export default function Notes() {
   const listedNotes = [
-    ...notes.filter((note) => note.category !== 'record' && note.category !== 'coaching'),
+    ...notes.filter((note) => note.category !== 'record'),
     ...notes.filter((note) => note.category === 'record'),
-    ...notes.filter((note) => note.category === 'coaching'),
   ];
 
   return (

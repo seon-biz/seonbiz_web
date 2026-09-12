@@ -15,8 +15,8 @@ export default async function NoteDetail({ params }: Props) {
   const { slug } = await params;
   const note = notes.find((item) => item.slug === slug);
   if (!note) notFound();
-  const related = note.relatedHref || (slug === 'choose-coaching' ? '/process' : slug === 'content-formats' ? '/cases/content-workflow' : '/coaching/shop');
-  const label = note.relatedLabel || (slug === 'choose-coaching' ? '전체 진행 방식과 비용 확인하기' : slug === 'content-formats' ? '직접 만든 영상과 제작 과정 보기' : '상세페이지 코칭 살펴보기');
+  const related = note.relatedHref || (slug === 'content-formats' ? '/cases/content-workflow' : '/coaching/shop');
+  const label = note.relatedLabel || (slug === 'content-formats' ? '직접 만든 영상과 제작 과정 보기' : '상세페이지 코칭 살펴보기');
 
   return (
     <main id="main">
