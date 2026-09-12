@@ -12,13 +12,14 @@ export function ScopeList() {
   </section>;
 }
 
-export function Method() {
+export function Method({showSessionExample=false}:{showSessionExample?:boolean}={}) {
   return <section id="method" className="container section method-section">
     <div className="method-sticky"><p className="eyebrow">일대일 코칭 진행 방식</p><h2>실제 작업을 하면서<br/>하나씩 익힙니다.</h2><p className="lead method-lead">한 번에 2시간, Zoom으로 화면을 공유합니다. 월 코칭에서는 직접 해본 결과와 어려웠던 부분을 다음 시간에 다시 살펴봅니다.</p>
       <div className="takeaway-note"><p className="kicker">코칭 후에 남기는 것</p><ul><li>함께 작성하고 수정한 내용</li><li>다시 작업할 때 볼 순서와 메모</li><li>다음에 직접 해볼 일</li></ul></div>
       <a href="/process" className="text-link">진행 방식과 준비물 보기 <ArrowRight size={18}/></a>
     </div>
     <div className="method-steps">{coachingSteps.map((step,i)=><Reveal key={step.label}><article className="method-step is-active"><span className="step-index">0{i+1} / {step.label}</span><h3>{step.title}</h3><p>{step.body}</p></article></Reveal>)}</div>
+    {showSessionExample&&<div className="session-example"><div><p className="eyebrow">회차별 진행 예시</p><h3>몇 번이면 혼자 할 수 있나요?</h3><p>빠른 분은 4회, 시간이 걸리는 분은 8회 정도 걸립니다.<br/>하시던 일과 준비된 자료에 따라 달라집니다.</p></div><dl><div><dt>1~2회차</dt><dd>지금 상태를 같이 보고, 가장 급한 것부터 손댑니다</dd></div><div><dt>3~4회차</dt><dd>대표님이 같은 작업을 혼자 해보고, 막힌 곳을 점검합니다</dd></div><div><dt>5회차~</dt><dd>나머지 상품과 페이지에 스스로 적용하고, 다음 작업을 정합니다</dd></div></dl></div>}
   </section>;
 }
 
@@ -40,8 +41,8 @@ export function PricingSummary() {
   return <section className="container section pricing-summary"><div><p className="eyebrow">코칭 신청 안내</p><h2>첫 상담에서<br/>진행할 일을 정합니다.</h2><p className="lead">1시간 무료 상담 후 코칭을 선택하세요.</p></div><div><dl><div><dt>월 코칭 <span>4회 × 2시간</span></dt><dd>132만 원</dd></div><div><dt>단독 코칭 <span>1회 2시간</span></dt><dd>44만 원</dd></div></dl><p className="meta">부가세 포함 · AI 구독료와 운영 비용은 사용 계정과 항목에 따라 별도 부담</p><a href="/process" className="text-link">진행 방식·포함 내용·비용 자세히 보기 <ArrowRight size={18}/></a></div></section>;
 }
 
-export function FAQ({subset}:{subset?:number[]}={}) {
-  const items=subset?subset.map(i=>faqs[i]):faqs;
+export function FAQ({subset,additions=[]}:{subset?:number[];additions?:{q:string;a:string}[]}={}) {
+  const items=[...(subset?subset.map(i=>faqs[i]):faqs),...additions];
   return <section className="container section faq-section"><div><p className="eyebrow">신청 전에 궁금한 점</p><h2>미리 확인하세요.</h2><p className="faq-intro">설명으로 충분하지 않은 부분은<br/>무료 상담에서 함께 이야기합니다.</p></div><Accordion type="single" collapsible className="faq-list">{items.map((item,i)=><AccordionItem value={`faq-${i}`} key={item.q}><AccordionTrigger id={`faq-question-${i}`}>{item.q}</AccordionTrigger><AccordionContent>{item.a}</AccordionContent></AccordionItem>)}</Accordion></section>;
 }
 
