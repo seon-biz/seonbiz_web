@@ -54,17 +54,35 @@ export const coaching = {
 };
 
 type NoteCategory = 'shop' | 'website' | 'content' | 'ads' | 'search' | 'record' | 'coaching';
-type Note = { slug: string; category: NoteCategory; targetKeyword: string; tag: string; title: string; intro: string; sections: string[][]; relatedHref?: string; relatedLabel?: string; source?: { label: string; href: string } };
+type Note = {
+  slug: string; category: NoteCategory; targetKeyword: string; tag: string; title: string; intro: string;
+  metaDescription?: string;
+  sections: [title: string, ...paragraphs: string[]][];
+  example?: { afterSection: number; title: string; disclosure: string; question: string; before: string; after: string[]; note: string };
+  relatedHref?: string; relatedLabel?: string; source?: { label: string; href: string };
+};
 export const notes: Note[] = [
   {
-    slug: 'customer-questions', category: 'shop', targetKeyword: '상세페이지 쓰는 법', tag: '쇼핑몰 · 상세페이지',
+    slug: 'customer-questions', category: 'shop', targetKeyword: '상세페이지 문구', tag: '쇼핑몰 · 상세페이지',
     title: '상세페이지에 무슨 말을 써야 할지 모르겠을 때',
+    metaDescription: '상품 설명을 쓰다 막혔다면 고객 문의부터 읽어보세요. 질문을 모으고, 고르고, 상세페이지 어디에 넣을지 정리하는 순서를 알려드립니다.',
     intro: '상품 설명을 고치려고 열어놓고도 무슨 말을 더 써야 할지 막힐 때가 있습니다. 그럴 때는 고객이 남긴 문의를 읽어보세요. 판매자에게는 당연한 내용이 처음 사는 사람에게는 꼭 필요한 정보일 수 있습니다.',
     sections: [
-      ['최근에 받은 문의부터 모아보세요.', '상품 문의, 상담 메시지, 리뷰에 나온 질문을 옮겨 적습니다. 보관 방법이나 구성품처럼 구매 전에 확인하는 내용을 찾아보세요. 이름과 연락처는 빼고, 고객이 실제로 쓴 말은 그대로 남겨둡니다. AI로 정리할 때도 없던 질문이 섞이지 않았는지 확인하세요.'],
-      ['답을 몰라서 주문을 못 할 만한 질문을 고르세요.', '사이즈가 맞는지, 구성품이 충분한지, 언제 받을 수 있는지. 이런 질문은 답이 없으면 주문하기 어렵습니다. 여러 번 나온 질문도 챙기되, 한 번 나온 질문이라도 구매에 필요한 내용이라면 빠뜨리지 마세요. 비슷한 질문은 하나로 묶어도 됩니다.'],
-      ['설명이 필요한 곳에 답을 넣으세요.', '규격과 구성품은 상품 소개에, 배송과 교환 조건은 주문 안내에 넣습니다. 모두 맨 아래에 모아두면 고객이 못 보고 지나갈 수 있습니다. 수치와 조건이 맞는지 확인한 뒤, 휴대전화로 글자 크기와 줄바꿈까지 읽어보세요.'],
+      ['최근에 받은 문의부터 모아보세요.', '상품 문의, 상담 메시지, 리뷰에 나온 질문을 옮겨 적습니다. 보관 방법이나 구성품처럼 구매 전에 확인하는 내용을 찾아보세요. 이름과 연락처는 빼고, 고객이 실제로 쓴 말은 그대로 남겨둡니다. AI로 정리할 때도 없던 질문이 섞이지 않았는지 확인하세요.', '예를 들어 최근 3개월 문의에서 20~30건부터 살펴보세요. 적다면 있는 문의로 시작해도 됩니다. 상품 문의 게시판, 카카오톡 상담, 전화 메모, 판매처별 Q&A를 함께 봅니다. 반복되는 질문은 답이 빠졌는지, 이미 있어도 찾기 어려운지 확인합니다.'],
+      ['답을 몰라서 주문을 못 할 만한 질문을 고르세요.', '사이즈가 맞는지, 구성품이 충분한지, 언제 받을 수 있는지. 이런 질문은 답이 없으면 주문하기 어렵습니다. 여러 번 나온 질문도 챙기되, 한 번 나온 질문이라도 구매에 필요한 내용이라면 빠뜨리지 마세요. 비슷한 질문은 하나로 묶어도 됩니다.', '“이 답을 모르면 장바구니에서 멈출까?”를 기준으로 순서를 정합니다. 규격, 배송일, 보관 조건처럼 구매 판단에 필요한 내용을 앞에 둡니다. 선물 포장도 선물용 상품에서는 중요한 조건입니다. 질문 횟수와 함께 고객이 이 상품을 사려는 목적을 살펴보세요.'],
+      ['설명이 필요한 곳에 답을 넣으세요.', '규격과 구성품은 상품 소개에, 배송과 교환 조건은 주문 안내에 넣습니다. 모두 맨 아래에 모아두면 고객이 못 보고 지나갈 수 있습니다. 수치와 조건이 맞는지 확인한 뒤, 휴대전화로 글자 크기와 줄바꿈까지 읽어보세요.', '상품을 고를 때 필요한 규격·구성품은 소개 윗부분에, 사용법·보관법은 사용 설명 옆에 둡니다. 배송·교환 조건은 주문 안내에, 그 밖의 질문은 하단 FAQ에 정리합니다. 보관 조건이 구매를 좌우한다면 더 위에 배치하세요. 답을 읽고 추가 문의 없이 판단할 수 있는지 확인합니다.'],
+      ['이 작업이 검색에도 도움이 됩니다.', '고객 문의는 구매자가 어떤 정보를 찾는지 알려주는 단서입니다. 질문과 정확한 답을 본문 텍스트로 정리하면 고객이 필요한 설명을 찾기 쉽고, 검색엔진이 상품의 맥락을 이해하는 데도 도움이 됩니다.', 'Google은 이미지를 이해할 때 이미지 분석과 함께 주변 본문과 대체 텍스트를 활용합니다. 중요한 규격·보관법은 이미지에만 넣지 말고 본문에도 적어두세요. 같은 주제를 검색하거나 AI 검색에서 살펴보는 사람에게 참고될 수 있지만, 이 작업만으로 검색 순위나 AI 검색 노출이 보장되지는 않습니다.'],
     ],
+    example: {
+      afterSection: 2,
+      title: '같은 정보를 이렇게 바꿔 적습니다',
+      disclosure: '설명 방식을 보여주기 위해 재구성한 식품 예시입니다. 실제 고객 문의가 아닙니다.',
+      question: '“이거 냉장 보관해야 하나요? 상온에 둬도 되나요?”',
+      before: '상품 이미지 안에만 “서늘한 곳에 보관”',
+      after: ['개봉 전: [제품에 표시된 보관 장소·온도]', '개봉 후: [표시사항 또는 제조사 안내의 보관 방법·섭취 기한]', '추가 조건: [별도 안내가 있는 경우에만 작성]'],
+      note: '대괄호는 작성할 항목입니다. 실제 상품의 표시사항과 제조사 안내를 확인해 채우고, 확인되지 않은 온도나 기간은 넣지 않습니다.',
+    },
+    source: { label: 'Google의 이미지 검색 안내', href: 'https://developers.google.com/search/docs/appearance/google-images' },
   },
   {
     slug: 'content-formats', category: 'content', targetKeyword: '블로그 글로 카드뉴스 만들기', tag: 'AI 실무 · 콘텐츠',
