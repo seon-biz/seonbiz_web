@@ -151,7 +151,7 @@ export const caseSummaries: CaseSummary[] = [
     slug: 'search-records', tag: '고객 사례 · 식품 쇼핑몰',
     category: 'customer', listed: false,
     title: '식품 쇼핑몰의 상품 정보와\n구글 검색 기록',
-    summary: '상품 제목과 설명, 이미지 정보를 정비하면서 확인한 자료입니다. 같은 쇼핑몰의 검색 클릭과 자연검색 매출을 각각 어떤 기간에 비교했는지 설명합니다.',
+    summary: '2021년과 2022년에 상품 정보를 정비하면서 확인한 구글 검색 기록입니다. 클릭과 노출의 변화, 비교할 때 알아둘 점을 담았습니다.',
     image: '/images/search-2022.webp', alt: '2022년 구글 서치콘솔 원본 화면',
   },
   {
