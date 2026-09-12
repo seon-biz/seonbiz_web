@@ -80,6 +80,29 @@
 .about-principles h2{font-size:1.85rem}.about-principles p{color:var(--muted-foreground)}
 .about-proof,.about-coder{display:grid;grid-template-columns:1fr 1fr;gap:90px;border-top:1px solid var(--border)}
 .about-proof .text-link,.about-coder .text-link{margin-top:22px}.about-proof>div>p:not(.eyebrow),.about-coder>div>p:not(.eyebrow){color:var(--muted-foreground);font-size:1.0625rem}
+.about-profile,.about-beliefs,.about-practice{display:grid;grid-template-columns:.8fr 1.2fr;gap:90px;border-top:1px solid var(--border)}
+.about-profile h2{font-size:clamp(2.75rem,4vw,4rem)}
+.about-profile-role{font-size:.9375rem;color:var(--muted-foreground);margin-top:20px}
+.about-profile-copy>p,.about-practice>div>p,.about-built-service>p:not(.eyebrow){font-size:1.0625rem;color:var(--muted-foreground);line-height:1.95}
+.about-profile-copy>p+p,.about-built-service>p+p{margin-top:22px}
+.about-experience{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin:38px 0 0;padding-top:30px;border-top:1px solid var(--border)}
+.about-experience dt{font-size:.9375rem;color:var(--muted-foreground)}
+.about-experience dd{margin:10px 0 0;font-size:1.25rem}.about-experience strong{font-size:3rem;font-weight:500;line-height:1.3;margin-right:5px}
+.about-experience p{font-size:.875rem;color:var(--muted-foreground);margin-top:10px}
+.about-belief-list{list-style:none;margin:0;padding:0}
+.about-belief-list li{display:grid;grid-template-columns:28px 1fr;gap:18px;padding:24px 0;border-bottom:1px solid var(--border)}
+.about-belief-list li:first-child{padding-top:0}.about-belief-list .step-index{margin:4px 0 0}
+.about-belief-list li>div>p:first-child{font-size:1.25rem;line-height:1.7}
+.about-belief-list .about-belief-detail{font-size:1rem;color:var(--muted-foreground);margin-top:12px}
+.about-beliefs .about-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:32px;padding-top:0;border:0;max-width:none}
+.about-beliefs .text-link{margin-top:26px}.about-page .text-link svg{flex-shrink:0}
+.about-practice .about-own-site{font-size:1.4rem;color:var(--foreground)}
+.about-built-service{padding-top:38px;margin-top:38px;border-top:1px solid var(--border)}
+.about-built-service .eyebrow{margin-bottom:14px}.about-built-service h3{font-size:1.7rem;margin-bottom:24px}
+.about-built-service .text-link{margin-top:22px}
+@media(max-width:380px){.about-beliefs .about-facts{grid-template-columns:1fr;gap:14px}.about-beliefs .about-facts>div{display:flex;justify-content:space-between;gap:20px}.about-beliefs .about-facts span{margin-bottom:0}}
+@media(max-width:1050px){.about-profile,.about-beliefs,.about-practice{gap:50px}}
+@media(max-width:760px){.about-profile,.about-beliefs,.about-practice{grid-template-columns:1fr;gap:30px}.about-profile-copy>p,.about-practice>div>p,.about-built-service>p:not(.eyebrow){font-size:1rem}.about-experience{gap:20px;margin-top:30px}.about-experience strong{font-size:2.5rem}.about-belief-list li>div>p:first-child{font-size:1.125rem}.about-beliefs .about-facts{gap:15px}.about-practice .about-own-site{font-size:1.2rem}.about-built-service h3{font-size:1.4rem}}
 .footer-company{display:flex;flex-wrap:wrap;gap:15px 30px;padding-bottom:25px;font-size:.875rem;color:var(--muted-foreground)}
 .footer-company a{overflow-wrap:anywhere}.footer-bottom{font-size:.8125rem}
 .apply-assurance{background:#edf1fa;padding:25px;margin-bottom:26px;border-radius:12px}.apply-assurance h2{font-size:1.15rem;margin-bottom:13px}.apply-assurance p{font-size:1rem;color:var(--muted-foreground)}
