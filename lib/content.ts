@@ -53,10 +53,11 @@ export const coaching = {
   },
 };
 
-type Note = { slug: string; tag: string; title: string; intro: string; sections: string[][]; relatedHref?: string; relatedLabel?: string; source?: { label: string; href: string } };
+type NoteCategory = 'shop' | 'website' | 'content' | 'ads' | 'search' | 'record' | 'coaching';
+type Note = { slug: string; category: NoteCategory; targetKeyword: string; tag: string; title: string; intro: string; sections: string[][]; relatedHref?: string; relatedLabel?: string; source?: { label: string; href: string } };
 export const notes: Note[] = [
   {
-    slug: 'customer-questions', tag: '쇼핑몰 · 상세페이지',
+    slug: 'customer-questions', category: 'shop', targetKeyword: '상세페이지 쓰는 법', tag: '쇼핑몰 · 상세페이지',
     title: '상세페이지에 무슨 말을 써야 할지 모르겠을 때',
     intro: '상품 설명을 고치려고 열어놓고도 무슨 말을 더 써야 할지 막힐 때가 있습니다. 그럴 때는 고객이 남긴 문의를 읽어보세요. 판매자에게는 당연한 내용이 처음 사는 사람에게는 꼭 필요한 정보일 수 있습니다.',
     sections: [
@@ -66,7 +67,7 @@ export const notes: Note[] = [
     ],
   },
   {
-    slug: 'content-formats', tag: 'AI 실무 · 콘텐츠',
+    slug: 'content-formats', category: 'content', targetKeyword: '블로그 글로 카드뉴스 만들기', tag: 'AI 실무 · 콘텐츠',
     title: '블로그 글 한 편으로 카드뉴스와 짧은 영상 만들기',
     intro: '블로그에 쓴 글은 카드뉴스나 영상으로도 쓸 수 있습니다. 처음부터 새 글을 쓰기보다, 이미 정리한 내용에서 꼭 전할 이야기만 골라보세요. 글을 줄이는 작업과 화면을 만드는 작업을 나누면 진행하기 수월합니다.',
     sections: [
@@ -76,7 +77,7 @@ export const notes: Note[] = [
     ],
   },
   {
-    slug: 'choose-coaching', tag: '코칭 안내',
+    slug: 'choose-coaching', category: 'coaching', targetKeyword: '월 코칭과 단독 코칭 차이', tag: '코칭 안내',
     title: '월 코칭과 단독 코칭은 이렇게 다릅니다',
     intro: '한 가지 작업을 집중해서 보려면 단독 코칭, 직접 해본 내용을 점검받으며 배우려면 월 코칭이 맞습니다. 어떤 방식이 필요할지 모르겠다면 첫 상담에서 하시려는 일을 말씀해주세요.',
     sections: [
@@ -86,7 +87,7 @@ export const notes: Note[] = [
     ],
   },
   {
-    slug: 'website-or-agency', tag: '홈페이지 · 시작하기',
+    slug: 'website-or-agency', category: 'website', targetKeyword: '홈페이지 직접 만들기', tag: '홈페이지 · 시작하기',
     title: '홈페이지를 맡길까, 직접 만들까',
     intro: '홈페이지를 만드는 방법은 비용만으로 고르기 어렵습니다. 언제까지 무엇이 필요한지, 완성한 뒤 누가 내용을 고칠지부터 정해보세요. 소개 글과 사진을 자주 바꿀 사업이라면 직접 수정하는 방법을 알아두는 것이 도움이 됩니다.',
     sections: [
@@ -96,7 +97,7 @@ export const notes: Note[] = [
     ], relatedHref: '/coaching/service', relatedLabel: '홈페이지 제작 코칭 살펴보기',
   },
   {
-    slug: 'read-ad-numbers', tag: '광고 · 데이터',
+    slug: 'read-ad-numbers', category: 'ads', targetKeyword: '광고 성과 분석', tag: '광고 · 데이터',
     title: '광고 관리 화면에서 무엇부터 봐야 할까요?',
     intro: '클릭은 늘었는데 주문이나 문의는 그대로라면, 광고비를 늘리기 전에 연결된 화면과 기록부터 살펴보세요. 광고에서 약속한 내용, 고객이 도착하는 페이지, 문의나 구매가 기록되는 방식이 이어져 있어야 판단할 수 있습니다.',
     sections: [
@@ -106,7 +107,7 @@ export const notes: Note[] = [
     ], relatedHref: '/coaching/shop', relatedLabel: '광고·데이터 코칭 살펴보기',
   },
   {
-    slug: 'ai-search-basics', tag: '검색 · AI 검색',
+    slug: 'ai-search-basics', category: 'search', targetKeyword: 'AI 검색 대응', tag: '검색 · AI 검색',
     title: 'AI 검색을 준비하려면 무엇부터 고쳐야 할까요?',
     intro: '새로운 용어보다 내 사이트의 정보부터 확인해보세요. 어떤 상품과 서비스를 제공하는지, 고객의 질문에 답할 내용이 있는지, 검색에서 접근할 수 있는 상태인지가 출발점입니다.',
     sections: [
@@ -117,6 +118,26 @@ export const notes: Note[] = [
     source: { label: 'Google의 AI 검색 안내', href: 'https://developers.google.com/search/docs/fundamentals/ai-optimization-guide' },
   },
 
+  {
+    slug: 'product-page-search-records', category: 'record', targetKeyword: '상세페이지 검색 기록 비교', tag: '작업 기록 · 고객 사례',
+    title: '상품 정보를 정비하며 검색 기록은 어떻게 비교했을까요?',
+    intro: '스포츠용품 쇼핑몰의 상품 정보를 정비하며 확인한 검색 기록입니다. 전년 같은 기간의 클릭과 노출을 비교하고, 숫자만으로 알 수 없는 부분도 함께 짚었습니다.',
+    sections: [
+      ['같은 기간의 검색 기록을 나란히 봤습니다.', '스포츠용품 쇼핑몰의 상품 제목, 본문, 이미지 설명 등 상품 정보를 정비하며 구글 서치콘솔을 살펴봤습니다. 비교한 기간은 2025년과 2026년의 5월 11일~6월 12일입니다. 서로 다른 계절의 숫자를 바로 비교하지 않도록 전년의 같은 기간을 골랐습니다.'],
+      ['클릭과 노출, 평균 순위를 함께 읽었습니다.', '클릭은 약 1,270회에서 1,860회로, 노출은 약 4.3만 회에서 6.23만 회로 늘었습니다. 평균 순위는 6.9위에서 5.7위로 올랐습니다. 원본 화면의 클릭 수는 1.27천·1.86천으로 줄여 표시되어 있어 근삿값으로 읽어야 합니다. 클릭만 보지 않고 검색에 보인 횟수와 평균 순위를 함께 확인했습니다.'],
+      ['숫자가 달라진 이유는 따로 확인해야 합니다.', '검색 기록에는 계절 수요, 행사, 취급 상품, 검색 환경의 변화도 영향을 줄 수 있습니다. 이 화면만으로 상품 정보 정비의 효과를 분리하거나 매출이 늘었다고 말할 수는 없습니다. 직접 비교하실 때도 기간과 지표를 맞추고, 언제 무엇을 바꿨는지 함께 남겨두세요. 원본과 작업 맥락을 연결해서 읽는 것이 중요합니다.'],
+    ], relatedHref: '/cases/sports-search-records', relatedLabel: '비교 기간과 서치콘솔 원본 보기',
+  },
+  {
+    slug: 'blog-to-short-video-record', category: 'record', targetKeyword: '블로그 글로 짧은 영상 만들기', tag: '작업 기록 · 자체 제작',
+    title: '블로그 글 한 편을 25초 영상과 카드뉴스로 바꾼 기록',
+    intro: '세온비즈가 직접 쓴 원고에서 질문 하나를 골라 25초 영상과 카드뉴스를 만들었습니다. 같은 내용을 매체에 맞게 나눈 실제 결과물과 확인할 점을 소개합니다.',
+    sections: [
+      ['원고에서 질문 하나를 골랐습니다.', '출발점은 상세페이지 HTML 변환을 설명한 자체 원고였습니다. 그중 “어떤 상품부터 시작할까?”라는 질문에 집중했습니다. 글에 담긴 내용을 모두 넣기보다, 먼저 적용할 상품을 고르는 기준이 짧은 화면에서도 이어지도록 정리했습니다.'],
+      ['영상은 여섯 장면, 카드뉴스는 여섯 장으로 나눴습니다.', '완성한 영상은 약 25초이며, 여섯 장면으로 구성했습니다. 얼굴 촬영 없이 제목과 핵심 문장을 화면에 담았습니다. 같은 원고로 카드뉴스 여섯 장도 만들었습니다. 연결된 제작 사례에서 원본 영상을 재생하고, 카드뉴스의 앞 네 장을 확인할 수 있습니다.'],
+      ['짧게 바꾼 뒤에도 원래 뜻이 남아 있는지 봅니다.', '직접 만드실 때는 원문에 있던 조건이 빠지지 않았는지 먼저 확인하세요. 휴대전화에서 글자를 읽을 수 있는지, 자막이 너무 빨리 지나가지 않는지도 재생하며 살펴봅니다. 이 기록은 세온비즈의 자체 제작 예시입니다. 고객의 코칭 성과나 조회 수·매출의 변화를 보여주는 자료는 아닙니다.'],
+    ], relatedHref: '/cases/content-workflow', relatedLabel: '원본 영상과 카드뉴스 보기',
+  },
 ];
 
 export type CaseSummary = {

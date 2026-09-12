@@ -252,6 +252,13 @@
 
 /* Service coaching: ownership stays visible outside the FAQ */
 .service-coaching .illustrated-hero .lead{white-space:pre-line}
+.notes-page .illustrated-hero .lead{white-space:pre-line}
+.notes-page .note-list{padding-bottom:25px}
+.notes-consult{display:flex;align-items:center;justify-content:space-between;gap:40px;padding-top:38px;padding-bottom:42px;margin-bottom:65px;border-top:1px solid var(--border)}
+.notes-consult p{font-size:1.125rem;line-height:1.85;word-break:keep-all}
+.notes-consult .button{flex-shrink:0}
+@media(max-width:900px){.notes-consult{align-items:flex-start;flex-direction:column;gap:24px}}
+@media(max-width:760px){.notes-consult{padding-top:30px;padding-bottom:30px;margin-bottom:40px}.notes-consult p{font-size:1rem}.notes-consult p br{display:none}.notes-consult .button{gap:16px;font-size:.9375rem;max-width:100%}}
 .service-ownership{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;padding:50px 45px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:18px;margin-bottom:55px}
 .service-ownership .eyebrow{color:var(--blue)}
 .service-ownership h2{font-size:clamp(1.9rem,3vw,3rem)}
