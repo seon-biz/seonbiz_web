@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/site/page-hero";
 import { Method, Pricing, FAQ, ConsultCTA } from "@/components/site/coaching-blocks";

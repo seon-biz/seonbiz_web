@@ -1,4 +1,3 @@
-import Link from "next/link";
 export const metadata={title:'개인정보처리방침',description:'주식회사 티오엠이 운영하는 세온비즈의 상담 신청 정보 처리 목적, 수집 항목, 보관·삭제, 권리 행사 및 문의 방법을 안내합니다.'};
 const contents=['처리 목적','수집 항목과 방법','보유기간과 파기','제3자 제공과 운영 환경','권리 행사와 문의','안전조치','쿠키와 접속 정보','외부 상담·신고','방침 변경'];
 export default function Privacy(){return <main id="main"><header className="article-header privacy-header"><p className="eyebrow">주식회사 티오엠 · 세온비즈</p><h1>개인정보처리방침</h1><p className="article-meta">작성일 2026.09.12 · 상담 신청 정보에 관한 안내</p></header><article className="article-body legal-body">
@@ -13,4 +12,4 @@ export default function Privacy(){return <main id="main"><header className="arti
 <section id="privacy-7"><h2>7. 쿠키와 접속 정보</h2><p>현재 세온비즈 페이지에는 광고 추적 도구나 GA4 방문 분석 도구를 설치하지 않았습니다. 관리자 로그인에는 세션 쿠키를 사용합니다. 웹사이트 접근 인증과 보안을 위해 호스팅 서비스가 처리하는 쿠키·접속 기록이 있을 수 있습니다.</p><p>브라우저 설정에서 쿠키 저장을 제한하거나 삭제할 수 있습니다. 다만 쿠키를 차단하면 로그인 등 일부 기능 이용이 제한될 수 있습니다. 호스팅 서비스의 구체적인 처리 항목은 공개 운영 전 위 운영 환경 안내와 함께 확정합니다.</p></section>
 <section id="privacy-8"><h2>8. 외부 상담과 신고</h2><p>개인정보 침해 상담·신고는 <a href="https://privacy.kisa.or.kr/" target="_blank" rel="noopener noreferrer">개인정보침해 신고센터</a>(국번 없이 118), 분쟁 조정은 <a href="https://www.kopico.go.kr/" target="_blank" rel="noopener noreferrer">개인정보분쟁조정위원회</a>(1833-6972)를 이용할 수 있습니다.</p></section>
 <section id="privacy-9"><h2>9. 방침의 변경</h2><p>수집 항목, 이용 목적, 보관 기준 등이 달라지면 이 페이지에 변경 내용과 적용 시점을 안내하고, 필요한 경우 별도의 동의를 받습니다. 기존 신청자가 동의한 기록은 새 버전으로 소급 변경하지 않습니다.</p><p className="meta">2026.09.12: 운영 주체·문의 창구, 수집 항목, 파기와 권리 행사 안내를 보완했습니다. 국외 처리 세부사항은 공개 운영 전 확인이 필요합니다.</p></section>
-<div className="article-next"><Link href="/apply" className="text-link">상담 신청으로 돌아가기</Link></div></article></main>}
+<div className="article-next"><a href="/apply" className="text-link">상담 신청으로 돌아가기</a></div></article></main>}

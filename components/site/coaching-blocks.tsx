@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { coachingSteps, faqs, workAreas } from "@/lib/content";
@@ -17,7 +16,7 @@ export function Method() {
   return <section id="method" className="container section method-section">
     <div className="method-sticky"><p className="eyebrow">일대일 코칭 진행 방식</p><h2>실제 작업을 하면서<br/>하나씩 익힙니다.</h2><p className="lead method-lead">한 번에 2시간, Zoom으로 화면을 공유합니다. 월 코칭에서는 직접 해본 결과와 어려웠던 부분을 다음 시간에 다시 살펴봅니다.</p>
       <div className="takeaway-note"><p className="kicker">코칭 후에 남기는 것</p><ul><li>함께 작성하고 수정한 내용</li><li>다시 작업할 때 볼 순서와 메모</li><li>다음에 직접 해볼 일</li></ul></div>
-      <Link href="/process" className="text-link">진행 방식과 준비물 보기 <ArrowRight size={18}/></Link>
+      <a href="/process" className="text-link">진행 방식과 준비물 보기 <ArrowRight size={18}/></a>
     </div>
     <div className="method-steps">{coachingSteps.map((step,i)=><Reveal key={step.label}><article className="method-step is-active"><span className="step-index">0{i+1} / {step.label}</span><h3>{step.title}</h3><p>{step.body}</p></article></Reveal>)}</div>
   </section>;
@@ -33,12 +32,12 @@ export function Pricing() {
     </div>
     <p className="pricing-footnote">모두 부가세 포함 금액입니다. 5주인 달에도 월 코칭은 4회입니다. 결제는 계좌이체로 진행하며, 규모가 큰 별도 제작은 작업 내용과 비용을 따로 협의합니다.</p>
     <div className="cost-details"><div><h3>코칭 사이의 질문은 카카오톡으로</h3><p>질문을 남겨주시면 카카오톡으로 답변드립니다. 메시지로 설명하기 어렵거나 추가 작업이 필요한 내용은 코칭 시간에 함께 진행합니다.</p></div><div><h3>AI 구독료와 운영 비용</h3><p>세온비즈 계정에서 작업할 때는 세온비즈가 AI 구독료를 냅니다. 고객 화면과 계정에서 작업할 때는 고객이 부담합니다. 광고비와 도메인·호스팅 비용 등은 별도입니다.</p></div></div>
-    <Link href="/process#changes" className="text-link policy-link">일정 변경·취소·환불 기준 보기 <ArrowRight size={18}/></Link>
+    <a href="/process#changes" className="text-link policy-link">일정 변경·취소·환불 기준 보기 <ArrowRight size={18}/></a>
   </div></section>;
 }
 
 export function PricingSummary() {
-  return <section className="container section pricing-summary"><div><p className="eyebrow">코칭 신청 안내</p><h2>첫 상담에서<br/>진행할 일을 정합니다.</h2><p className="lead">1시간 무료 상담 후 코칭을 선택하세요.</p></div><div><dl><div><dt>월 코칭 <span>4회 × 2시간</span></dt><dd>132만 원</dd></div><div><dt>단독 코칭 <span>1회 2시간</span></dt><dd>44만 원</dd></div></dl><p className="meta">부가세 포함 · AI 구독료와 운영 비용은 사용 계정과 항목에 따라 별도 부담</p><Link href="/process" className="text-link">진행 방식·포함 내용·비용 자세히 보기 <ArrowRight size={18}/></Link></div></section>;
+  return <section className="container section pricing-summary"><div><p className="eyebrow">코칭 신청 안내</p><h2>첫 상담에서<br/>진행할 일을 정합니다.</h2><p className="lead">1시간 무료 상담 후 코칭을 선택하세요.</p></div><div><dl><div><dt>월 코칭 <span>4회 × 2시간</span></dt><dd>132만 원</dd></div><div><dt>단독 코칭 <span>1회 2시간</span></dt><dd>44만 원</dd></div></dl><p className="meta">부가세 포함 · AI 구독료와 운영 비용은 사용 계정과 항목에 따라 별도 부담</p><a href="/process" className="text-link">진행 방식·포함 내용·비용 자세히 보기 <ArrowRight size={18}/></a></div></section>;
 }
 
 export function FAQ({subset}:{subset?:number[]}={}) {
@@ -47,5 +46,5 @@ export function FAQ({subset}:{subset?:number[]}={}) {
 }
 
 export function ConsultCTA({title="지금 필요한 일부터\n이야기해 보세요.",description="어떤 도움이 필요한지 듣고, 코칭에서 함께 할 수 있는 일을 안내하겠습니다.",button="1시간 무료 상담 신청"}:{title?:string;description?:string;button?:string}={}) {
-  return <section className="consult-cta"><div className="container"><p className="eyebrow">첫 상담 1시간 무료 · Zoom</p><h2>{title.split('\n').map((line,i)=><span key={line}>{i>0&&<br/>}{line}</span>)}</h2><p>{description}</p><Link href="/apply" className="button button-coral">{button} <ArrowUpRight size={20}/></Link><span className="cta-note">코칭 신청은 상담 후 결정하시면 됩니다.</span></div></section>;
+  return <section className="consult-cta"><div className="container"><p className="eyebrow">첫 상담 1시간 무료 · Zoom</p><h2>{title.split('\n').map((line,i)=><span key={line}>{i>0&&<br/>}{line}</span>)}</h2><p>{description}</p><a href="/apply" className="button button-coral">{button} <ArrowUpRight size={20}/></a><span className="cta-note">코칭 신청은 상담 후 결정하시면 됩니다.</span></div></section>;
 }
