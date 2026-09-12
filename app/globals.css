@@ -255,6 +255,21 @@
 .notes-page .illustrated-hero .lead{white-space:pre-line}
 .article-example{margin:35px 0 15px;padding:30px 32px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:16px}
 .article-header .balanced-note-title{text-wrap:balance}
+.website-choice-situations{list-style:disc;margin:0 0 26px;padding-left:24px;color:#4f5763;font-size:1.0625rem;line-height:1.9}
+.website-choice-situations li{padding-left:4px;word-break:keep-all;overflow-wrap:break-word}
+.website-choice-situations li+li{margin-top:10px}
+.website-choice-situations li::marker{color:var(--blue)}
+.website-choice-comparison{margin-top:35px}
+.website-choice-comparison h3{font-size:1.3rem;line-height:1.6;margin-bottom:22px}
+.website-choice-comparison table{table-layout:fixed;font-size:1rem;line-height:1.8}
+.website-choice-comparison th,.website-choice-comparison td{white-space:normal;padding:18px 16px;vertical-align:top;word-break:keep-all;overflow-wrap:break-word}
+.website-choice-comparison thead{background:#edf1fa}
+.website-choice-comparison thead th:first-child{width:24%}
+.website-choice-comparison tbody th{color:var(--blue);font-size:.9375rem}
+.website-choice-comparison caption{font-size:.875rem;line-height:1.8;text-align:left;padding-top:18px;word-break:keep-all}
+.article-next .website-process-link{display:flex;width:fit-content;margin-top:15px}
+.website-process-link svg{flex-shrink:0}
+@media(max-width:760px){.website-choice-situations{font-size:1rem;padding-left:21px}.website-choice-comparison h3{font-size:1.125rem}.website-choice-comparison th,.website-choice-comparison td{padding:14px 9px}.website-choice-comparison thead th:first-child{width:25%}.website-choice-comparison tbody th{font-size:.875rem}}
 .note-content-preview{margin:35px 0 15px;padding:30px 32px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:16px}
 .note-content-preview h3{font-size:1.3rem;line-height:1.5}
 .note-content-preview .note-preview-label{font-size:.875rem;color:var(--blue);margin-bottom:10px}
