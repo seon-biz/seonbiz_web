@@ -33,7 +33,7 @@ export function ShopPageExplanation() {
         <p>바꾸는 작업도 대표님과 함께 합니다.<br/>다음 상품부터는 직접 하실 수 있게 순서를 남깁니다.</p>
       </div>
     </section>
-    <aside className="container shop-coder-box" aria-labelledby="shop-coder-title"><div><h2 id="shop-coder-title">코딩 제작을 맡기고 싶으시다면</h2><p>HTML 변환 제작은 세온코더에서 안내합니다.<br/>직접 배우는 코칭과 별도로 작업 내용과 비용을 확인하실 수 있습니다.</p></div><a className="button button-ink" href="https://seoncoder.com/" target="_blank" rel="noopener noreferrer">세온코더 제작 안내 <ArrowUpRight size={20}/></a></aside>
+    <aside className="container shop-coder-box" aria-labelledby="shop-coder-title"><div><h2 id="shop-coder-title">코딩 제작을 맡기고 싶으시다면</h2><p>세온비즈의 상세페이지 제작 서비스, SEON코더에서 HTML 변환 제작을 안내합니다.<br/>직접 배우는 코칭과 별도로 작업 내용과 비용을 확인하실 수 있습니다.</p></div><a className="button button-ink" href="https://seoncoder.com/" target="_blank" rel="noopener noreferrer">SEON코더 제작 안내 <ArrowUpRight size={20}/></a></aside>
   </>;
 }
 

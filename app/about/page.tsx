@@ -62,11 +62,11 @@ export default function About() {
         <div>
           <p className="about-own-site">이 사이트도 AI로 초안을 만들고 직접 수정·확인하며 완성했습니다.</p>
           <div className="about-built-service">
-            <p className="eyebrow">상세페이지 제작 서비스 · 세온코더</p>
+            <p className="eyebrow">세온비즈의 상세페이지 제작 서비스 · SEON코더</p>
             <h3>직접 만든 서비스</h3>
-            <p>이미지에 담긴 상품 설명을 본문 텍스트와 이미지로 구성하는 세온코더를 직접 만들어 운영하고 있습니다. 코칭에서 다루는 작업을 서비스로 만든 것입니다.</p>
+            <p>세온비즈의 상세페이지 제작 서비스인 SEON코더를 직접 만들어 운영하고 있습니다. 이미지에 담긴 상품 설명을 본문 텍스트와 이미지로 구성합니다. 코칭에서 다루는 작업을 서비스로 만든 것입니다.</p>
             <p>직접 배우실 수도 있고, 제작을 맡기실 수도 있습니다.</p>
-            <a href="https://seoncoder.com/" target="_blank" rel="noopener noreferrer" className="text-link">세온코더 <ArrowUpRight size={18} aria-hidden="true" /><span className="sr-only"> (새 탭)</span></a>
+            <a href="https://seoncoder.com/" target="_blank" rel="noopener noreferrer" className="text-link">SEON코더 <ArrowUpRight size={18} aria-hidden="true" /><span className="sr-only"> (새 탭)</span></a>
           </div>
         </div>
       </section>
