@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   description: "홈페이지부터 상품 홍보까지, 내 사업에 필요한 일을 AI로 직접 해보세요. 쇼핑몰·서비스업을 위한 일대일 실무 코칭. 첫 상담은 1시간 무료입니다.",
   icons: {
     icon: [
-      { url: "/favicon-seonbiz-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-seonbiz-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon-seonbiz-approved-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-seonbiz-approved-192.png", sizes: "192x192", type: "image/png" },
     ],
-    shortcut: "/favicon-seonbiz-32.png",
-    apple: { url: "/apple-touch-icon-seonbiz.png", sizes: "180x180", type: "image/png" },
+    shortcut: "/favicon-seonbiz-approved-32.png",
+    apple: { url: "/apple-touch-icon-seonbiz-approved.png", sizes: "180x180", type: "image/png" },
   },
 };
 export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
