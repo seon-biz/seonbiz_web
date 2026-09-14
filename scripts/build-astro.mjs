@@ -17,9 +17,11 @@ async function removeLocalEnvironmentFiles(directory) {
   }
 }
 await removeLocalEnvironmentFiles('dist');
-await mkdir('dist/.openai', { recursive: true });
-await cp('.openai/hosting.json', 'dist/.openai/hosting.json');
-await cp('drizzle', 'dist/.openai/drizzle', { recursive: true });
+if (process.env.SEONBIZ_DEPLOY_TARGET !== 'cloudflare') {
+  await mkdir('dist/.openai', { recursive: true });
+  await cp('.openai/hosting.json', 'dist/.openai/hosting.json');
+  await cp('drizzle', 'dist/.openai/drizzle', { recursive: true });
+}
 await access('dist/server/index.js');
 await access('dist/server/wrangler.json');
-console.log('Astro Worker, static pages, and existing D1 migrations are ready for Sites.');
+console.log('Astro Worker and static pages are ready. Local environment files have been excluded.');

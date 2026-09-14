@@ -6,7 +6,7 @@ export const businessTypeLabels: Record<BusinessType, string> = {
   preparing: '아직 시작 전',
   other: '기타',
 };
-export const applicationConsentVersion = '2026-09-12-v2';
+export const applicationConsentVersion = '2026-09-14-v3';
 
 export function businessTypeLabel(value: unknown) {
   return typeof value === 'string' && businessTypes.includes(value as BusinessType)

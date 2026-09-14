@@ -1,4 +1,0 @@
-import type { APIContext } from 'astro';
-export const prerender=false;
-import { adminKey,createSession,equal,sameOrigin } from '@/lib/server/manage-auth';
-export async function POST({request}:APIContext){if(!sameOrigin(request))return Response.json({error:'접근할 수 없습니다.'},{status:403});if(!adminKey())return Response.json({error:'관리자 접속 설정을 확인해 주세요.'},{status:503});let key='';try{const data=await request.json();key=data&&typeof data==='object'&&'key' in data&&typeof data.key==='string'?data.key:''}catch{}if(key.length>100||!equal(key,adminKey()))return Response.json({error:'접속키를 확인해 주세요.'},{status:401});const token=await createSession();const secure=new URL(request.url).protocol==='https:'?'; Secure':'';return Response.json({ok:true},{headers:{'Cache-Control':'no-store','Set-Cookie':`seonbiz_manage=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=28800${secure}`}})}

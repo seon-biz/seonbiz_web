@@ -3,17 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=22.13.0"
+    "node": ">=22.19.0"
   },
   "scripts": {
     "install:ci": "node scripts/install-ci.mjs",
     "dev": "node scripts/dev-astro.mjs",
     "build": "node scripts/build-astro.mjs",
+    "build:cloudflare": "node scripts/build-cloudflare.mjs",
+    "deploy:cloudflare": "node scripts/deploy-cloudflare.mjs",
     "start": "node scripts/preview-astro.mjs",
     "lint": "astro check",
     "db:generate": "drizzle-kit generate",
     "check": "astro check",
-    "db:migrate:local": "wrangler d1 migrations apply DB --local --config wrangler.jsonc",
     "test:smoke": "node scripts/test-astro.mjs"
   },
   "dependencies": {

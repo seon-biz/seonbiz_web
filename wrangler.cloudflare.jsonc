@@ -1,7 +1,10 @@
 {
-  "name": "seonbiz-astro",
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "seonbiz-coaching",
+  "account_id": "60b42a6ecb45f22b2b3496866eec4338",
   "compatibility_date": "2026-09-14",
   "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
   "assets": { "html_handling": "drop-trailing-slash" },
   "vars": {
     "CONTACT_EMAIL_FROM": "consultation@forms.seonbiz.com",

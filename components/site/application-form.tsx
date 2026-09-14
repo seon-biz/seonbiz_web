@@ -18,7 +18,8 @@ export function ApplicationForm() {
   const [pending,setPending] = useState(false);
   const [error,setError] = useState('');
   const [receipt,setReceipt] = useState('');
-  const requestId = useRef('');
+  const submission = useRef<{ id: string; payload: string } | null>(null);
+  const inFlight = useRef(false);
   const form = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export function ApplicationForm() {
 
   async function submit(event:React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (pending) return;
+    if (inFlight.current) return;
     setError('');
     if (!fields.businessType) {
       setError('하시는 일을 선택해 주세요.');
@@ -54,18 +55,33 @@ export function ApplicationForm() {
       return;
     }
     if (!consent) {setError('개인정보 수집·이용 안내를 확인하고 동의해 주세요.');return;}
-    if (!requestId.current) requestId.current = crypto.randomUUID();
+    const payload = {
+      ...fields,
+      website: fields.website.trim(),
+      problem: fields.problem.trim(),
+      aiUsage: fields.aiUsage.trim(),
+      phone: fields.phone.replace(/[\s-]/g, ''),
+      consent,
+      companyFax: new FormData(event.currentTarget).get('companyFax') || '',
+    };
+    const serializedPayload = JSON.stringify(payload);
+    if (!submission.current || submission.current.payload !== serializedPayload) {
+      submission.current = { id: crypto.randomUUID(), payload: serializedPayload };
+    }
+    const id = submission.current.id;
+    inFlight.current = true;
     setPending(true);
     try {
-      const response = await fetch('/api/applications',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...fields,id:requestId.current,consent,companyFax:new FormData(event.currentTarget).get('companyFax')||''})});
+      const response = await fetch('/api/applications',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...payload,id})});
       const data = await response.json() as {id:string;received?:boolean;error?:string};
-      if (!response.ok || !data.received) throw new Error(data.error||'접수 여부를 확인하지 못했습니다. 입력한 내용은 남아 있으니 다시 제출해 주세요.');
+      if (!response.ok || !data.received || data.id !== id) throw new Error(data.error||'접수 여부를 확인하지 못했습니다. 입력한 내용은 남아 있으니 잠시 후 다시 제출해 주세요.');
       setReceipt(data.id);
+      submission.current = null;
       setFields(emptyFields);
       setConsent(false);
     } catch(e) {
       setError(e instanceof Error?e.message:'연결을 확인하고 다시 제출해 주세요. 입력한 내용은 남아 있습니다.');
-    } finally {setPending(false);}
+    } finally {inFlight.current = false;setPending(false);}
   }
 
   if (receipt) return (
@@ -113,7 +129,7 @@ export function ApplicationForm() {
       <div className="honeypot" aria-hidden="true"><label htmlFor="companyFax">회사 팩스</label><input id="companyFax" name="companyFax" autoComplete="off" tabIndex={-1} /></div>
       <div className="privacy-consent">
         <div className="consent-choice"><Checkbox id="consent" checked={consent} onCheckedChange={value=>setConsent(value===true)} className="consent-checkbox" /><label htmlFor="consent">상담을 위한 개인정보 수집·이용에 동의합니다. <span>(필수)</span></label></div>
-        <p>입력하신 정보는 상담 준비와 일정 조율에 사용하며, 상담 목적을 달성하거나 신청을 철회하면 지체 없이 삭제합니다.</p>
+        <p>입력하신 정보는 운영자 이메일로 전달해 상담 준비와 일정 조율에 사용하며, 상담 목적을 달성하거나 신청을 철회하면 지체 없이 삭제합니다.</p>
         <Collapsible className="consent-details">
           <CollapsibleTrigger className="consent-details-trigger" aria-label="개인정보 수집·이용 더 보기">더 보기 <ChevronDown size={17} aria-hidden="true" /></CollapsibleTrigger>
           <CollapsibleContent className="consent-details-content">
@@ -122,8 +138,9 @@ export function ApplicationForm() {
               <div><dt>필수 입력</dt><dd>하시는 일, 휴대전화번호, 상담 내용, AI 사용 경험</dd></div>
               <div><dt>선택 입력</dt><dd>사이트 또는 판매처 주소. 비워두셔도 신청할 수 있습니다.</dd></div>
               <div><dt>접수 시 생성</dt><dd>신청번호, 접수 시각, 동의한 문서의 버전</dd></div>
-              <div><dt>이용 목적</dt><dd>상담 검토·준비, 연락·일정 조율, 접수 확인과 중복·과다 접수 방지</dd></div>
-              <div><dt>보관·삭제</dt><dd>상담 준비와 연락·일정 조율 목적을 달성할 때까지 보관하며, 목적을 달성하거나 신청을 철회하면 지체 없이 삭제합니다.</dd></div>
+              <div><dt>이용 목적</dt><dd>상담 검토·준비, 연락·일정 조율, 접수 확인과 과다 접수 방지</dd></div>
+              <div><dt>전달·보관</dt><dd>신청 내용은 운영자 이메일로 전달하며, 웹사이트의 상담 데이터베이스에는 저장하지 않습니다. 상담 준비와 연락·일정 조율 목적을 달성할 때까지 이메일로 보관합니다.</dd></div>
+              <div><dt>삭제</dt><dd>상담 목적을 달성하거나 신청을 철회하면 상담 신청 이메일을 지체 없이 삭제합니다.</dd></div>
             </dl>
             <p>개인정보 수집·이용에 동의하지 않을 수 있습니다. 다만 필수 항목의 수집·이용에 동의하지 않으면 이 신청서로 접수할 수 없습니다.</p>
           </CollapsibleContent>
