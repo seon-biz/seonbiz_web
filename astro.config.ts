@@ -9,7 +9,7 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'never',
   session: false,
-  build: { serverEntry: 'index.js' },
+  build: { serverEntry: 'index.js', format: 'file' },
   integrations: [react()],
   adapter: cloudflare({ imageService: 'passthrough', inspectorPort: false }),
   devToolbar: { enabled: false },

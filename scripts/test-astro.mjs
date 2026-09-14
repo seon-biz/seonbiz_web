@@ -21,6 +21,7 @@ async function staticRoutes(directory = 'dist/client', relative = '') {
     const name = relative + item.name;
     if (item.isDirectory()) routes.push(...await staticRoutes(`${directory}/${item.name}`, `${name}/`));
     else if (item.name === 'index.html') routes.push('/' + relative.replace(/\/$/, ''));
+    else if (item.name.endsWith('.html') && name !== '404.html') routes.push('/' + name.slice(0, -5));
   }
   return routes;
 }
