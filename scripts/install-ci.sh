@@ -82,29 +82,29 @@ if [[ -n "${seed_cache}" && -d "${seed_cache}" ]]; then
   fi
 fi
 
-locked_vinext_output="$({ node --input-type=module - "${SITES_PROJECT_ROOT}/package-lock.json" <<'NODE'
+locked_astro_output="$({ node --input-type=module - "${SITES_PROJECT_ROOT}/package-lock.json" <<'NODE'
 import { readFile } from "node:fs/promises";
 
 const lock = JSON.parse(await readFile(process.argv[2], "utf8"));
-const vinext = lock.packages?.["node_modules/vinext"];
-if (!vinext?.resolved || !vinext?.integrity) {
-  throw new Error("package-lock.json does not contain a resolved, integrity-pinned vinext tarball");
+const astro = lock.packages?.["node_modules/astro"];
+if (!astro?.resolved || !astro?.integrity) {
+  throw new Error("package-lock.json does not contain a resolved, integrity-pinned astro tarball");
 }
-console.log(vinext.resolved);
-console.log(vinext.integrity);
+console.log(astro.resolved);
+console.log(astro.integrity);
 NODE
 })" || {
-  echo "Could not read the integrity-pinned vinext tarball from package-lock.json." >&2
+  echo "Could not read the integrity-pinned astro tarball from package-lock.json." >&2
   exit 65
 }
-mapfile -t locked_vinext <<<"${locked_vinext_output}"
-if [[ "${#locked_vinext[@]}" -ne 2 ]]; then
-  echo "Expected exactly one Vinext URL and integrity value from package-lock.json." >&2
+mapfile -t locked_astro <<<"${locked_astro_output}"
+if [[ "${#locked_astro[@]}" -ne 2 ]]; then
+  echo "Expected exactly one Astro URL and integrity value from package-lock.json." >&2
   exit 65
 fi
 
-locked_tarball="${locked_vinext[0]}"
-locked_integrity="${locked_vinext[1]}"
+locked_tarball="${locked_astro[0]}"
+locked_integrity="${locked_astro[1]}"
 
 if [[ "${use_seeded_cache}" == "0" ]]; then
   registry="$(npm --prefix "${SITES_PROJECT_ROOT}" --workspaces=false config get registry)"
@@ -124,10 +124,10 @@ NODE
   }
 
   preflight_dir="${runtime_root}/preflight"
-  preflight_tarball="${preflight_dir}/vinext.tgz"
+  preflight_tarball="${preflight_dir}/astro.tgz"
   mkdir -p "${preflight_dir}"
 
-  echo "[sites] downloading the complete locked vinext tarball"
+  echo "[sites] downloading the complete locked astro tarball"
   curl \
     --fail \
     --location \
@@ -139,7 +139,7 @@ NODE
     --output "${preflight_tarball}" \
     "${preflight_url}"
 
-  echo "[sites] verifying locked vinext tarball integrity"
+  echo "[sites] verifying locked astro tarball integrity"
   node --input-type=module - "${preflight_tarball}" "${locked_integrity}" <<'NODE'
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
@@ -152,7 +152,7 @@ const actual = createHash(algorithm)
   .update(await readFile(process.argv[2]))
   .digest("base64");
 if (actual !== expected) {
-  throw new Error(`vinext tarball integrity mismatch for ${algorithm}`);
+  throw new Error(`astro tarball integrity mismatch for ${algorithm}`);
 }
 NODE
   echo "[sites] network and integrity preflight passed"
@@ -172,9 +172,9 @@ timeout \
   "${SITES_INSTALL_TIMEOUT:-8m}" \
   npm "${npm_ci_args[@]}"
 
-vinext="${SITES_PROJECT_ROOT}/node_modules/.bin/vinext"
-if [[ ! -x "${vinext}" ]]; then
-  echo "npm ci exited successfully but node_modules/.bin/vinext is unavailable." >&2
+astro="${SITES_PROJECT_ROOT}/node_modules/.bin/astro"
+if [[ ! -x "${astro}" ]]; then
+  echo "npm ci exited successfully but node_modules/.bin/astro is unavailable." >&2
   exit 69
 fi
 
@@ -208,4 +208,4 @@ if (reportPath) {
   }
 }
 NODE
-echo "[sites] npm ci passed and vinext is available"
+echo "[sites] npm ci passed and astro is available"

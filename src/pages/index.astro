@@ -1,0 +1,17 @@
+---
+import SiteLayout from "@/src/layouts/SiteLayout.astro";
+import { ArrowUpRight } from "lucide-react";
+import { WorkShowcase } from "@/components/site/sections";
+import { Method, Pricing, FAQ, ConsultCTA, ScopeList } from "@/components/site/coaching-blocks";
+import { Hero } from "@/components/site/hero";
+import { ContentFormats, TrustBanner, homeFaqAdditions } from "@/components/site/home-sections";
+const metadata={};
+
+---
+<SiteLayout {...metadata}>
+<main id="main"><Hero client:load/><TrustBanner/>
+<section id="coaching" class="container section audience"><div class="section-heading"><p class="eyebrow">업종별 코칭 안내</p><h2>대표님이 하시는 일에<br/>맞춰 시작합니다</h2><p>팔고 있는 상품과 현장의 경험이<br/>코칭에서 함께 볼 자료가 됩니다.</p></div><div class="audience-links"><a href="/coaching/shop" class="audience-link"><span class="audience-number">01</span><div><h3>쇼핑몰을 운영하신다면</h3><p>상품 설명과 홍보 글을 쓰고,<br/>검색·광고 기록을 보며 고칠 곳을 찾습니다.</p></div><ArrowUpRight/></a><a href="/coaching/service" class="audience-link"><span class="audience-number">02</span><div><h3>서비스업을 운영하신다면</h3><p>현장에서 하던 설명으로 홈페이지를 만들고,<br/>작업 사례와 문의 안내를 정리합니다.</p></div><ArrowUpRight/></a></div></section>
+<ScopeList/><ContentFormats/><WorkShowcase client:load/><Method showSessionExample/><Pricing/><FAQ client:load subset={[0,2,4,7,8]} additions={homeFaqAdditions}/>
+<section class="container section home-notes"><div><p class="eyebrow">코칭 노트</p><h2>혼자 해보실 때<br/>참고하세요.</h2></div><div><a href="/notes/website-or-agency">홈페이지를 맡길까, 직접 만들까 <ArrowUpRight size={20}/></a><a href="/notes/content-formats">블로그 글 한 편으로 카드뉴스와 짧은 영상 만들기 <ArrowUpRight size={20}/></a><a href="/notes/read-ad-numbers">광고 관리 화면에서 무엇부터 봐야 할까요? <ArrowUpRight size={20}/></a><a href="/notes" class="text-link">코칭 노트 모두 보기</a></div></section><ConsultCTA/>
+</main>
+</SiteLayout>

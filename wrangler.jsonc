@@ -1,0 +1,15 @@
+{
+  "name": "seonbiz-astro",
+  "compatibility_date": "2026-09-14",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": { "html_handling": "drop-trailing-slash" },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "site-creator-d1",
+      // Local placeholder; Sites supplies the existing production D1 binding.
+      "database_id": "00000000-0000-4000-8000-000000000000",
+      "migrations_dir": "drizzle"
+    }
+  ]
+}

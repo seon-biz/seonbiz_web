@@ -1,0 +1,17 @@
+---
+import SiteLayout from "@/src/layouts/SiteLayout.astro";
+import { ContentWorkflowCase } from "@/components/site/content-workflow-case";
+import { caseSummaries } from "@/lib/content";
+import { LegacySearchCase, LegacySearchLinks } from "@/components/site/legacy-search-case";
+import { RecentCaseDetail } from "@/components/site/case-evidence";
+import { ConsultCTA } from "@/components/site/coaching-blocks";
+export function getStaticPaths(){return caseSummaries.map(item=>({params:{slug:item.slug}}));}
+
+const {slug}=Astro.params;
+const item=caseSummaries.find(x=>x.slug===slug);
+if(!item)throw new Error("Unknown content route");
+const metadata={title:item.title.replace("\n"," "),description:item.summary};
+---
+<SiteLayout {...metadata}>
+<main id="main"><section class="inner-hero container"><a href="/cases" class="back-link">실제 사례</a><p class="eyebrow">{item.tag}</p><h1>{item.title.split('\n').map((line,i)=><span >{i>0&&<br/>}{line}</span>)}</h1><p class="lead">{item.summary}</p>{slug==='search-records'&&<LegacySearchLinks/>}</section>{item.recordKind?<RecentCaseDetail kind={item.recordKind}/>:slug==='search-records'?<LegacySearchCase/>:<ContentWorkflowCase client:visible/>}<ConsultCTA/></main>
+</SiteLayout>

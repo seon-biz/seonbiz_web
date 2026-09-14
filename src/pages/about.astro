@@ -1,0 +1,83 @@
+---
+import SiteLayout from "@/src/layouts/SiteLayout.astro";
+import { ArrowUpRight } from "lucide-react";
+import { ConsultCTA } from "@/components/site/coaching-blocks";
+const metadata = {
+  title: '세온비즈 소개',
+  description: '세온비즈를 운영하는 서정옥을 소개합니다. 유료 코칭으로 함께한 35개 회사, 디지털 마케팅 경력 8년. 대표님이 직접 이어갈 수 있도록 실제 사업 자료로 함께 작업합니다.',
+};
+const principles = [
+  { title: '대표님 사업의 자료로 합니다.' },
+  { title: 'AI가 쓴 내용도 그대로 쓰지 않고 확인합니다.', detail: '그럴듯한 문장에 틀린 규격이나 하지 않는 서비스가 들어갈 수 있습니다.' },
+  { title: '끝나고 나서 직접 하실 수 있게 하는 것이 목표입니다.' },
+];
+
+---
+<SiteLayout {...metadata}>
+<main id="main" class="about-page">
+      <section class="container inner-hero about-hero">
+        <p class="eyebrow">세온비즈 소개</p>
+        <h1>설명은 함께 보고 있는<br />화면에서 시작합니다.</h1>
+        <p class="lead">세온비즈는 쇼핑몰과 서비스업에서 필요한 일을 함께 해보는 일대일 AI 코칭입니다. 배운 방법을 실제 일에 쓸 수 있도록, 지금 운영하는 사업과 준비된 자료를 놓고 진행합니다.</p>
+      </section>
+
+      <section class="container section about-profile" aria-labelledby="about-profile-name">
+        <div>
+          <p class="eyebrow">세온비즈를 운영합니다</p>
+          <h2 id="about-profile-name">서정옥</h2>
+          <p class="about-profile-role">쇼핑몰·서비스업 일대일 AI 코칭</p>
+        </div>
+        <div class="about-profile-copy">
+          <p>20여 년 동안 인쇄물 제작 일을 했습니다. 제 일을 홍보하려고 외부에 사이트 제작을 맡겼지만, 결과가 만족스럽지 않았습니다. 내용을 계속 고쳐야 했고, 그때마다 수정을 의뢰하는 일도 번거로웠습니다.</p>
+          <p>2018년에는 사이트를 직접 만들기로 했습니다. 어렵게 제 사이트를 만든 뒤, 지인들의 사이트 만들기를 도와주기 시작했습니다. 그렇게 한 분씩 돕던 일이 코칭으로 이어졌습니다.</p>
+          <p>홈페이지는 만든 뒤에도 계속 손볼 일이 생깁니다. 제 사이트를 만들며 겪었던 불편함을 알기에, 대표님이 필요할 때 직접 고치고 다음 작업도 이어갈 수 있도록 돕고 싶습니다.</p>
+          <p>처음에는 서비스를 판매하는 업체와 일했고, 이후 쇼핑몰로 코칭 범위를 넓혔습니다. 지금은 AI를 적극 활용합니다. 대표님이 직접 쇼핑몰과 웹사이트를 만들고, 콘텐츠를 발행하며 온라인 마케팅을 할 수 있도록 함께 작업하고 있습니다.</p>
+          <dl class="about-experience">
+            <div><dt>함께 일한 회사</dt><dd><strong>35</strong>개<p>유료 코칭을 받은 회사 기준</p></dd></div>
+            <div><dt>디지털 마케팅 경력</dt><dd><strong>8</strong>년</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="container section about-beliefs" aria-labelledby="about-beliefs-title">
+        <div><p class="eyebrow">코칭에서 지키는 기준</p><h2 id="about-beliefs-title">이렇게 일합니다.</h2></div>
+        <div>
+          <ol class="about-belief-list">{principles.map((principle, i) => (
+            <li >
+              <span class="step-index" aria-hidden="true">0{i + 1}</span>
+              <div><p>{principle.title}</p>{principle.detail && <p class="about-belief-detail">{principle.detail}</p>}</div>
+            </li>
+          ))}</ol>
+          <div class="about-facts">
+            <div><span>진행 방식</span><strong>Zoom 일대일</strong></div>
+            <div><span>한 번의 코칭</span><strong>2시간</strong></div>
+            <div><span>첫 상담</span><strong>1시간 무료</strong></div>
+          </div>
+          <a href="/process" class="text-link">자세한 진행 방식과 비용 보기 <ArrowUpRight size={18} aria-hidden="true" /></a>
+        </div>
+      </section>
+
+      <section class="container section about-practice" aria-labelledby="about-practice-title">
+        <div><p class="eyebrow">제 사업에도 적용합니다</p><h2 id="about-practice-title">지금도 직접<br />하고 있습니다.</h2></div>
+        <div>
+          <p class="about-own-site">이 사이트도 AI로 초안을 만들고 직접 수정·확인하며 완성했습니다.</p>
+          <div class="about-built-service">
+            <p class="eyebrow">세온비즈의 상세페이지 제작 서비스 · SEON코더</p>
+            <h3>직접 만든 서비스</h3>
+            <p>세온비즈의 상세페이지 제작 서비스인 SEON코더를 직접 만들어 운영하고 있습니다. 이미지에 담긴 상품 설명을 본문 텍스트와 이미지로 구성합니다. 코칭에서 다루는 작업을 서비스로 만든 것입니다.</p>
+            <p>직접 배우실 수도 있고, 제작을 맡기실 수도 있습니다.</p>
+            <a href="https://seoncoder.com/" target="_blank" rel="noopener noreferrer" class="text-link">SEON코더 <ArrowUpRight size={18} aria-hidden="true" /><span class="sr-only"> (새 탭)</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="container section about-proof">
+        <div><p class="eyebrow">직접 작업한 자료</p><h2>어떤 일을 했는지<br />확인하실 수 있습니다.</h2></div>
+        <div>
+          <p>생활용품 쇼핑몰의 AI 유입 기록, 스포츠용품 쇼핑몰의 검색 기록, 세온비즈가 직접 만든 짧은 영상을 소개합니다. 비교한 기간과 작업 내용을 함께 설명합니다.</p>
+          <a href="/cases" class="text-link">실제 작업 사례 보기 <ArrowUpRight size={18} aria-hidden="true" /></a>
+        </div>
+      </section>
+      <ConsultCTA />
+    </main>
+</SiteLayout>

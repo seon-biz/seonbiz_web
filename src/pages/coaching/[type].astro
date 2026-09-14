@@ -1,0 +1,27 @@
+---
+import SiteLayout from "@/src/layouts/SiteLayout.astro";
+import { ArrowUpRight, Check } from "lucide-react";
+import { coaching } from "@/lib/content";
+import { Reveal } from "@/components/site/sections";
+import { PricingSummary, FAQ, ConsultCTA } from "@/components/site/coaching-blocks";
+import { PageHero } from "@/components/site/page-hero";
+import { ShopProblems, ShopPageExplanation, ShopCaseLinks, shopFaqs } from "@/components/site/shop-sections";
+import { ServiceProblems, ServiceOwnership, serviceFaqs } from "@/components/site/service-sections";
+export function getStaticPaths(){return Object.keys(coaching).map(type=>({params:{type}}));}
+
+const {type}=Astro.params;
+const item=coaching[type as keyof typeof coaching];
+if(!item)throw new Error("Unknown content route");
+const isShop=type==='shop';
+const metadata={title:item.label,description:item.intro.replaceAll("\n"," ")};
+---
+<SiteLayout {...metadata}>
+<main id="main" class={isShop?"shop-coaching":"service-coaching"}>
+<PageHero eyebrow={item.eyebrow} title={item.title} intro={item.intro} image={isShop?'/images/shop-product-page.webp':'/images/service-website.webp'} alt={isShop?'상품과 규격 자료를 보며 상세페이지를 작성하는 손을 그린 일러스트':'정비 사진과 점검 내용을 서비스 소개 홈페이지에 정리하는 일러스트'} caption={isShop?'판매 중인 상품과 고객의 질문으로':'현장의 경험을 고객이 읽을 수 있게'}/>
+{isShop?<ShopProblems/>:<ServiceProblems/>}
+<section class="container task-section">{isShop&&<p class="scope-note shop-platform-note">Cafe24 자사몰을 중심으로, 스마트스토어·쿠팡·오픈마켓·종합몰까지 같은 상품을 여러 곳에 올리는 일을 함께 합니다.</p>}<p class="scope-note">필요한 작업을 골라 진행합니다. 첫 상담에서 현재 상황을 살펴보고, 코칭을 시작할 때 시간 안에 가능한 범위를 정합니다.</p>{item.tasks.map((task,i)=><Reveal ><article class="task-row"><div><span class="step-index">0{i+1}</span><h2>{task.title}</h2></div><div><h3>{task.problem}</h3><ul>{task.items.map(t=><li ><Check size={18}/>{t}</li>)}</ul><p class="task-result">{task.result}</p></div></article></Reveal>)}</section>
+{isShop?<ShopPageExplanation/>:<><ServiceOwnership/><section class="service-example container"><p class="eyebrow">자동차 정비소에서 해볼 수 있는 일</p><h2>수리 사진 옆에<br/>작업한 이유를 적습니다.</h2><p>어떤 증상으로 입고됐는지, 무엇을 점검했고 왜 부품을 교체했는지 정리합니다. 고객에게 말로 설명하던 내용을 사진 옆에 붙여보세요. AI로 초안을 쓰고 실제 작업과 다른 내용을 고치는 순서까지 함께 익힙니다.</p><p class="meta">정비소를 가정한 작업 예시입니다. 실제 업체의 성과 사례는 아닙니다.</p></section></>}
+{isShop?<ShopCaseLinks/>:<section class="container related-case"><p>글 한 편을 콘텐츠로 넓히는 과정을 확인하세요.</p><p class="service-case-note">세온비즈가 직접 만든 자료입니다.</p><a href="/cases/content-workflow" class="text-link">짧은 영상 제작 사례 보기<ArrowUpRight size={18}/></a></section>}
+<PricingSummary/><FAQ client:load items={isShop?shopFaqs:serviceFaqs}/><ConsultCTA title={isShop?'판매 중인 상품과\n고치고 싶은 곳을 알려주세요.':'하시는 일과 준비한 자료로\n이야기를 시작해 보세요.'} description="필요한 작업과 참여하실 수 있는 시간을 듣고, 코칭 진행 방향을 함께 정합니다."/>
+</main>
+</SiteLayout>

@@ -49,3 +49,6 @@ next-env.d.ts
 .private/
 
 *.tsbuildinfo
+
+# Astro generated types and build cache
+/.astro/
