@@ -12,6 +12,17 @@ const { title, description = '홈페이지부터 상품 홍보까지, 내 사업
 const pageTitle = typeof title === 'object' ? title.absolute : title ? `${title} | 세온비즈` : '세온비즈 · 쇼핑몰·서비스업 일대일 AI 코칭';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const socialImageUrl = new URL(image, canonicalUrl);
+const pathParts = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumbNames: Record<string, string> = { coaching: '코칭 안내', shop: '쇼핑몰 코칭', service: '서비스업 코칭', process: '진행·비용', cases: '실제 사례', notes: '코칭 노트', about: '소개', apply: '무료 상담 신청', privacy: '개인정보처리방침' };
+const breadcrumbItems = [{ name: '홈', url: new URL('/', canonicalUrl).toString() }, ...pathParts.map((part, index) => ({ name: breadcrumbNames[part] ?? pageTitle, url: new URL(`/${pathParts.slice(0, index + 1).join('/')}`, canonicalUrl).toString() }))];
+const organization = { '@type': 'Organization', name: '세온비즈', url: 'https://seonbiz.com', email: 'cobaltblue872@gmail.com', logo: 'https://seonbiz.com/favicon-seonbiz-approved-192.png', founder: { '@type': 'Person', name: '서정옥' } };
+const structuredData = [
+  { '@context': 'https://schema.org', ...organization },
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: '세온비즈', url: 'https://seonbiz.com', publisher: { '@id': 'https://seonbiz.com/#organization' } },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: breadcrumbItems.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.name, item: item.url })) },
+  ...(Astro.url.pathname.startsWith('/coaching/') ? [{ '@context': 'https://schema.org', '@type': 'Service', name: pageTitle, description, serviceType: '일대일 AI 실무 코칭', provider: organization, areaServed: '대한민국', url: canonicalUrl.toString() }] : []),
+  ...((Astro.url.pathname.startsWith('/notes/') || Astro.url.pathname.startsWith('/cases/')) ? [{ '@context': 'https://schema.org', '@type': 'Article', headline: pageTitle, description, author: { '@type': 'Person', name: '서정옥' }, publisher: organization, mainEntityOfPage: canonicalUrl.toString(), image: socialImageUrl.toString() }] : []),
+];
 ---
 <!doctype html>
 <html lang="ko">
@@ -33,6 +44,7 @@ const socialImageUrl = new URL(image, canonicalUrl);
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     {robots && <meta name="robots" content={`${robots.index === false ? 'noindex' : 'index'}, ${robots.follow === false ? 'nofollow' : 'follow'}`} />}
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="/favicon-seonbiz-approved-32.png" sizes="32x32" type="image/png" />
