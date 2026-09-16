@@ -6,7 +6,7 @@ import { sites } from './build/sites-vite-plugin';
 
 export default defineConfig({
   site: process.env.SEONBIZ_SITE_URL || 'https://seonbiz.com',
-  output: 'static',
+  output: 'server',
   trailingSlash: 'never',
   session: false,
   build: { serverEntry: 'index.js', format: 'file' },
