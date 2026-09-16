@@ -47,6 +47,7 @@ const structuredData = [
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     {robots && <meta name="robots" content={`${robots.index === false ? 'noindex' : 'index'}, ${robots.follow === false ? 'nofollow' : 'follow'}`} />}
     <meta name="generator" content={Astro.generator} />
+    {Astro.url.pathname === '/' && <link rel="preload" as="image" href="/images/business-work.webp" type="image/webp" fetchpriority="high" />}
     <link rel="icon" href="/favicon-seonbiz-approved-32.png" sizes="32x32" type="image/png" />
     <link rel="icon" href="/favicon-seonbiz-approved-192.png" sizes="192x192" type="image/png" />
     <link rel="shortcut icon" href="/favicon-seonbiz-approved-32.png" />
