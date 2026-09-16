@@ -5,11 +5,13 @@ import { SiteHeader, SiteFooter } from '@/components/site/shell';
 interface Props {
   title?: string | { absolute: string };
   description?: string;
+  image?: string;
   robots?: { index?: boolean; follow?: boolean };
 }
-const { title, description = '홈페이지부터 상품 홍보까지, 내 사업에 필요한 일을 AI로 직접 해보세요. 쇼핑몰·서비스업을 위한 일대일 실무 코칭. 첫 상담은 1시간 무료입니다.', robots } = Astro.props;
+const { title, description = '홈페이지부터 상품 홍보까지, 내 사업에 필요한 일을 AI로 직접 해보세요. 쇼핑몰·서비스업을 위한 일대일 실무 코칭. 첫 상담은 1시간 무료입니다.', image = '/images/business-work.webp', robots } = Astro.props;
 const pageTitle = typeof title === 'object' ? title.absolute : title ? `${title} | 세온비즈` : '세온비즈 · 쇼핑몰·서비스업 일대일 AI 코칭';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const socialImageUrl = new URL(image, canonicalUrl);
 ---
 <!doctype html>
 <html lang="ko">
@@ -19,6 +21,18 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="세온비즈" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:alt" content="세온비즈 AI 코칭 안내" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
     {robots && <meta name="robots" content={`${robots.index === false ? 'noindex' : 'index'}, ${robots.follow === false ? 'nofollow' : 'follow'}`} />}
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="/favicon-seonbiz-approved-32.png" sizes="32x32" type="image/png" />
