@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { sites } from './build/sites-vite-plugin';
 
 export default defineConfig({
-  site: process.env.SEONBIZ_SITE_URL || 'https://seonbiz-coaching.jeongohkseo.chatgpt.site',
+  site: process.env.SEONBIZ_SITE_URL || 'https://seonbiz.com',
   output: 'static',
   trailingSlash: 'never',
   session: false,

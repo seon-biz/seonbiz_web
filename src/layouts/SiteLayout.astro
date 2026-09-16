@@ -9,6 +9,7 @@ interface Props {
 }
 const { title, description = '홈페이지부터 상품 홍보까지, 내 사업에 필요한 일을 AI로 직접 해보세요. 쇼핑몰·서비스업을 위한 일대일 실무 코칭. 첫 상담은 1시간 무료입니다.', robots } = Astro.props;
 const pageTitle = typeof title === 'object' ? title.absolute : title ? `${title} | 세온비즈` : '세온비즈 · 쇼핑몰·서비스업 일대일 AI 코칭';
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 ---
 <!doctype html>
 <html lang="ko">
@@ -17,6 +18,7 @@ const pageTitle = typeof title === 'object' ? title.absolute : title ? `${title}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
     {robots && <meta name="robots" content={`${robots.index === false ? 'noindex' : 'index'}, ${robots.follow === false ? 'nofollow' : 'follow'}`} />}
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="/favicon-seonbiz-approved-32.png" sizes="32x32" type="image/png" />
