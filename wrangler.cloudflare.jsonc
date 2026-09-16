@@ -5,6 +5,10 @@
   "compatibility_date": "2026-09-14",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
+  "routes": [
+    { "pattern": "seonbiz.com", "custom_domain": true },
+    { "pattern": "www.seonbiz.com", "custom_domain": true }
+  ],
   "assets": { "html_handling": "drop-trailing-slash" },
   "vars": {
     "CONTACT_EMAIL_FROM": "consultation@forms.seonbiz.com",
