@@ -1,6 +1,6 @@
 import './sites-env.mjs';
 import { spawnSync } from 'node:child_process';
-import { cp, mkdir, readdir, rm, access } from 'node:fs/promises';
+import { cp, mkdir, readdir, rm, access, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -17,6 +17,12 @@ async function removeLocalEnvironmentFiles(directory) {
   }
 }
 await removeLocalEnvironmentFiles('dist');
+if (process.env.SEONBIZ_DEPLOY_TARGET === 'cloudflare') {
+  const workerConfigPath = 'dist/server/wrangler.json';
+  const workerConfig = JSON.parse(await readFile(workerConfigPath, 'utf8'));
+  workerConfig.assets = { ...workerConfig.assets, run_worker_first: true };
+  await writeFile(workerConfigPath, JSON.stringify(workerConfig));
+}
 if (process.env.SEONBIZ_DEPLOY_TARGET !== 'cloudflare') {
   await mkdir('dist/.openai', { recursive: true });
   await cp('.openai/hosting.json', 'dist/.openai/hosting.json');
