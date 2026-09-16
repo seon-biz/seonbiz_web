@@ -13,7 +13,12 @@ const {type}=Astro.params;
 const item=coaching[type as keyof typeof coaching];
 if(!item)throw new Error("Unknown content route");
 const isShop=type==='shop';
-const metadata={title:item.label,description:item.intro.replaceAll("\n"," ")};
+const metadata={
+  title: isShop ? '쇼핑몰 AI 코칭 | 상세페이지·온라인 마케팅' : '서비스업 홈페이지 코칭 | AI 온라인 마케팅',
+  description: isShop
+    ? '쇼핑몰 대표님을 위한 일대일 AI 코칭. 상품 상세페이지, 상품 설명, 검색·광고 데이터와 블로그·SNS 홍보를 실제 판매 자료로 함께 작업합니다.'
+    : '서비스업 대표님을 위한 일대일 AI 코칭. 현장 설명으로 홈페이지를 만들고, 작업 사례·문의 안내·검색과 온라인 마케팅을 직접 이어가도록 돕습니다.',
+};
 ---
 <SiteLayout {...metadata}>
 <main id="main" class={isShop?"shop-coaching":"service-coaching"}>
