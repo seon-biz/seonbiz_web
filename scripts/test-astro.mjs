@@ -8,7 +8,7 @@ let checks = 0;
 const expect = (actual, expected, label) => { assert.equal(actual, expected, label); checks++; };
 const request = (route, options = {}) => fetch(new URL(route, base), { redirect: 'manual', ...options });
 const post = (route, data, headers = {}) => request(route, { method: 'POST', headers: { Origin: base.origin, 'Content-Type': 'application/json', ...headers }, body: JSON.stringify(data) });
-const fixture = { businessType: 'existing', website: '', problem: 'Astro migration local test fixture only', aiUsage: '테스트용 데이터', phone: '01000000000', consent: true, companyFax: '' };
+const fixture = { businessType: 'existing', website: '', problem: 'outdated', problemOther: '', aiUsage: 'none', phone: '01000000000', consent: true, companyFax: '' };
 
 async function staticRoutes(directory = 'dist/client', relative = '') {
   let routes = [];
@@ -29,7 +29,6 @@ async function staticRoutes(directory = 'dist/client', relative = '') {
     const html = await response.text();
     assert.match(html, /name="generator" content="Astro v7/);
     assert.match(html, /<h1[\s>]/);
-    assert(!html.includes('숙박'), `Old terminology in ${route}`);
     assert(!/(쇼핑몰|상세페이지|스마트스토어|자사몰|쿠팡|SEON코더)/.test(html), `Removed commerce content in ${route}`);
   }
   expect((await request('/route-that-does-not-exist')).status, 404, 'Unknown URL');
@@ -61,8 +60,9 @@ async function staticRoutes(directory = 'dist/client', relative = '') {
   expect((await post('/api/applications', { ...fresh(), consent: false })).status, 400, 'Consent required');
   expect((await post('/api/applications', { ...fresh(), companyFax: 'bot' })).status, 400, 'Honeypot validation');
   expect((await post('/api/applications', { ...fresh(), businessType: 'unknown' })).status, 400, 'Business enum validation');
-  expect((await post('/api/applications', { ...fresh(), problem: 'short' })).status, 400, 'Minimum content length');
-  expect((await post('/api/applications', { ...fresh(), problem: 'x'.repeat(13000) })).status, 413, 'Request size limit');
+  expect((await post('/api/applications', { ...fresh(), problem: 'unknown' })).status, 400, 'Problem enum validation');
+  expect((await post('/api/applications', { ...fresh(), aiUsage: 'unknown' })).status, 400, 'AI usage enum validation');
+  expect((await post('/api/applications', { ...fresh(), problem: 'other', problemOther: 'x'.repeat(13000) })).status, 413, 'Request size limit');
   expect((await post('/api/applications', fresh(), { 'Content-Type': 'text/plain' })).status, 415, 'JSON required');
   expect((await request('/api/applications', { method: 'POST', headers: { Origin: base.origin, 'Content-Type': 'application/json' }, body: '{invalid' })).status, 400, 'Malformed JSON');
   console.log(`Passed ${checks} checks across ${routes.length} pages, redirects, removed admin routes, and application validation. No emails were sent.`);

@@ -1,14 +1,47 @@
 import { ArrowRight } from "lucide-react";
+import { websiteCases } from "@/lib/content";
+import { WebsiteCaseCard } from "./website-case-card";
 
 export function TrustBanner() {
   return <section className="trust-banner" aria-label="세온비즈 코칭 이력과 진행 방식">
     <div className="container trust-facts">
-      <div><span>유료 코칭</span><p><strong>35</strong>개 회사</p><small>무료 상담 제외</small></div>
-      <div><span>디지털 마케팅</span><p><strong>8</strong>년</p><small>인쇄·디자인 20년 포함</small></div>
+      <div><span>함께 일한 회사</span><p><strong>35</strong>개 회사</p><small>유료 코칭 기준</small></div>
+      <div><span>실무 경력</span><p><strong>28</strong>년</p><small>인쇄·디자인 20년 + 디지털 마케팅 8년</small></div>
       <div><span>코칭 1회</span><p><strong>2</strong>시간</p><small>Zoom 화면 공유</small></div>
       <div><span>첫 상담</span><p className="trust-zoom">1시간 무료</p><small>전국 어디서나</small></div>
     </div>
   </section>;
+}
+
+export function CoachIntro() {
+  return <section className="container section home-coach-intro" aria-labelledby="home-coach-title">
+    <img src="/images/profile/seonbiz-profile.webp" width="800" height="1000" alt="세온비즈를 운영하는 서정옥" loading="lazy"/>
+    <div className="home-coach-intro-copy">
+      <h2 id="home-coach-title">코칭은 제가 직접 진행합니다</h2>
+      <p>서정옥 · 홈페이지 일대일 AI 코칭<br/>인쇄·디자인 20년, 디지털 마케팅 8년.<br/>2018년부터 제 사이트를 직접 만들기 시작해 35개 회사와 함께했습니다.<br/>이 사이트도 AI로 초안을 만들어 직접 수정했습니다.</p>
+      <a href="/about" className="text-link">세온비즈 소개 보기 <ArrowRight size={18}/></a>
+    </div>
+  </section>;
+}
+
+export function HomeCases() {
+  return <>
+    <section className="container section home-cases" aria-labelledby="home-cases-title">
+      <div className="home-cases-heading">
+        <div><p className="eyebrow">실제 사례</p><h2 id="home-cases-title">대표님들이 직접 만들고,<br/>직접 고치고 계십니다.</h2></div>
+        <p>제작을 대신하지 않습니다. 약 40%만 코칭에서 함께하고,<br/>나머지는 대표님이 직접 만드십니다.</p>
+      </div>
+      <div className="website-cases-grid home-cases-grid">
+        {websiteCases.map(item => <WebsiteCaseCard key={item.slug} item={item} compact />)}
+      </div>
+      <a href="/cases" className="text-link">실제 사례 자세히 보기 <ArrowRight size={18} aria-hidden="true" /></a>
+    </section>
+    <section className="container home-testimonial" aria-label="고객 후기">
+      <blockquote><p>나이도 있고 컴퓨터도 잘 못해서, 모르는 걸 물어보려면 주눅부터 들었습니다.<br/>지금은 사진도 마음껏 바꾸고, 블로그 글도 직접 올립니다.</p></blockquote>
+      <p className="home-testimonial-source">본대로홈 · 맞춤 커튼·블라인드 · 충북 청주 오창</p>
+      <a href="/cases" className="text-link">다른 후기도 보기 <ArrowRight size={18} aria-hidden="true" /></a>
+    </section>
+  </>;
 }
 
 export function ContentFormats() {

@@ -6,11 +6,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { businessTypes, businessTypeLabels, type BusinessType } from '@/lib/application-options';
+import { aiUsageLabels, aiUsageTypes, businessTypes, businessTypeLabels, problemTypeLabels, problemTypes, type AiUsageType, type BusinessType, type ProblemType } from '@/lib/application-options';
 import { z } from 'zod';
 
-const draftSchema = z.object({businessType:z.enum(businessTypes).optional(),website:z.string().max(500).optional(),problem:z.string().max(3000).optional(),aiUsage:z.string().max(500).optional(),phone:z.string().max(20).optional()}).strict();
-const emptyFields = {businessType:'' as BusinessType | '',website:'',problem:'',aiUsage:'',phone:''};
+const draftSchema = z.object({businessType:z.enum(businessTypes).optional(),website:z.string().max(500).optional(),problem:z.enum(problemTypes).optional(),problemOther:z.string().optional(),aiUsage:z.enum(aiUsageTypes).optional(),phone:z.string().max(20).optional()}).strict();
+const emptyFields = {businessType:'' as BusinessType | '',website:'',problem:'' as ProblemType | '',problemOther:'',aiUsage:'' as AiUsageType | '',phone:''};
 
 export function ApplicationForm() {
   const [fields,setFields] = useState(emptyFields);
@@ -30,7 +30,7 @@ export function ApplicationForm() {
       void Promise.resolve(context.registerTool({
         name:'prepare_consultation_application',title:'상담 신청 내용 준비',
         description:'Fill the visible consultation form for the user to review. The requested work is required to submit; a website URL is optional. Does not give consent, submit, or store an application.',
-        inputSchema:{type:'object',properties:{businessType:{type:'string',enum:businessTypes},website:{type:'string',maxLength:500},problem:{type:'string',maxLength:3000},aiUsage:{type:'string',maxLength:500},phone:{type:'string',maxLength:20}},additionalProperties:false},
+        inputSchema:{type:'object',properties:{businessType:{type:'string',enum:businessTypes},website:{type:'string',maxLength:500},problem:{type:'string',enum:problemTypes},problemOther:{type:'string'},aiUsage:{type:'string',enum:aiUsageTypes},phone:{type:'string',maxLength:20}},additionalProperties:false},
         annotations:{readOnlyHint:false,untrustedContentHint:false},
         async execute(input:unknown) {
           const parsed = draftSchema.safeParse(input);
@@ -54,12 +54,21 @@ export function ApplicationForm() {
       form.current?.querySelector<HTMLButtonElement>('[role="radio"]')?.focus();
       return;
     }
+    if (!fields.problem) {
+      setError('지금 가장 답답한 점을 선택해 주세요.');
+      form.current?.querySelector<HTMLButtonElement>('[name="problem"]')?.focus();
+      return;
+    }
+    if (!fields.aiUsage) {
+      setError('AI 사용 경험을 선택해 주세요.');
+      form.current?.querySelector<HTMLButtonElement>('[name="aiUsage"]')?.focus();
+      return;
+    }
     if (!consent) {setError('개인정보 수집·이용 안내를 확인하고 동의해 주세요.');return;}
     const payload = {
       ...fields,
       website: fields.website.trim(),
-      problem: fields.problem.trim(),
-      aiUsage: fields.aiUsage.trim(),
+      problemOther: fields.problem === 'other' ? fields.problemOther.trim() : '',
       phone: fields.phone.replace(/[\s-]/g, ''),
       consent,
       companyFax: new FormData(event.currentTarget).get('companyFax') || '',
@@ -111,16 +120,25 @@ export function ApplicationForm() {
         <p id="website-help">현재 홈페이지나 사업용 블로그·SNS 주소를 적어주세요. 아직 없다면 비워두셔도 됩니다.</p>
         <Input id="website" name="website" type="url" maxLength={500} placeholder="https://" autoComplete="url" aria-describedby="website-help" value={fields.website} onChange={e=>setFields({...fields,website:e.target.value})} />
       </div>
-      <div className="form-field">
-        <label htmlFor="problem">지금 가장 답답한 점</label>
-        <p id="problem-help">예) 3년 전 만든 홈페이지인데 가격표를 못 바꾸고 있습니다 / 블로그는 쓰는데 문의가 없습니다 / 홈페이지가 아예 없습니다</p>
-        <Textarea id="problem" name="problem" required minLength={10} maxLength={3000} rows={5} aria-describedby="problem-help" placeholder="지금 가장 답답한 점을 10자 이상 적어주세요." value={fields.problem} onChange={e=>setFields({...fields,problem:e.target.value})} />
-      </div>
-      <div className="form-field">
-        <label htmlFor="aiUsage">AI 사용 경험</label>
-        <p id="ai-help">써본 프로그램과 용도를 적어주세요. 처음이시면 ‘사용한 적 없음’이라고 적어주시면 됩니다.</p>
-        <Textarea id="aiUsage" name="aiUsage" required maxLength={500} rows={2} aria-describedby="ai-help" value={fields.aiUsage} onChange={e=>setFields({...fields,aiUsage:e.target.value})} />
-      </div>
+      <fieldset className="form-field business-field">
+        <legend id="problem-label">지금 가장 답답한 점</legend>
+        <RadioGroup name="problem" value={fields.problem} onValueChange={value=>setFields({...fields,problem:value as ProblemType})} required aria-labelledby="problem-label" className="business-options">
+          {problemTypes.map(value => <label className="business-option" key={value} htmlFor={'problem-'+value}>
+            <RadioGroupItem id={'problem-'+value} value={value} className="business-radio" />
+            <span>{problemTypeLabels[value]}</span>
+          </label>)}
+        </RadioGroup>
+        {fields.problem === 'other'&&<div className="other-problem-field"><label htmlFor="problemOther">기타 내용 <span className="optional-label">(선택)</span></label><Textarea id="problemOther" name="problemOther" rows={4} placeholder="필요하시면 내용을 적어주세요." value={fields.problemOther} onChange={e=>setFields({...fields,problemOther:e.target.value})}/></div>}
+      </fieldset>
+      <fieldset className="form-field business-field">
+        <legend id="ai-usage-label">AI 사용 경험</legend>
+        <RadioGroup name="aiUsage" value={fields.aiUsage} onValueChange={value=>setFields({...fields,aiUsage:value as AiUsageType})} required aria-labelledby="ai-usage-label" className="business-options">
+          {aiUsageTypes.map(value => <label className="business-option" key={value} htmlFor={'ai-usage-'+value}>
+            <RadioGroupItem id={'ai-usage-'+value} value={value} className="business-radio" />
+            <span>{aiUsageLabels[value]}</span>
+          </label>)}
+        </RadioGroup>
+      </fieldset>
       <div className="form-field">
         <label htmlFor="phone">연락받으실 휴대전화번호</label>
         <p id="phone-help">1영업일 이내 카카오톡으로 연락해 상담 일정을 안내합니다. 연결이 어려우면 문자로 연락드립니다.</p>

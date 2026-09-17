@@ -1,10 +1,38 @@
 ---
 import SiteLayout from "@/src/layouts/SiteLayout.astro";
-import { caseSummaries } from "@/lib/content";
+import { caseSummaries, websiteCases } from "@/lib/content";
 import { ConsultCTA } from "@/components/site/coaching-blocks";
 import { CaseCard } from "@/components/site/case-card";
-const metadata = {title: 'GA4·구글 서치콘솔 실제 데이터',description: '서로 다른 고객 웹사이트에서 확인한 GA4의 AI 유입과 구글 서치콘솔 검색 기록입니다. 기간과 지표, 해석할 때 알아둘 범위를 함께 설명합니다.'};
+import { WebsiteCaseCard } from "@/components/site/website-case-card";
+const metadata = {title: '코칭으로 직접 만든 홈페이지 사례와 실제 데이터',description: '대표님들이 코칭으로 직접 만든 홈페이지와 고객 웹사이트에서 확인한 GA4 AI 유입, 구글 서치콘솔 검색 기록을 소개합니다.'};
+const recentDataCases = caseSummaries.filter(item => item.kind !== 'search-legacy');
 ---
 <SiteLayout {...metadata}>
-<main id="main"><section class="inner-hero container"><p class="eyebrow">실제 데이터</p><h1>확인 가능한 기록으로<br/>다음 작업을 정합니다.</h1><p class="lead">GA4의 AI 유입과 구글 서치콘솔 검색 기록을 소개합니다.<br/>세 자료는 서로 다른 고객 웹사이트의 기록이며 숫자를 합쳐 비교하지 않습니다.<br/>특정 수정의 효과나 검색·AI 추천을 보장하는 자료도 아닙니다.</p></section><section class="container case-group" aria-labelledby="data-cases-title"><div class="case-group-heading"><h2 id="data-cases-title">고객 웹사이트의 실제 데이터</h2></div><div class="case-grid">{caseSummaries.map(item => <CaseCard item={item}/>)}</div></section><ConsultCTA/></main>
+<main id="main" class="cases-page">
+  <section class="inner-hero container cases-hero">
+    <p class="eyebrow">실제 사례</p>
+    <h1>대표님들이 직접 만든<br/>홈페이지입니다.</h1>
+    <p class="lead">코칭으로 함께 만든 홈페이지입니다.<br/>세온비즈는 제작을 대신하지 않습니다. 대표님 계정에서 함께 만들고,<br/>완성 후에는 대표님이 직접 고치십니다.</p>
+  </section>
+
+  <section class="container case-group website-cases-section" aria-labelledby="website-cases-title">
+    <div class="case-group-heading"><h2 id="website-cases-title">코칭으로 만든 홈페이지</h2></div>
+    <div class="website-cases-grid">{websiteCases.map(item => <WebsiteCaseCard item={item}/>)}</div>
+    <p class="website-cases-note">네 곳 모두 도메인·호스팅·수정 권한이 대표님 계정에 있습니다.<br/>후기는 각 대표님께 확인받아 게재했습니다.</p>
+    <dl class="website-cases-summary">
+      <div><dt>코칭이 맡는 범위</dt><dd><strong>약 40%</strong><span>나머지는 대표님이 직접</span></dd></div>
+      <div><dt>완성 후 수정</dt><dd><strong>대표님 직접</strong><span>도메인·계정·수정 권한 전부 이전</span></dd></div>
+      <div><dt>블로그 발행</dt><dd><strong>업체별 자동화 설정</strong><span>대표님 계정에서 직접 발행</span></dd></div>
+    </dl>
+  </section>
+
+  <section class="container section case-group data-cases-section" aria-labelledby="data-cases-title">
+    <div class="case-group-heading data-cases-heading">
+      <h2 id="data-cases-title">검색과 AI에서 들어온 기록</h2>
+      <p>GA4의 AI 유입과 구글 서치콘솔 검색 기록을 소개합니다.<br/>세 자료는 서로 다른 고객 웹사이트의 기록이며 숫자를 합쳐 비교하지 않습니다.<br/>특정 수정의 효과나 검색·AI 추천을 보장하는 자료도 아닙니다.</p>
+    </div>
+    <div class="case-grid">{recentDataCases.map(item => <CaseCard item={item}/>)}</div>
+  </section>
+  <ConsultCTA/>
+</main>
 </SiteLayout>

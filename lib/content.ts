@@ -36,6 +36,7 @@ export const coaching = {
 type NoteCategory = 'website' | 'content' | 'ads' | 'search';
 type Note = {
   slug: string; category: NoteCategory; targetKeyword: string; tag: string; title: string; intro: string;
+  publishedAt: string; publishedLabel: string;
   metaDescription?: string;
   metaTitle?: string;
   sections: [title: string, ...paragraphs: string[]][];
@@ -46,6 +47,7 @@ export const notes: Note[] = [
   {
     slug: 'website-or-agency', category: 'website', targetKeyword: '홈페이지 제작 직접', tag: '홈페이지 · 시작하기',
     title: '홈페이지를 맡길까, 직접 만들까',
+    publishedAt: '2026-08-20', publishedLabel: '2026.08.20',
     metaTitle: '홈페이지를 맡길까, 직접 만들까 — 판단 기준 5가지',
     metaDescription: '홈페이지 제작을 맡길지 직접 만들지는 비용만으로 고르기 어렵습니다. 기능, 변경 빈도, 계정 소유와 운영 방법을 확인할 기준을 정리했습니다.',
     intro: '홈페이지를 만드는 방법은 비용만으로 고르기 어렵습니다. 언제까지 무엇이 필요한지, 완성한 뒤 누가 웹사이트의 내용을 고칠지부터 정해보세요. 소개 글과 사진을 자주 바꿀 사업이라면 직접 수정하는 방법을 알아두는 것이 도움이 됩니다.',
@@ -59,6 +61,7 @@ export const notes: Note[] = [
   {
     slug: 'content-formats', category: 'content', targetKeyword: 'AI 콘텐츠 자동화', tag: 'AI 실무 · 채널 운영',
     title: '홈페이지 내용을 블로그·SNS·숏츠로 확장하는 방법',
+    publishedAt: '2026-09-03', publishedLabel: '2026.09.03',
     metaDescription: '홈페이지의 정확한 내용을 블로그 글, SNS 게시물, 유튜브 숏츠로 바꾸고 직접 검토·발행하는 AI 콘텐츠 운영 순서를 설명합니다.',
     intro: '홈페이지에 사업과 서비스를 정확하게 정리했다면 같은 내용을 블로그·SNS·유튜브 숏츠로 확장할 수 있습니다. 단순히 복사하지 않고 각 채널에서 읽고 보는 방식에 맞게 질문과 설명의 밀도를 바꿉니다.',
     sections: [
@@ -71,6 +74,7 @@ export const notes: Note[] = [
   {
     slug: 'read-ad-numbers', category: 'ads', targetKeyword: '광고 성과 확인 방법', tag: '선택 코칭 · 광고 데이터',
     title: '광고 관리 화면에서 무엇부터 봐야 할까요?',
+    publishedAt: '2026-09-10', publishedLabel: '2026.09.10',
     metaDescription: '광고 클릭 뒤 홈페이지와 문의 기록을 연결해서 확인하는 방법. 네이버·구글·메타 광고에서 먼저 볼 설정과 수치를 정리했습니다.',
     intro: '광고 클릭은 늘었는데 문의가 그대로라면 예산을 늘리기 전에 연결된 홈페이지와 기록부터 살펴보세요. 광고에서 약속한 내용, 고객이 도착하는 페이지, 문의가 기록되는 방식이 이어져 있어야 판단할 수 있습니다.',
     sections: [
@@ -82,6 +86,7 @@ export const notes: Note[] = [
   {
     slug: 'ai-search-basics', category: 'search', targetKeyword: 'AI 검색 최적화 GEO', tag: 'SEO · AI 검색 최적화(GEO)',
     title: 'AI 검색을 준비하려면 홈페이지에서 무엇을 고쳐야 할까요?',
+    publishedAt: '2026-09-17', publishedLabel: '2026.09.17',
     metaDescription: '홈페이지의 사업·서비스 정보를 검색엔진과 AI 서비스가 이해하고 참고할 수 있도록 정리하는 SEO·AI 검색 최적화(GEO)의 기본 순서입니다.',
     intro: '새로운 용어보다 홈페이지의 정보부터 확인해보세요. 어떤 사업과 서비스를 제공하는지, 고객 질문에 답할 내용이 있는지, 검색에서 접근할 수 있는지가 출발점입니다.',
     sections: [
@@ -94,11 +99,85 @@ export const notes: Note[] = [
   },
 ];
 
+export type WebsiteCase = {
+  slug: string;
+  title: string;
+  homeTitle?: string;
+  label: string;
+  homeLabel: string;
+  meta: string;
+  homeMeta: string;
+  body: string;
+  quote: string;
+  image: string;
+  width: number;
+  height: number;
+  alt: string;
+  href: string;
+};
+
+export const websiteCases: WebsiteCase[] = [
+  {
+    slug: 'motorrepair',
+    title: '모터리페어',
+    label: '수입차 정비 · 경기 동탄',
+    homeLabel: '수입차 정비 · 동탄',
+    meta: '코칭 8회 · 7페이지 · 2026년 7월',
+    homeMeta: '코칭 8회 · 7페이지',
+    body: '전체 구조를 잡는 부분만 코칭으로 함께했고, 나머지 페이지와 문구는 대표님이 직접 완성하셨습니다. 지금은 블로그 글을 매주 3편씩 직접 발행하고 계십니다.',
+    quote: '6년 전에는 워드프레스로 만들었는데, 과정이 길고 어려웠습니다. 이번에는 코치님이 기획을 잡아주시고 디자인부터 각 페이지 작업까지 제가 직접 했습니다. 체감으로는 예전의 10분의 1 정도 시간과 노력으로 끝난 것 같습니다. 블로그 글도 예전엔 한 편에 한 시간 넘게 걸렸는데, 지금은 15분이면 써서 올립니다.',
+    image: '/images/cases/motorrepair.webp', width: 3412, height: 2302,
+    alt: '모터리페어 홈페이지 첫 화면',
+    href: 'https://motorrepair.co.kr',
+  },
+  {
+    slug: 'leejae',
+    title: '리재 (LEEJAE)',
+    homeTitle: '리재(LEEJAE)',
+    label: '숙박 · 서울',
+    homeLabel: '숙박 · 서울',
+    meta: '코칭 12회 · 9페이지 · 2026년 8월',
+    homeMeta: '코칭 12회 · 9페이지',
+    body: '영문 직접 예약 사이트입니다. 전체 작업의 약 40%만 코칭으로 함께했고, 나머지는 대표님이 직접 작업하셨습니다. 사진과 문구도 직접 바꾸십니다.',
+    quote: '외부 업체에서 만든 사이트는 제가 원하던 것이 아니었습니다. 그동안 에어비앤비나 부킹닷컴을 통해서만 예약이 들어왔는데, 이제 제가 직접 리재를 알릴 수 있게 되어 기쁩니다. 무엇보다 직접 마음껏 수정할 수 있는 점이 좋습니다.',
+    image: '/images/cases/leejae.webp', width: 2350, height: 2298,
+    alt: '리재 홈페이지 첫 화면',
+    href: 'https://www.leejae.kr',
+  },
+  {
+    slug: 'bondaerohome',
+    title: '본대로홈',
+    label: '맞춤 커튼·블라인드 · 충북 청주 오창',
+    homeLabel: '맞춤 커튼·블라인드 · 청주 오창',
+    meta: '코칭 9회 · 6페이지 · 2026년 8월',
+    homeMeta: '코칭 9회 · 6페이지',
+    body: '매장 상담과 시공 과정을 홈페이지의 서비스 소개로 옮겼습니다. 전체 작업의 약 40%만 코칭으로 함께했고, 지금은 사진과 문구를 직접 관리하십니다.',
+    quote: '나이도 있고 컴퓨터도 잘 못해서, 모르는 걸 물어보려면 주눅부터 들었습니다. 예전에 남에게 맡겨서 만들어본 적도 있는데, 처음부터 마음에 들지 않았고 고칠 수도 없었습니다. 지금은 사진도 마음껏 바꾸고, 블로그 글도 직접 올립니다.',
+    image: '/images/cases/bondaerohome.webp', width: 2112, height: 2030,
+    alt: '본대로홈 홈페이지 첫 화면',
+    href: 'https://bondaerohome.com',
+  },
+  {
+    slug: 'barcodenet',
+    title: '바코드넷',
+    label: '의료용 라벨 제조',
+    homeLabel: '의료용 라벨 제조',
+    meta: '코칭 7회 · 6페이지 · 2026년 3월',
+    homeMeta: '코칭 7회 · 6페이지',
+    body: '제품 이미지를 AI로 제작해 채운 B2B 제조업 사이트입니다. 코칭이 끝난 뒤에도 대표님이 직접 수정하고 블로그를 발행하고 계십니다.',
+    quote: '이런 쪽은 아무것도 모르던 사람이라, 웹사이트를 직접 만들 생각은 꿈에도 못 했어요. 코칭이 끝난 지금도 필요할 때마다 직접 수정하고, 블로그는 매주 한 편씩 발행하고 있습니다. 사이트는 직접 만들어야 직접 관리할 수 있다고 생각합니다.',
+    image: '/images/cases/barcodenet.webp', width: 2620, height: 2302,
+    alt: '바코드넷 홈페이지 첫 화면',
+    href: 'https://barcodenet.co.kr',
+  },
+];
+
 export type CaseSummary = {
   slug: string;
   tag: string;
   title: string;
   summary: string;
+  interpretation?: string;
   kind: 'ai' | 'search-current' | 'search-legacy';
   period: string;
   image: string;
@@ -110,6 +189,7 @@ export const caseSummaries: CaseSummary[] = [
     slug: 'ai-referral-data-2026', kind: 'ai', tag: 'GA4 사례 · 고객 웹사이트',
     title: 'ChatGPT를 거친\n방문 기록',
     summary: 'AI 검색을 위한 정보 정비를 이어가던 기간의 GA4 기록입니다. ChatGPT 경로로 기록된 방문의 일별 흐름과 참여 지표, 데이터가 알려주는 범위를 함께 설명합니다.',
+    interpretation: 'ChatGPT를 거쳐 들어온 방문이 기간 내 1,627회 기록되었습니다.',
     period: 'GA4 · 2026.01.01–09.12',
     image: '/images/website-chatgpt-2026-redacted.png', alt: '2026년 1월 1일~9월 12일 GA4 세션 소스·매체 보고서: GPT 필터를 적용한 일별 유입과 참여 지표, 고객 식별 가능 정보 가림',
   },
@@ -117,6 +197,7 @@ export const caseSummaries: CaseSummary[] = [
     slug: 'search-performance-2025-2026', kind: 'search-current', tag: '최근 서치콘솔 사례 · 고객 웹사이트',
     title: '구글 검색 클릭\n약 1,270회 → 1,860회',
     summary: '웹사이트 정보를 정비하던 기간에 전년 같은 기간의 검색 기록을 비교했습니다. 클릭·노출·평균 순위와 숫자를 해석할 때 알아둘 점을 함께 봅니다.',
+    interpretation: '전년 같은 기간보다 하루 평균 약 20명이 더 유입된 수치입니다.',
     period: '서치콘솔 · 2025년·2026년 5월 11일~6월 12일 비교',
     image: '/images/sports-search-2025-2026.png', alt: '고객 웹사이트의 서치콘솔 전년 동기 비교: 클릭 1.27천→1.86천, 노출 4.3만→6.23만, 평균 순위 6.9→5.7',
   },

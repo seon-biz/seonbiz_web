@@ -25,8 +25,8 @@ const { handleApplicationRequest } = await import(await moduleUrl(new URL('../li
 
 const id = '024e94ec-a93c-4d3a-8fbe-282497f55dc5';
 const payload = {
-  id, businessType: 'existing', website: '', problem: '기존 홈페이지를 직접 고치고 싶습니다.',
-  aiUsage: '사용한 적 없음', phone: '010-0000-0000', consent: true, companyFax: '',
+  id, businessType: 'existing', website: '', problem: 'outdated', problemOther: '',
+  aiUsage: 'none', phone: '010-0000-0000', consent: true, companyFax: '',
 };
 function request(data = payload, options = {}) {
   return new Request('https://example.test/api/applications', {
@@ -63,8 +63,9 @@ for (const [name, data, options, status] of [
   ['honeypot filled', { ...payload, companyFax: 'automated spam' }, {}, 400],
   ['invalid receipt ID', { ...payload, id: 'invalid' }, {}, 400],
   ['invalid business type', { ...payload, businessType: 'invalid' }, {}, 400],
+  ['invalid problem type', { ...payload, problem: 'invalid' }, {}, 400],
+  ['invalid AI usage', { ...payload, aiUsage: 'invalid' }, {}, 400],
   ['invalid phone', { ...payload, phone: 'not-a-phone' }, {}, 400],
-  ['short consultation', { ...payload, problem: '짧음' }, {}, 400],
   ['unsafe website protocol', { ...payload, website: 'javascript:alert(1)' }, {}, 400],
 ]) {
   test(`Rejects ${name} before mail or rate-limit calls`, async () => {
@@ -81,7 +82,7 @@ test('Sends Korean plain text to configured addresses and returns the same recei
   const context = setup();
   const response = await handleApplicationRequest(request({
     ...payload, to: 'attacker@example.test', from: 'attacker@example.test',
-    problem: '  기존 홈페이지를 직접 고치고 싶습니다.  ',
+    problem: 'other', problemOther: '  일정과 준비물을 먼저 알고 싶습니다.  ',
   }), context.bindings, new Date('2026-09-14T08:00:00Z'));
   assert.equal(response.status, 201);
   assert.deepEqual(await response.json(), { id, received: true });
@@ -92,7 +93,7 @@ test('Sends Korean plain text to configured addresses and returns the same recei
   assert.equal(message.html, undefined);
   assert.match(message.subject, /024E94EC/);
   for (const expected of [id, '기존 홈페이지 수정·관리', '01000000000',
-    '홈페이지 또는 사업용 채널 주소: 입력하지 않음', payload.problem, payload.aiUsage,
+    '홈페이지 또는 사업용 채널 주소: 입력하지 않음', '기타', '일정과 준비물을 먼저 알고 싶습니다.', '써본 적 없음',
     '개인정보 수집·이용 동의: 동의함', '2026-09-17-v5', '2026년 9월 14일', '한국 시간']) {
     assert.ok(message.text.includes(expected), expected);
   }
@@ -163,4 +164,11 @@ test('Rate limiting is consistent for normalized phone numbers', async () => {
   await handleApplicationRequest(request(), context.bindings);
   await handleApplicationRequest(request({ ...payload, phone: '01000000000' }), context.bindings);
   assert.equal(context.phoneKeys[0], context.phoneKeys[1]);
+});
+
+test('Other problem detail is optional and has no field-level minimum length', async () => {
+  const context = setup();
+  const response = await handleApplicationRequest(request({ ...payload, problem: 'other', problemOther: '' }), context.bindings);
+  assert.equal(response.status, 201);
+  assert.match(context.sent[0].text, /\[지금 가장 답답한 점\]\n기타\n/);
 });

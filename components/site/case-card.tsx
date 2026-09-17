@@ -7,6 +7,7 @@ export function CaseCard({item}: {item: CaseSummary}) {
     <div className="case-card-copy">
       <p className="kicker">{item.tag}</p>
       <h3>{item.title.replace('\n', ' ')}</h3>
+      {item.interpretation && <p className="case-interpretation">{item.interpretation}</p>}
       <p>{item.summary}</p>
       {item.period && <p className="case-period">{item.period}</p>}
       <span className="text-link">작업 내용과 자료 보기 <ArrowUpRight size={18}/></span>

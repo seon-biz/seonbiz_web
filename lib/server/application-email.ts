@@ -1,5 +1,5 @@
 import { applicationSchema } from '../application-validation';
-import { applicationConsentVersion, businessTypeLabels } from '../application-options';
+import { aiUsageLabels, applicationConsentVersion, businessTypeLabels, problemTypeLabels } from '../application-options';
 
 export interface ApplicationEmailBindings {
   CONTACT_EMAIL?: Pick<SendEmail, 'send'>;
@@ -47,7 +47,7 @@ export async function handleApplicationRequest(
     return reply({ error: '입력 내용을 확인해 주세요.' }, 400);
   }
   if (!parsed.success) {
-    return reply({ error: '필요한 작업을 선택해 주세요. 홈페이지 주소를 입력했다면 형식을 확인해 주세요. 상담 내용(10자 이상), AI 사용 경험, 휴대전화번호와 동의는 필수입니다.' }, 400);
+    return reply({ error: '필요한 작업과 지금 가장 답답한 점, AI 사용 경험을 선택해 주세요. 홈페이지 주소 형식과 휴대전화번호, 개인정보 동의도 확인해 주세요.' }, 400);
   }
 
   const { CONTACT_EMAIL: email, CONTACT_EMAIL_FROM: from, CONTACT_EMAIL_TO: to,
@@ -79,10 +79,11 @@ export async function handleApplicationRequest(
       `홈페이지 또는 사업용 채널 주소: ${data.website || '입력하지 않음'}`,
       '',
       '[지금 가장 답답한 점]',
-      data.problem,
+      problemTypeLabels[data.problem],
+      ...(data.problem === 'other' && data.problemOther ? [data.problemOther] : []),
       '',
       '[AI 사용 경험]',
-      data.aiUsage,
+      aiUsageLabels[data.aiUsage],
       '',
       '개인정보 수집·이용 동의: 동의함',
       `동의 문서 버전: ${applicationConsentVersion}`,

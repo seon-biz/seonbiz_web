@@ -2,15 +2,18 @@
 import SiteLayout from "@/src/layouts/SiteLayout.astro";
 import { ArrowUpRight } from "lucide-react";
 import { ConsultCTA } from "@/components/site/coaching-blocks";
+import { CaseCard } from "@/components/site/case-card";
+import { caseSummaries } from "@/lib/content";
 const metadata = {
   title: '세온비즈 소개',
-  description: '세온비즈를 운영하는 서정옥을 소개합니다. 유료 코칭으로 함께한 35개 회사, 디지털 마케팅 경력 8년. 대표님이 직접 이어갈 수 있도록 실제 사업 자료로 함께 작업합니다.',
+  description: '세온비즈를 운영하는 서정옥을 소개합니다. 유료 코칭으로 함께한 35개 회사, 인쇄·디자인과 디지털 마케팅 실무 경력 28년. 대표님이 직접 이어갈 수 있도록 실제 사업 자료로 함께 작업합니다.',
 };
 const principles = [
   { title: '대표님 사업의 자료로 합니다.' },
   { title: 'AI가 쓴 내용도 그대로 쓰지 않고 확인합니다.', detail: '그럴듯한 문장에 틀린 이용 조건이나 하지 않는 서비스가 들어갈 수 있습니다.' },
   { title: '끝나고 나서 직접 하실 수 있게 하는 것이 목표입니다.' },
 ];
+const legacyCase = caseSummaries.find(item => item.kind === 'search-legacy')!;
 
 ---
 <SiteLayout {...metadata}>
@@ -22,10 +25,9 @@ const principles = [
       </section>
 
       <section class="container section about-profile" aria-labelledby="about-profile-name">
-        <div>
-          <p class="eyebrow">세온비즈를 운영합니다</p>
-          <h2 id="about-profile-name">서정옥</h2>
-          <p class="about-profile-role">홈페이지 일대일 AI 코칭</p>
+        <div class="about-profile-intro">
+          <div class="about-profile-name"><p class="eyebrow">세온비즈를 운영합니다</p><h2 id="about-profile-name">서정옥</h2><p class="about-profile-role">홈페이지 일대일 AI 코칭</p></div>
+          <img class="about-profile-photo" src="/images/profile/seonbiz-profile.webp" width="800" height="1000" alt="세온비즈를 운영하는 서정옥"/>
         </div>
         <div class="about-profile-copy">
           <p>제 일을 홍보하려고 홈페이지 제작을 맡겼지만, 결과가 만족스럽지 않았습니다. 내용을 계속 고쳐야 했고, 그때마다 제작 업체에 수정을 의뢰하는 일도 번거로웠습니다.</p>
@@ -33,8 +35,8 @@ const principles = [
           <p>그래서 2018년에 제 사이트를 직접 만들기 시작했습니다. 어렵게 완성한 뒤 지인들의 사이트 만들기를 도왔고, 한 분씩 돕던 일이 지금의 코칭으로 이어졌습니다.</p>
           <p>지금은 AI를 활용해 대표님이 직접 홈페이지를 만들고 관리하도록 돕습니다. 검색과 AI 서비스가 참고할 정보를 정리하고, 실제 GA4·구글 서치콘솔 기록을 보며 다음 작업을 판단하는 방법도 함께 다룹니다.</p>
           <dl class="about-experience">
-            <div><dt>함께 일한 회사</dt><dd><strong>35</strong>개<p>유료 코칭을 받은 회사 기준</p></dd></div>
-            <div><dt>디지털 마케팅 경력</dt><dd><strong>8</strong>년</dd></div>
+            <div><dt>함께 일한 회사</dt><dd><strong>35</strong>개<p>유료 코칭 기준</p></dd></div>
+            <div><dt>실무 경력</dt><dd><strong>28</strong>년<p>인쇄·디자인 20년 + 디지털 마케팅 8년</p></dd></div>
           </dl>
         </div>
       </section>
@@ -67,9 +69,10 @@ const principles = [
 
       <section class="container section about-proof">
         <div><p class="eyebrow">직접 작업한 자료</p><h2>어떤 일을 했는지<br />확인하실 수 있습니다.</h2></div>
-        <div>
-          <p>서로 다른 고객 웹사이트에서 확인한 GA4의 AI 유입과 구글 서치콘솔 검색 기록을 소개합니다. 비교한 기간과 지표, 숫자를 해석할 때 알아둘 범위를 함께 설명합니다.</p>
-          <a href="/cases" class="text-link">실제 데이터 보기 <ArrowUpRight size={18} aria-hidden="true" /></a>
+        <div class="about-proof-content">
+          <p>8년 동안 여러 고객 웹사이트에서 확인한 검색 기록입니다.<br />최근 자료는 실제 사례 페이지에서 보실 수 있습니다.</p>
+          <div class="about-proof-legacy"><p class="about-proof-caption">2021·2022년 기록</p><CaseCard item={legacyCase}/></div>
+          <a href="/cases" class="text-link">실제 사례 보기 <ArrowUpRight size={18} aria-hidden="true" /></a>
         </div>
       </section>
       <ConsultCTA />
