@@ -6,15 +6,14 @@ import { Method, Pricing, FAQ, ConsultCTA, ScopeList } from "@/components/site/c
 import { Hero } from "@/components/site/hero";
 import { ContentFormats, TrustBanner, homeFaqAdditions } from "@/components/site/home-sections";
 const metadata={
-  title: { absolute: '쇼핑몰·서비스업 AI 코칭 | 세온비즈' },
-  description: '쇼핑몰과 서비스업 대표님을 위한 일대일 AI 코칭. 상품 상세페이지, 홈페이지 제작, 블로그·SNS 콘텐츠, 검색·광고 데이터를 실제 사업 자료로 함께 정리합니다.',
+  title: { absolute: '홈페이지 AI 코칭 | 세온비즈' },
+  description: '웹사이트를 직접 만들고 관리하려는 분을 위한 일대일 AI 코칭. 홈페이지 제작·수정, 콘텐츠, 검색과 AI 추천을 위한 정보 정리, GA4·서치콘솔 데이터 확인을 함께합니다.',
 };
-
 ---
 <SiteLayout {...metadata}>
 <main id="main"><Hero client:load/><TrustBanner/>
-<section id="coaching" class="container section audience"><div class="section-heading"><p class="eyebrow">업종별 코칭 안내</p><h2>대표님이 하시는 일에<br/>맞춰 시작합니다</h2><p>팔고 있는 상품과 현장의 경험이<br/>코칭에서 함께 볼 자료가 됩니다.</p></div><div class="audience-links"><a href="/coaching/shop" class="audience-link"><span class="audience-number">01</span><div><h3>쇼핑몰을 운영하신다면</h3><p>상품 설명과 홍보 글을 쓰고,<br/>검색·광고 기록을 보며 고칠 곳을 찾습니다.</p></div><ArrowUpRight/></a><a href="/coaching/service" class="audience-link"><span class="audience-number">02</span><div><h3>서비스업을 운영하신다면</h3><p>현장에서 하던 설명으로 홈페이지를 만들고,<br/>작업 사례와 문의 안내를 정리합니다.</p></div><ArrowUpRight/></a></div></section>
-<ScopeList/><ContentFormats/><WorkShowcase client:load/><Method showSessionExample/><Pricing/><FAQ client:load subset={[0,2,4,7,8]} additions={homeFaqAdditions}/>
-<section class="container section home-notes"><div><p class="eyebrow">코칭 노트</p><h2>혼자 해보실 때<br/>참고하세요.</h2></div><div><a href="/notes/customer-questions">고객 질문으로 상세페이지 문구 정리하기 <ArrowUpRight size={20}/></a><a href="/notes/website-or-agency">홈페이지를 맡길까, 직접 만들까 <ArrowUpRight size={20}/></a><a href="/notes/content-formats">블로그 글 한 편으로 카드뉴스와 짧은 영상 만들기 <ArrowUpRight size={20}/></a><a href="/notes/read-ad-numbers">광고 관리 화면에서 무엇부터 봐야 할까요? <ArrowUpRight size={20}/></a><a href="/notes/ai-search-basics">AI 검색을 준비하려면 무엇부터 고쳐야 할까요? <ArrowUpRight size={20}/></a><a href="/notes" class="text-link">코칭 노트 모두 보기</a></div></section><ConsultCTA/>
+<section id="coaching" class="container section audience"><div class="section-heading"><p class="eyebrow">홈페이지 AI 코칭</p><h2>만드는 일부터<br/>직접 운영하는 방법까지</h2><p>새 홈페이지를 만들거나 현재 웹사이트를 고치고,<br/>검색과 AI 서비스가 참고할 정보를 정리합니다.</p></div><div class="audience-links"><a href="/coaching/website" class="audience-link"><span class="audience-number">01</span><div><h3>홈페이지 제작·수정</h3><p>사업과 서비스를 정확하게 설명하고,<br/>문의하기 쉬운 화면을 함께 만듭니다.</p></div><ArrowUpRight/></a><a href="/coaching/website" class="audience-link"><span class="audience-number">02</span><div><h3>SEO·GEO·데이터 분석</h3><p>검색과 AI 추천의 기반을 정리하고,<br/>GA4·서치콘솔 기록으로 다음 작업을 정합니다.</p></div><ArrowUpRight/></a></div></section>
+<ScopeList/><ContentFormats/><WorkShowcase client:load/><Method showSessionExample/><Pricing/><FAQ client:load subset={[0,1,2,3,4,5,7,8]} additions={homeFaqAdditions}/>
+<section class="container section home-notes"><div><p class="eyebrow">코칭 노트</p><h2>직접 해보실 때<br/>참고하세요.</h2></div><div><a href="/notes/website-or-agency">홈페이지를 맡길까, 직접 만들까 <ArrowUpRight size={20}/></a><a href="/notes/content-formats">홈페이지 내용을 블로그·SNS·숏츠로 확장하기 <ArrowUpRight size={20}/></a><a href="/notes/ai-search-basics">AI 검색을 준비하려면 무엇부터 고칠까요? <ArrowUpRight size={20}/></a><a href="/notes/read-ad-numbers">광고 관리 화면에서 무엇부터 봐야 할까요? <ArrowUpRight size={20}/></a><a href="/notes" class="text-link">코칭 노트 모두 보기</a></div></section><ConsultCTA/>
 </main>
 </SiteLayout>

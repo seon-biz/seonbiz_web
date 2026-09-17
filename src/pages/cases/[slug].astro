@@ -1,25 +1,16 @@
 ---
 import SiteLayout from "@/src/layouts/SiteLayout.astro";
-import { ContentWorkflowCase } from "@/components/site/content-workflow-case";
 import { caseSummaries } from "@/lib/content";
-import { LegacySearchCase, LegacySearchLinks } from "@/components/site/legacy-search-case";
-import { RecentCaseDetail } from "@/components/site/case-evidence";
+import { CaseDetail } from "@/components/site/case-evidence";
 import { ConsultCTA } from "@/components/site/coaching-blocks";
 import { ArrowRight } from "lucide-react";
+export const prerender = true;
 export function getStaticPaths(){return caseSummaries.map(item=>({params:{slug:item.slug}}));}
-
 const {slug}=Astro.params;
 const item=caseSummaries.find(x=>x.slug===slug);
 if(!item)throw new Error("Unknown content route");
 const metadata={title:item.title.replace("\n"," "),description:item.summary};
-const relatedNote = slug === 'ai-search-visits'
-  ? { href: '/notes/ai-search-basics', label: 'AI 검색 노출을 준비하는 순서 보기' }
-  : slug === 'sports-search-records'
-    ? { href: '/notes/product-page-search-records', label: '상세페이지 검색 기록 비교 방법 보기' }
-    : slug === 'content-workflow'
-      ? { href: '/notes/content-formats', label: '블로그 글로 카드뉴스·짧은 영상 만들기' }
-      : { href: '/notes/ai-search-basics', label: '검색에 필요한 사이트 정보 정리하기' };
 ---
 <SiteLayout {...metadata}>
-<main id="main"><section class="inner-hero container"><a href="/cases" class="back-link">실제 사례</a><p class="eyebrow">{item.tag}</p><h1>{item.title.split('\n').map((line,i)=><span >{i>0&&<br/>}{line}</span>)}</h1><p class="lead">{item.summary}</p>{slug==='search-records'&&<LegacySearchLinks/>}</section>{item.recordKind?<RecentCaseDetail kind={item.recordKind}/>:slug==='search-records'?<LegacySearchCase/>:<ContentWorkflowCase client:visible/>}<section class="container article-next" aria-label="관련 코칭 노트"><p>이 사례와 연결해서 읽어보세요.</p><a class="text-link" href={relatedNote.href}>{relatedNote.label}<ArrowRight size={18}/></a></section><ConsultCTA/></main>
+<main id="main"><section class="inner-hero container"><a href="/cases" class="back-link">실제 데이터</a><p class="eyebrow">{item.tag}</p><h1>{item.title.split('\n').map((line,i)=><span>{i>0&&<br/>}{line}</span>)}</h1><p class="lead">{item.summary}</p></section><CaseDetail kind={item.kind}/><section class="container article-next" aria-label="관련 코칭 노트"><p>데이터를 보기 전에 측정과 정보 정리의 기본 순서를 확인하세요.</p><a class="text-link" href="/notes/ai-search-basics">SEO·AI 검색 최적화 기본 순서 <ArrowRight size={18}/></a></section><ConsultCTA/></main>
 </SiteLayout>

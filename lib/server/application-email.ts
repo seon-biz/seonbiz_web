@@ -47,7 +47,7 @@ export async function handleApplicationRequest(
     return reply({ error: '입력 내용을 확인해 주세요.' }, 400);
   }
   if (!parsed.success) {
-    return reply({ error: '하시는 일을 선택해 주세요. 사이트 주소를 입력했다면 형식을 확인해 주세요. 상담 내용(10자 이상), AI 사용 경험, 휴대전화번호와 동의는 필수입니다.' }, 400);
+    return reply({ error: '필요한 작업을 선택해 주세요. 홈페이지 주소를 입력했다면 형식을 확인해 주세요. 상담 내용(10자 이상), AI 사용 경험, 휴대전화번호와 동의는 필수입니다.' }, 400);
   }
 
   const { CONTACT_EMAIL: email, CONTACT_EMAIL_FROM: from, CONTACT_EMAIL_TO: to,
@@ -74,9 +74,9 @@ export async function handleApplicationRequest(
       '',
       `접수번호: ${data.id}`,
       `접수 시각: ${date} (한국 시간)`,
-      `하시는 일: ${businessTypeLabels[data.businessType]}`,
+      `필요한 작업: ${businessTypeLabels[data.businessType]}`,
       `휴대전화번호: ${data.phone}`,
-      `사이트 또는 판매처 주소: ${data.website || '입력하지 않음'}`,
+      `홈페이지 또는 사업용 채널 주소: ${data.website || '입력하지 않음'}`,
       '',
       '[상담하고 싶은 내용]',
       data.problem,

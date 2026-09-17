@@ -17,6 +17,17 @@ export default defineConfig({
     inspectorPort: false,
   }),
   devToolbar: { enabled: false },
+  redirects: {
+    '/coaching/shop': '/coaching/website',
+    '/coaching/service': '/coaching/website',
+    '/notes/customer-questions': '/notes',
+    '/notes/product-page-search-records': '/cases/search-performance-2025-2026',
+    '/notes/blog-to-short-video-record': '/notes/content-formats',
+    '/cases/ai-search-visits': '/cases/ai-referral-data-2026',
+    '/cases/sports-search-records': '/cases/search-performance-2025-2026',
+    '/cases/search-records': '/cases/search-performance-2021-2022',
+    '/cases/content-workflow': '/notes/content-formats',
+  },
   vite: {
     cacheDir: process.argv.includes('build') ? 'node_modules/.vite-build' : 'node_modules/.vite',
     plugins: process.env.SEONBIZ_DEPLOY_TARGET === 'cloudflare' ? [] : [sites()],

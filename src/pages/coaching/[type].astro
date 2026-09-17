@@ -5,29 +5,27 @@ import { coaching } from "@/lib/content";
 import { Reveal } from "@/components/site/sections";
 import { PricingSummary, FAQ, ConsultCTA } from "@/components/site/coaching-blocks";
 import { PageHero } from "@/components/site/page-hero";
-import { ShopProblems, ShopPageExplanation, ShopCaseLinks, shopFaqs } from "@/components/site/shop-sections";
-import { ServiceProblems, ServiceOwnership, serviceFaqs } from "@/components/site/service-sections";
-export function getStaticPaths(){return Object.keys(coaching).map(type=>({params:{type}}));}
+import { ServiceProblems, ServiceOwnership } from "@/components/site/service-sections";
+export const prerender = true;
+export function getStaticPaths(){return [{params:{type:'website'}}];}
 
 const {type}=Astro.params;
 const item=coaching[type as keyof typeof coaching];
 if(!item)throw new Error("Unknown content route");
-const isShop=type==='shop';
 const metadata={
-  title: isShop ? '쇼핑몰 AI 코칭 | 상세페이지·온라인 마케팅' : '서비스업 홈페이지 코칭 | AI 온라인 마케팅',
-  description: isShop
-    ? '쇼핑몰 대표님을 위한 일대일 AI 코칭. 상품 상세페이지, 상품 설명, 검색·광고 데이터와 블로그·SNS 홍보를 실제 판매 자료로 함께 작업합니다.'
-    : '서비스업 대표님을 위한 일대일 AI 코칭. 현장 설명으로 홈페이지를 만들고, 작업 사례·문의 안내·검색과 온라인 마케팅을 직접 이어가도록 돕습니다.',
+  title: '홈페이지 AI 코칭',
+  description: '웹사이트를 직접 만들고 관리하려는 분을 위한 일대일 AI 코칭. 홈페이지 제작·수정, SEO·AI 검색 최적화(GEO), GA4·서치콘솔 데이터 분석과 콘텐츠 채널 운영 자동화를 함께합니다.',
 };
 ---
 <SiteLayout {...metadata}>
-<main id="main" class={isShop?"shop-coaching":"service-coaching"}>
-<PageHero eyebrow={item.eyebrow} title={item.title} intro={item.intro} image={isShop?'/images/shop-product-page.webp':'/images/service-website.webp'} alt={isShop?'상품과 규격 자료를 보며 상세페이지를 작성하는 손을 그린 일러스트':'정비 사진과 점검 내용을 서비스 소개 홈페이지에 정리하는 일러스트'} caption={isShop?'판매 중인 상품과 고객의 질문으로':'현장의 경험을 고객이 읽을 수 있게'}/>
-{isShop?<ShopProblems/>:<ServiceProblems/>}
-<section class="container task-section">{isShop&&<p class="scope-note shop-platform-note">Cafe24 자사몰을 중심으로, 스마트스토어·쿠팡·오픈마켓·종합몰까지 같은 상품을 여러 곳에 올리는 일을 함께 합니다.</p>}<p class="scope-note">필요한 작업을 골라 진행합니다. 첫 상담에서 현재 상황을 살펴보고, 코칭을 시작할 때 시간 안에 가능한 범위를 정합니다.</p>{item.tasks.map((task,i)=><Reveal ><article class="task-row"><div><span class="step-index">0{i+1}</span><h2>{task.title}</h2></div><div><h3>{task.problem}</h3><ul>{task.items.map(t=><li ><Check size={18}/>{t}</li>)}</ul><p class="task-result">{task.result}</p></div></article></Reveal>)}</section>
-{isShop?<ShopPageExplanation/>:<><ServiceOwnership/><section class="service-example container"><p class="eyebrow">자동차 정비소에서 해볼 수 있는 일</p><h2>수리 사진 옆에<br/>작업한 이유를 적습니다.</h2><p>어떤 증상으로 입고됐는지, 무엇을 점검했고 왜 부품을 교체했는지 정리합니다. 고객에게 말로 설명하던 내용을 사진 옆에 붙여보세요. AI로 초안을 쓰고 실제 작업과 다른 내용을 고치는 순서까지 함께 익힙니다.</p><p class="meta">정비소를 가정한 작업 예시입니다. 실제 업체의 성과 사례는 아닙니다.</p></section></>}
-{isShop?<ShopCaseLinks/>:<section class="container related-case"><p>글 한 편을 콘텐츠로 넓히는 과정을 확인하세요.</p><p class="service-case-note">세온비즈가 직접 만든 자료입니다.</p><a href="/cases/content-workflow" class="text-link">짧은 영상 제작 사례 보기<ArrowUpRight size={18}/></a></section>}
-<section class="container related-case related-note-links" aria-label="관련 코칭 노트"><p>{isShop?'쇼핑몰 운영에 필요한 글도 함께 읽어보세요.':'서비스업 홈페이지와 콘텐츠를 준비하는 글도 함께 읽어보세요.'}</p><div><a href={isShop?'/notes/customer-questions':'/notes/website-or-agency'} class="text-link">{isShop?'고객 질문으로 상세페이지 문구 정리하기':'홈페이지를 맡길까, 직접 만들까'} <ArrowUpRight size={18}/></a><a href={isShop?'/notes/ai-search-basics':'/notes/content-formats'} class="text-link">{isShop?'AI 검색을 위한 사이트 정보 정리하기':'블로그 글로 카드뉴스·짧은 영상 만들기'} <ArrowUpRight size={18}/></a></div></section>
-<PricingSummary/><FAQ client:load items={isShop?shopFaqs:serviceFaqs}/><ConsultCTA title={isShop?'판매 중인 상품과\n고치고 싶은 곳을 알려주세요.':'하시는 일과 준비한 자료로\n이야기를 시작해 보세요.'} description="필요한 작업과 참여하실 수 있는 시간을 듣고, 코칭 진행 방향을 함께 정합니다."/>
+<main id="main" class="service-coaching">
+<PageHero eyebrow={item.eyebrow} title={item.title} intro={item.intro} image="/images/service-website.webp" alt="사업 자료와 현장 사진을 홈페이지의 서비스 소개와 문의 안내로 정리하는 일러스트" caption="사업의 실제 정보로 만드는 홈페이지"/>
+<ServiceProblems/>
+<section class="container task-section"><p class="scope-note">필요한 작업과 순서를 첫 상담에서 정합니다. 홈페이지 제작과 초기 SEO·GEO 설정은 보통 4~8회, 약 1~2개월이 걸리며 페이지 수, 기능, 기존 상태와 준비된 자료에 따라 달라집니다.</p>{item.tasks.map((task,i)=><Reveal><article class="task-row"><div><span class="step-index">0{i+1}</span><h2>{task.title}</h2></div><div><h3>{task.problem}</h3><ul>{task.items.map(t=><li><Check size={18}/>{t}</li>)}</ul><p class="task-result">{task.result}</p></div></article></Reveal>)}</section>
+<ServiceOwnership/>
+<section class="service-example container"><p class="eyebrow">홈페이지에서 채널 운영까지</p><h2>고객 질문 하나를<br/>여러 채널로 확장합니다.</h2><p>홈페이지에 정확한 답을 먼저 정리한 뒤 블로그 글, SNS 게시물, 유튜브 숏츠에 맞게 나눕니다. 업체에 맞는 AI 지시문과 검토표, 반복 작업 순서를 설정하고 고객이 자기 계정에서 확인해 발행합니다.</p><p class="meta">채널 운영 자동화에는 홈페이지 제작과 별도의 시간이 필요합니다.</p></section>
+<section class="container related-case"><p>실제 GA4와 구글 서치콘솔 기록을 확인하세요.</p><p class="service-case-note">서로 다른 고객 웹사이트의 기록이며 특정 수정 하나의 효과를 뜻하지 않습니다.</p><a href="/cases" class="text-link">실제 데이터 보기 <ArrowUpRight size={18}/></a></section>
+<section class="container related-case related-note-links" aria-label="관련 코칭 노트"><p>홈페이지 제작과 운영에 필요한 글도 함께 읽어보세요.</p><div><a href="/notes/website-or-agency" class="text-link">홈페이지를 맡길까, 직접 만들까 <ArrowUpRight size={18}/></a><a href="/notes/content-formats" class="text-link">홈페이지 내용을 블로그·SNS·숏츠로 확장하기 <ArrowUpRight size={18}/></a><a href="/notes/ai-search-basics" class="text-link">SEO·AI 검색 최적화 기본 순서 <ArrowUpRight size={18}/></a></div></section>
+<PricingSummary/><FAQ client:load/><ConsultCTA title={'만들거나 고치고 싶은\n홈페이지를 알려주세요.'} description="현재 상태와 준비된 자료를 듣고, 홈페이지 제작부터 SEO·GEO와 데이터 분석까지 진행 방향을 함께 정합니다."/>
 </main>
 </SiteLayout>

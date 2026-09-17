@@ -29,7 +29,7 @@ export function ApplicationForm() {
     try {
       void Promise.resolve(context.registerTool({
         name:'prepare_consultation_application',title:'상담 신청 내용 준비',
-        description:'Fill the visible consultation form for the user to review. Business type is required to submit; website is optional. Does not give consent, submit, or store an application.',
+        description:'Fill the visible consultation form for the user to review. The requested work is required to submit; a website URL is optional. Does not give consent, submit, or store an application.',
         inputSchema:{type:'object',properties:{businessType:{type:'string',enum:businessTypes},website:{type:'string',maxLength:500},problem:{type:'string',maxLength:3000},aiUsage:{type:'string',maxLength:500},phone:{type:'string',maxLength:20}},additionalProperties:false},
         annotations:{readOnlyHint:false,untrustedContentHint:false},
         async execute(input:unknown) {
@@ -50,7 +50,7 @@ export function ApplicationForm() {
     if (inFlight.current) return;
     setError('');
     if (!fields.businessType) {
-      setError('하시는 일을 선택해 주세요.');
+      setError('필요한 작업을 선택해 주세요.');
       form.current?.querySelector<HTMLButtonElement>('[role="radio"]')?.focus();
       return;
     }
@@ -98,7 +98,7 @@ export function ApplicationForm() {
   return (
     <form ref={form} onSubmit={submit} className="application-form" aria-label="무료 상담 신청서">
       <fieldset className="form-field business-field">
-        <legend id="business-type-label">하시는 일 <span className="optional-label">(필수)</span></legend>
+        <legend id="business-type-label">필요한 작업 <span className="optional-label">(필수)</span></legend>
         <RadioGroup name="businessType" value={fields.businessType} onValueChange={value=>setFields({...fields,businessType:value as BusinessType})} required aria-labelledby="business-type-label" className="business-options">
           {businessTypes.map(value => <label className="business-option" key={value} htmlFor={'business-'+value}>
             <RadioGroupItem id={'business-'+value} value={value} className="business-radio" />
@@ -107,14 +107,14 @@ export function ApplicationForm() {
         </RadioGroup>
       </fieldset>
       <div className="form-field">
-        <label htmlFor="website">사이트 또는 판매처 주소 <span className="optional-label">(선택)</span></label>
-        <p id="website-help">쇼핑몰·홈페이지·사업용 블로그 주소를 적어주세요. 스마트스토어, 쿠팡, 네이버 플레이스 주소도 괜찮습니다. 아직 없다면 비워두셔도 됩니다.</p>
+        <label htmlFor="website">홈페이지 또는 사업용 채널 주소 <span className="optional-label">(선택)</span></label>
+        <p id="website-help">현재 홈페이지나 사업용 블로그·SNS 주소를 적어주세요. 아직 없다면 비워두셔도 됩니다.</p>
         <Input id="website" name="website" type="url" maxLength={500} placeholder="https://" autoComplete="url" aria-describedby="website-help" value={fields.website} onChange={e=>setFields({...fields,website:e.target.value})} />
       </div>
       <div className="form-field">
         <label htmlFor="problem">상담하고 싶은 내용</label>
         <p id="problem-help">하고 싶은 일이나 어려운 점을 10자 이상 적어주세요. 자세한 내용은 상담하면서 여쭤보겠습니다.</p>
-        <Textarea id="problem" name="problem" required minLength={10} maxLength={3000} rows={5} aria-describedby="problem-help" placeholder="예: 상품 설명과 블로그 글을 직접 쓰고 싶습니다. AI를 써봤는데 문장이 어색해서 고치는 데 시간이 오래 걸립니다." value={fields.problem} onChange={e=>setFields({...fields,problem:e.target.value})} />
+        <Textarea id="problem" name="problem" required minLength={10} maxLength={3000} rows={5} aria-describedby="problem-help" placeholder="예: 기존 홈페이지를 직접 고치고, 홈페이지 내용을 블로그와 유튜브 숏츠로 확장하는 AI 작업 흐름을 만들고 싶습니다." value={fields.problem} onChange={e=>setFields({...fields,problem:e.target.value})} />
       </div>
       <div className="form-field">
         <label htmlFor="aiUsage">AI 사용 경험</label>
@@ -135,8 +135,8 @@ export function ApplicationForm() {
           <CollapsibleContent className="consent-details-content">
             <p>주식회사 티오엠은 아래 정보를 상담 신청서에서 수집·이용합니다.</p>
             <dl>
-              <div><dt>필수 입력</dt><dd>하시는 일, 휴대전화번호, 상담 내용, AI 사용 경험</dd></div>
-              <div><dt>선택 입력</dt><dd>사이트 또는 판매처 주소. 비워두셔도 신청할 수 있습니다.</dd></div>
+              <div><dt>필수 입력</dt><dd>필요한 작업, 휴대전화번호, 상담 내용, AI 사용 경험</dd></div>
+              <div><dt>선택 입력</dt><dd>홈페이지 또는 사업용 채널 주소. 비워두셔도 신청할 수 있습니다.</dd></div>
               <div><dt>접수 시 생성</dt><dd>신청번호, 접수 시각, 동의한 문서의 버전</dd></div>
               <div><dt>이용 목적</dt><dd>상담 검토·준비, 연락·일정 조율, 접수 확인과 과다 접수 방지</dd></div>
               <div><dt>전달·보관</dt><dd>신청 내용은 운영자 이메일로 전달하며, 웹사이트의 상담 데이터베이스에는 저장하지 않습니다. 상담 준비와 연락·일정 조율 목적을 달성할 때까지 이메일로 보관합니다.</dd></div>

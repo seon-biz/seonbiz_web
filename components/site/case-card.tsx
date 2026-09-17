@@ -1,8 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
 import type { CaseSummary } from "@/lib/content";
 export function CaseCard({item}: {item: CaseSummary}) {
-  const dimensions = item.image.includes('household') ? [2688, 1694] : item.image.includes('sports-search') ? [2734, 1300] : item.image.includes('content-') ? [1080, item.image.includes('poster') || item.image.includes('scene') ? 1920 : 1350] : item.image.includes('search-') ? [1024, 456] : [1448, 1086];
-  return <a href={`/cases/${item.slug}`} className={`case-card ${item.category === 'self' ? 'case-content' : 'case-customer'}`}>
+  const dimensions = item.kind === 'ai' ? [1579, 996] : item.kind === 'search-current' ? [2734, 1300] : [1024, 456];
+  return <a href={`/cases/${item.slug}`} className="case-card case-customer">
     <div className="case-thumb"><img src={item.image} width={dimensions[0]} height={dimensions[1]} alt={item.alt} loading="lazy" decoding="async"/></div>
     <div className="case-card-copy">
       <p className="kicker">{item.tag}</p>

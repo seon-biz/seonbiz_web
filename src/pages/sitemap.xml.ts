@@ -1,7 +1,7 @@
 import { caseSummaries, notes } from '@/lib/content';
 
 const staticPaths = [
-  '/', '/coaching/shop', '/coaching/service', '/process', '/cases', '/notes',
+  '/', '/coaching/website', '/process', '/cases', '/notes',
   '/about', '/apply', '/privacy',
 ];
 

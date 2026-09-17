@@ -2,28 +2,9 @@
 import SiteLayout from "@/src/layouts/SiteLayout.astro";
 import { caseSummaries } from "@/lib/content";
 import { ConsultCTA } from "@/components/site/coaching-blocks";
-const metadata = {
-  title: '쇼핑몰·서비스업 온라인 마케팅 실제 사례',
-  description: '쇼핑몰의 AI 검색 유입과 구글 검색 기록, 온라인 마케팅 콘텐츠 제작 사례를 소개합니다. 실제 작업 내용과 비교 기간, 숫자를 해석할 때 알아둘 점을 함께 확인하세요.',
-};
 import { CaseCard } from "@/components/site/case-card";
-const listed = caseSummaries.filter(item => item.listed !== false);
+const metadata = {title: 'GA4·구글 서치콘솔 실제 데이터',description: '서로 다른 고객 웹사이트에서 확인한 GA4의 AI 유입과 구글 서치콘솔 검색 기록입니다. 기간과 지표, 해석할 때 알아둘 범위를 함께 설명합니다.'};
 ---
 <SiteLayout {...metadata}>
-<main id="main">
-    <section class="inner-hero container">
-      <p class="eyebrow">실제 사례</p>
-      <h1>바꾼 내용과 결과를<br/>실제 자료로 확인하세요.</h1>
-      <p class="lead">상품 정보를 정비한 고객 사례와 직접 만든 콘텐츠를 소개합니다.<br/>고객 사례마다 다른 쇼핑몰이며, 업체명은 밝히지 않습니다.<br/>작업 내용, 비교 기간, 숫자를 해석할 때 알아둘 점을 함께 담았습니다.</p>
-    </section>
-    <section class="container case-group" aria-labelledby="customer-cases-title">
-      <div class="case-group-heading"><h2 id="customer-cases-title">고객 사례</h2></div>
-      <div class="case-grid">{listed.filter(item => item.category === 'customer').map(item => <CaseCard  item={item}/>)}</div>
-    </section>
-    <section class="container case-group case-own-group" aria-labelledby="own-cases-title">
-      <div class="case-group-heading"><h2 id="own-cases-title">세온비즈가 직접 만든 것</h2><p>코칭에서 알려드리는 방법을 세온비즈 사업에 먼저 적용한 기록입니다.</p></div>
-      <div class="case-own-list">{listed.filter(item => item.category === 'self').map(item => <CaseCard  item={item}/>)}</div>
-    </section>
-    <ConsultCTA/>
-  </main>
+<main id="main"><section class="inner-hero container"><p class="eyebrow">실제 데이터</p><h1>확인 가능한 기록으로<br/>다음 작업을 정합니다.</h1><p class="lead">GA4의 AI 유입과 구글 서치콘솔 검색 기록을 소개합니다.<br/>세 자료는 서로 다른 고객 웹사이트의 기록이며 숫자를 합쳐 비교하지 않습니다.<br/>특정 수정의 효과나 검색·AI 추천을 보장하는 자료도 아닙니다.</p></section><section class="container case-group" aria-labelledby="data-cases-title"><div class="case-group-heading"><h2 id="data-cases-title">고객 웹사이트의 실제 데이터</h2></div><div class="case-grid">{caseSummaries.map(item => <CaseCard item={item}/>)}</div></section><ConsultCTA/></main>
 </SiteLayout>

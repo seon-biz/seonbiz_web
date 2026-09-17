@@ -8,7 +8,7 @@ let checks = 0;
 const expect = (actual, expected, label) => { assert.equal(actual, expected, label); checks++; };
 const request = (route, options = {}) => fetch(new URL(route, base), { redirect: 'manual', ...options });
 const post = (route, data, headers = {}) => request(route, { method: 'POST', headers: { Origin: base.origin, 'Content-Type': 'application/json', ...headers }, body: JSON.stringify(data) });
-const fixture = { businessType: 'service', website: '', problem: 'Astro migration local test fixture only', aiUsage: '테스트용 데이터', phone: '01000000000', consent: true, companyFax: '' };
+const fixture = { businessType: 'existing', website: '', problem: 'Astro migration local test fixture only', aiUsage: '테스트용 데이터', phone: '01000000000', consent: true, companyFax: '' };
 
 async function staticRoutes(directory = 'dist/client', relative = '') {
   let routes = [];
@@ -22,7 +22,7 @@ async function staticRoutes(directory = 'dist/client', relative = '') {
 }
 
 {
-  const routes = await staticRoutes();
+  const routes = [...new Set([...await staticRoutes(), '/', '/process', '/cases', '/notes', '/about', '/apply', '/privacy'])];
   for (const route of routes) {
     const response = await request(route);
     expect(response.status, 200, `Page ${route}`);
@@ -30,12 +30,28 @@ async function staticRoutes(directory = 'dist/client', relative = '') {
     assert.match(html, /name="generator" content="Astro v7/);
     assert.match(html, /<h1[\s>]/);
     assert(!html.includes('숙박'), `Old terminology in ${route}`);
+    assert(!/(쇼핑몰|상세페이지|스마트스토어|자사몰|쿠팡|SEON코더)/.test(html), `Removed commerce content in ${route}`);
   }
   expect((await request('/route-that-does-not-exist')).status, 404, 'Unknown URL');
   expect((await request('/coaching/unknown')).status, 404, 'Unknown coaching');
   const redirect = await request('/notes/choose-coaching');
   expect(redirect.status, 308, 'Legacy redirect status');
   assert(new URL(redirect.headers.get('location'), base).href.endsWith('/process#pricing'));
+  for (const [from, to] of [
+    ['/coaching/shop', '/coaching/website'],
+    ['/coaching/service', '/coaching/website'],
+    ['/notes/customer-questions', '/notes'],
+    ['/cases/ai-search-visits', '/cases/ai-referral-data-2026'],
+    ['/cases/sports-search-records', '/cases/search-performance-2025-2026'],
+    ['/cases/search-records', '/cases/search-performance-2021-2022'],
+    ['/cases/content-workflow', '/notes/content-formats'],
+  ]) {
+    const response = await request(from);
+    assert([301, 302, 307, 308].includes(response.status), `Redirect status for ${from}`);
+    checks++;
+    assert.equal(new URL(response.headers.get('location'), base).pathname, to, `Redirect target for ${from}`);
+    checks++;
+  }
 
   expect((await request('/manage')).status, 404, 'Removed administrator page');
   expect((await post('/api/manage/login', { key: 'unused' })).status, 404, 'Removed administrator API');

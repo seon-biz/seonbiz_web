@@ -1,12 +1,12 @@
-export const businessTypes = ['shop', 'service', 'preparing', 'other'] as const;
+export const businessTypes = ['new', 'existing', 'content', 'unsure'] as const;
 export type BusinessType = typeof businessTypes[number];
 export const businessTypeLabels: Record<BusinessType, string> = {
-  shop: '쇼핑몰 운영',
-  service: '정비·시공·펜션 등 서비스업',
-  preparing: '아직 시작 전',
-  other: '기타',
+  new: '새 홈페이지 만들기',
+  existing: '기존 홈페이지 수정·관리',
+  content: '콘텐츠·검색 데이터',
+  unsure: '아직 잘 모르겠음',
 };
-export const applicationConsentVersion = '2026-09-14-v3';
+export const applicationConsentVersion = '2026-09-17-v4';
 
 export function businessTypeLabel(value: unknown) {
   return typeof value === 'string' && businessTypes.includes(value as BusinessType)

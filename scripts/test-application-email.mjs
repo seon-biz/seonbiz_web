@@ -25,7 +25,7 @@ const { handleApplicationRequest } = await import(await moduleUrl(new URL('../li
 
 const id = '024e94ec-a93c-4d3a-8fbe-282497f55dc5';
 const payload = {
-  id, businessType: 'service', website: '', problem: '쇼핑몰 상품 설명을 직접 만들고 싶습니다.',
+  id, businessType: 'existing', website: '', problem: '기존 홈페이지를 직접 고치고 싶습니다.',
   aiUsage: '사용한 적 없음', phone: '010-0000-0000', consent: true, companyFax: '',
 };
 function request(data = payload, options = {}) {
@@ -81,7 +81,7 @@ test('Sends Korean plain text to configured addresses and returns the same recei
   const context = setup();
   const response = await handleApplicationRequest(request({
     ...payload, to: 'attacker@example.test', from: 'attacker@example.test',
-    problem: '  쇼핑몰 상품 설명을 직접 만들고 싶습니다.  ',
+    problem: '  기존 홈페이지를 직접 고치고 싶습니다.  ',
   }), context.bindings, new Date('2026-09-14T08:00:00Z'));
   assert.equal(response.status, 201);
   assert.deepEqual(await response.json(), { id, received: true });
@@ -91,9 +91,9 @@ test('Sends Korean plain text to configured addresses and returns the same recei
   assert.equal(message.to, 'owner@example.test');
   assert.equal(message.html, undefined);
   assert.match(message.subject, /024E94EC/);
-  for (const expected of [id, '정비·시공·펜션 등 서비스업', '01000000000',
-    '사이트 또는 판매처 주소: 입력하지 않음', payload.problem, payload.aiUsage,
-    '개인정보 수집·이용 동의: 동의함', '2026-09-14-v3', '2026년 9월 14일', '한국 시간']) {
+  for (const expected of [id, '기존 홈페이지 수정·관리', '01000000000',
+    '홈페이지 또는 사업용 채널 주소: 입력하지 않음', payload.problem, payload.aiUsage,
+    '개인정보 수집·이용 동의: 동의함', '2026-09-17-v4', '2026년 9월 14일', '한국 시간']) {
     assert.ok(message.text.includes(expected), expected);
   }
   assert.equal(message.headers['X-Seonbiz-Submission-ID'], id);

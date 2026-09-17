@@ -2,66 +2,13 @@
 import SiteLayout from "@/src/layouts/SiteLayout.astro";
 import { ArrowRight } from "lucide-react";
 import { notes } from "@/lib/content";
-import { ContentFormatsChecklist, ContentFormatsCoachingLinks, ContentFormatsPreview } from "@/components/site/content-formats-note";
-import { WebsiteChoiceComparison, WebsiteChoiceSituations } from "@/components/site/website-choice-note";
-import { AdLandingChecklist, AdPlatformTerms } from "@/components/site/ad-numbers-note";
-import { AiSearchCoachingLink, AiSearchRecordPreview, AiSearchTextChecklist } from "@/components/site/ai-search-note";
+export const prerender = true;
 export function getStaticPaths(){return notes.map(item=>({params:{slug:item.slug}}));}
-
 const {slug}=Astro.params;
 const note = notes.find((item) => item.slug === slug);
 if(!note)throw new Error("Unknown note route");
-const related = note.relatedHref || (slug === 'content-formats' ? '/cases/content-workflow' : '/coaching/shop');
-const label = note.relatedLabel || (slug === 'content-formats' ? '직접 만든 영상과 제작 과정 보기' : '상세페이지 코칭 살펴보기');
 const metadata={title:note.metaTitle??note.title,description:note.metaDescription??note.intro};
 ---
 <SiteLayout {...metadata}>
-<main id="main">
-      <header class="article-header">
-        <a href="/notes" class="back-link">코칭 노트</a>
-        <p class="eyebrow">{note.tag}</p>
-        <h1 class={['customer-questions', 'content-formats', 'website-or-agency', 'read-ad-numbers', 'ai-search-basics'].includes(slug) ? 'balanced-note-title' : undefined}>{note.title}</h1>
-        <p class="article-meta">세온비즈 · <time datetime="2026-09-12">2026.09.12</time></p>
-      </header>
-      <article class="article-body">
-        <p class="article-intro">{note.intro}</p>
-        {slug === 'read-ad-numbers' && <p>네이버 검색광고, 구글 애즈, 메타 광고(인스타그램·페이스북) 등 어떤 곳을 쓰시든 확인하는 순서는 비슷합니다. 화면 이름과 용어, 숫자를 세는 기준은 다를 수 있습니다.</p>}
-        {note.sections.map(([title, ...paragraphs], i) => (
-          <section >
-            <span class="step-index">{String(i + 1).padStart(2, '0')}</span>
-            <h2>{title}</h2>
-            {slug === 'website-or-agency' && i === 1 && <WebsiteChoiceSituations kind="agency" />}
-            {slug === 'website-or-agency' && i === 2 && <WebsiteChoiceSituations kind="self" />}
-            {paragraphs.map((paragraph) => <p >{paragraph}</p>)}
-            {slug === 'content-formats' && i === 1 && <ContentFormatsPreview />}
-            {slug === 'content-formats' && i === 2 && <ContentFormatsChecklist client:visible />}
-            {slug === 'website-or-agency' && i === 3 && <WebsiteChoiceComparison />}
-            {slug === 'read-ad-numbers' && i === 0 && <AdLandingChecklist client:visible />}
-            {slug === 'read-ad-numbers' && i === 2 && <AdPlatformTerms />}
-            {slug === 'ai-search-basics' && i === 1 && <AiSearchTextChecklist client:visible />}
-            {slug === 'ai-search-basics' && i === 3 && <AiSearchRecordPreview />}
-            {note.example?.afterSection === i + 1 && (
-              <aside class="article-example" aria-labelledby="article-example-title">
-                <h3 id="article-example-title">{note.example.title}</h3>
-                <p class="example-disclosure">{note.example.disclosure}</p>
-                <dl>
-                  <div><dt>고객 문의</dt><dd>{note.example.question}</dd></div>
-                  <div><dt>수정 전</dt><dd>{note.example.before}</dd></div>
-                  <div class="example-after"><dt>수정 후</dt><dd><strong>본문에 보관 방법 추가</strong>{note.example.after.map((line) => <span >{line}</span>)}</dd></div>
-                </dl>
-                <p class="example-note">{note.example.note}</p>
-              </aside>
-            )}
-          </section>
-        ))}
-        {note.source && <p class="source-note">함께 참고할 자료: <a href={note.source.href} target="_blank" rel="noopener noreferrer">{note.source.label}</a></p>}
-        <div class="article-next">
-          <p>실제 작업과 진행 안내도 함께 확인해보세요.</p>
-          <a class="text-link" href={related}>{label}<ArrowRight size={18} /></a>
-          {slug === 'content-formats' && <ContentFormatsCoachingLinks />}
-          {slug === 'ai-search-basics' && <AiSearchCoachingLink />}
-          {['website-or-agency', 'read-ad-numbers'].includes(slug) && <a class="text-link website-process-link" href="/process">진행 방식과 비용 확인하기 <ArrowRight size={18} aria-hidden="true" /></a>}
-        </div>
-      </article>
-    </main>
+<main id="main"><header class="article-header"><a href="/notes" class="back-link">코칭 노트</a><p class="eyebrow">{note.tag}</p><h1 class="balanced-note-title">{note.title}</h1><p class="article-meta">세온비즈 · <time datetime="2026-09-17">2026.09.17</time></p></header><article class="article-body"><p class="article-intro">{note.intro}</p>{note.sections.map(([title,...paragraphs],i)=><section><span class="step-index">{String(i+1).padStart(2,'0')}</span><h2>{title}</h2>{paragraphs.map(paragraph=><p>{paragraph}</p>)}</section>)}{note.source&&<p class="source-note">함께 참고할 자료: <a href={note.source.href} target="_blank" rel="noopener noreferrer">{note.source.label}</a></p>}<div class="article-next"><p>코칭 안내와 실제 데이터도 함께 확인해보세요.</p><a class="text-link" href={note.relatedHref}>{note.relatedLabel}<ArrowRight size={18}/></a><a class="text-link website-process-link" href="/process">진행 방식과 비용 확인하기 <ArrowRight size={18}/></a></div></article></main>
 </SiteLayout>
