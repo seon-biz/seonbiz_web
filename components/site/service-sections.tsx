@@ -1,15 +1,15 @@
 import { ArrowRight } from "lucide-react";
 
 const serviceProblems = [
-  { problem: "제 일을 제대로 보여줄 홈페이지가 필요합니다", solution: "AI로 사이트 구조와 화면을 만들고, 서비스 소개와 작업 사례를 담습니다." },
-  { problem: "방문자가 문의나 예약까지 이어지게 하고 싶습니다", solution: "문의 경로와 예약 안내, 외부 예약 플랫폼 연결을 설계합니다." },
-  { problem: "현장 경험은 많은데 글로 남기지 못합니다", solution: "현장 사진과 메모를 모으는 방법부터 글로 옮기는 순서를 정합니다." },
-  { problem: "만들고 나서 고치거나 관리하기 어렵습니다", solution: "대표님 계정으로 작업하고, 고치는 방법을 남깁니다." },
+  { problem: "견적 문의가 오면, 보여줄 게 카톡 사진뿐입니다", solution: "흩어진 사진과 설명을 홈페이지의 서비스 소개와 작업 사례로 옮깁니다." },
+  { problem: "사람은 들어오는데, 전화는 울리지 않습니다", solution: "고객이 확인할 정보와 문의 경로를 한 화면에서 찾을 수 있게 정리합니다." },
+  { problem: "할 말은 많은데, 쓰려고 앉으면 한 줄도 안 나옵니다", solution: "현장 사진·메모·고객 질문을 근거로 AI 초안을 만들고 직접 확인합니다." },
+  { problem: "가격 한 줄 바꾸는 데, 업체 연락하고 사흘을 기다립니다", solution: "대표님 계정에서 직접 고치고, 다음에도 따라 할 수 있는 순서를 남깁니다." },
 ];
 
 export function ServiceProblems() {
-  return <section className="container section service-problems" aria-labelledby="service-problems-title">
-    <div className="section-heading"><p className="eyebrow">이런 상황이신가요</p><h2 id="service-problems-title">일은 잘하는데,<br/>보여줄 곳이 없을 때</h2><p>잘하는 일을 보여주는 홈페이지로, 고객이 서비스와 문의 방법을 확인할 수 있게 합니다.</p></div>
+  return <section id="coaching" className="container section service-problems" aria-labelledby="service-problems-title">
+    <div className="section-heading"><p className="eyebrow">이런 상황이라면</p><h2 id="service-problems-title">만들긴 만들었는데,<br/>손댈 수가 없습니다.</h2><p>외주로 만든 홈페이지가 1년째 그대로라면, 문제는 대표님이 아니라 만든 방식에 있습니다.</p></div>
     <div className="service-problem-list">{serviceProblems.map(item => <article key={item.problem}><h3>{item.problem}</h3><p><ArrowRight size={18} aria-hidden="true"/><span>{item.solution}</span></p></article>)}</div>
   </section>;
 }

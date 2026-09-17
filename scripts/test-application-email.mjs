@@ -93,7 +93,7 @@ test('Sends Korean plain text to configured addresses and returns the same recei
   assert.match(message.subject, /024E94EC/);
   for (const expected of [id, '기존 홈페이지 수정·관리', '01000000000',
     '홈페이지 또는 사업용 채널 주소: 입력하지 않음', payload.problem, payload.aiUsage,
-    '개인정보 수집·이용 동의: 동의함', '2026-09-17-v4', '2026년 9월 14일', '한국 시간']) {
+    '개인정보 수집·이용 동의: 동의함', '2026-09-17-v5', '2026년 9월 14일', '한국 시간']) {
     assert.ok(message.text.includes(expected), expected);
   }
   assert.equal(message.headers['X-Seonbiz-Submission-ID'], id);

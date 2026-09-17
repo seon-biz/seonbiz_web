@@ -78,7 +78,7 @@ export async function handleApplicationRequest(
       `휴대전화번호: ${data.phone}`,
       `홈페이지 또는 사업용 채널 주소: ${data.website || '입력하지 않음'}`,
       '',
-      '[상담하고 싶은 내용]',
+      '[지금 가장 답답한 점]',
       data.problem,
       '',
       '[AI 사용 경험]',

@@ -112,9 +112,9 @@ export function ApplicationForm() {
         <Input id="website" name="website" type="url" maxLength={500} placeholder="https://" autoComplete="url" aria-describedby="website-help" value={fields.website} onChange={e=>setFields({...fields,website:e.target.value})} />
       </div>
       <div className="form-field">
-        <label htmlFor="problem">상담하고 싶은 내용</label>
-        <p id="problem-help">하고 싶은 일이나 어려운 점을 10자 이상 적어주세요. 자세한 내용은 상담하면서 여쭤보겠습니다.</p>
-        <Textarea id="problem" name="problem" required minLength={10} maxLength={3000} rows={5} aria-describedby="problem-help" placeholder="예: 기존 홈페이지를 직접 고치고, 홈페이지 내용을 블로그와 유튜브 숏츠로 확장하는 AI 작업 흐름을 만들고 싶습니다." value={fields.problem} onChange={e=>setFields({...fields,problem:e.target.value})} />
+        <label htmlFor="problem">지금 가장 답답한 점</label>
+        <p id="problem-help">예) 3년 전 만든 홈페이지인데 가격표를 못 바꾸고 있습니다 / 블로그는 쓰는데 문의가 없습니다 / 홈페이지가 아예 없습니다</p>
+        <Textarea id="problem" name="problem" required minLength={10} maxLength={3000} rows={5} aria-describedby="problem-help" placeholder="지금 가장 답답한 점을 10자 이상 적어주세요." value={fields.problem} onChange={e=>setFields({...fields,problem:e.target.value})} />
       </div>
       <div className="form-field">
         <label htmlFor="aiUsage">AI 사용 경험</label>
@@ -148,7 +148,7 @@ export function ApplicationForm() {
         <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-link">개인정보처리방침 보기<span className="sr-only"> (새 탭)</span></a>
       </div>
       {error && <p role="alert" className="form-error">{error}</p>}
-      <button type="submit" disabled={pending} className="button button-coral submit-button">{pending?<><LoaderCircle className="spin" size={20} /> 접수 중</>:<>1시간 무료 상담 신청하기 <ArrowUpRight size={20} /></>}</button>
+      <button type="submit" disabled={pending} className="button button-coral submit-button">{pending?<><LoaderCircle className="spin" size={20} /> 접수 중</>:<>1시간 무료 상담 신청하기 (결제 없음) <ArrowUpRight size={20} /></>}</button>
       <p className="meta submit-note">상담 신청 시 결제되는 금액은 없습니다.<br />1영업일 이내 카카오톡으로 연락드리고, 상담 일정을 함께 정합니다.</p>
     </form>
   );

@@ -7,17 +7,17 @@ import { Reveal } from "./sections";
 
 export function ScopeList() {
   return <section className="container section scope-overview">
-    <div className="section-heading"><p className="eyebrow">코칭에서 다루는 일</p><h2>지금 필요한 작업부터<br/>함께 해봅니다.</h2><p>홈페이지부터 홍보와 데이터까지 살펴봅니다. 필요한 일을 고르고, 코칭 시간과 준비된 자료에 맞춰 진행합니다.</p></div>
+    <div className="section-heading"><p className="eyebrow">코칭에서 다루는 일</p><h2>만드는 것으로<br/>끝내지 않습니다.</h2><p>홈페이지를 만들고, 검색에 걸리게 하고, 실제 방문 기록까지 봅니다. 순서는 첫 상담에서 정합니다.</p></div>
     <div className="scope-list">{workAreas.map((area,i)=><Reveal key={area.name}><article><span className="step-index">0{i+1}</span><h3>{area.name}</h3><p>{area.description}</p></article></Reveal>)}</div>
   </section>;
 }
 
-export function Method({showSessionExample=false}:{showSessionExample?:boolean}={}) {
+export function Method({showSessionExample=false,showProcessLink=true}:{showSessionExample?:boolean;showProcessLink?:boolean}={}) {
   return <section id="method" className="container section method-section">
     <div className="method-flow">
     <div className="method-sticky"><p className="eyebrow">일대일 코칭 진행 방식</p><h2>실제 작업을 하면서<br/>하나씩 익힙니다.</h2><p className="lead method-lead">한 번에 2시간, Zoom으로 화면을 공유합니다. 월 코칭에서는 직접 해본 결과와 어려웠던 부분을 다음 시간에 다시 살펴봅니다.</p>
       <div className="takeaway-note"><p className="kicker">코칭 후에 남기는 것</p><ul><li>함께 작성하고 수정한 내용</li><li>다시 작업할 때 볼 순서와 메모</li><li>다음에 직접 해볼 일</li></ul></div>
-      <a href="/process" className="text-link">진행 방식과 준비물 보기 <ArrowRight size={18}/></a>
+      {showProcessLink&&<a href="/process" className="text-link">진행 방식과 준비물 보기 <ArrowRight size={18}/></a>}
     </div>
     <div className="method-steps">{coachingSteps.map((step,i)=><Reveal key={step.label}><article className="method-step is-active"><span className="step-index">0{i+1} / {step.label}</span><h3>{step.title}</h3><p>{step.body}</p></article></Reveal>)}</div>
     </div>
@@ -28,6 +28,7 @@ export function Method({showSessionExample=false}:{showSessionExample?:boolean}=
 export function Pricing({showProcessDetails=false}:{showProcessDetails?:boolean}={}) {
   return <section id="pricing" className="pricing"><div className="container section">
     <div className="section-heading pricing-heading"><div><p className="eyebrow">코칭 시간과 비용</p><h2>필요한 만큼 선택하고,<br/>한 달씩 이어갑니다.</h2></div><p>첫 상담에서 하려는 일을 이야기합니다.<br/>시간과 진행 방식이 맞는지 확인한 뒤 결정하세요.</p></div>
+    <div className="pricing-comparison"><p className="eyebrow">제작 외주와 다른 점</p><h3>제작을 맡기면 끝나지만,<br/>여기서는 시작입니다.</h3><p>제작 외주는 완성된 화면을 받고 끝납니다. 이후 문구 하나를 바꾸려면 다시 연락하고, 다시 비용이 들 수 있습니다.</p><p>코칭은 대표님 계정에서 함께 만듭니다. 도메인·호스팅·수정 권한이 전부 대표님께 남고, 다음 수정은 직접 하십니다.</p></div>
     <div className="price-list">
       <article className="price-row"><div><p className="kicker">코칭을 시작하기 전에</p><h3>첫 무료 상담</h3></div><div><strong>현재 상황과 코칭 가능 여부 확인</strong><p>무엇부터 시작하면 좋을지 함께 살펴봅니다. 실제 수정·제작과 상세 보고서는 유료 코칭에서 진행합니다.</p>{showProcessDetails&&<p className="consult-response">신청하시면 <strong>1영업일 이내에 카카오톡으로 연락드립니다.</strong> 연결이 어려우면 문자로 안내드립니다.</p>}</div><div className="price-amount"><strong>무료</strong><span>1시간 · Zoom</span></div></article>
       <article className="price-row"><div><p className="kicker">직접 해본 일을 다음 시간에 점검</p><h3>월 코칭</h3></div><div><strong>월 4회 × 2시간 · 총 8시간</strong><p>보통 주 1회 진행합니다. 한 달 단위로 신청하고, 해본 결과와 다음 과제를 보고 연장 여부를 정합니다.</p></div><div className="price-amount"><strong>132<span>만 원</span></strong><span>공급가 120만 원 + 부가세 12만 원</span></div></article>

@@ -52,7 +52,7 @@
 .illustrated-hero img{aspect-ratio:4/3;width:100%;height:auto;object-fit:cover;border-radius:26px}
 .illustrated-hero figcaption{position:absolute;bottom:20px;left:20px;right:20px;width:fit-content;max-width:calc(100% - 40px);padding:12px 17px;background:#fff;border-radius:10px;font-size:.875rem;box-shadow:0 8px 35px #20242b0a}
 .scope-note{font-size:.9375rem;max-width:900px;padding-block:0 30px}
-.task-row li,.task-result{font-size:1rem}
+.task-row li{font-size:1rem}.task-result{font-size:.875rem}
 .related-case{padding-top:35px}.related-case>p{color:var(--muted-foreground)}
 .pricing-summary{display:grid;grid-template-columns:1fr 1.1fr;gap:85px;border-top:1px solid var(--border)}
 .pricing-summary .lead{margin-top:24px}.pricing-summary dl{margin:0}
@@ -133,7 +133,7 @@
 .scope-overview{display:block;padding-block:60px}.scope-overview .section-heading{position:static;margin-bottom:32px}.scope-list article{grid-template-columns:28px 1fr;gap:9px 14px;padding-block:25px}.scope-list h3{font-size:1.2rem}
 .method-steps{padding-top:38px}.method-step{min-height:0;padding-bottom:36px}.method-step p{font-size:1rem}.takeaway-note{padding:22px}.pricing-heading{display:block}.pricing-heading>p{margin-top:24px}.price-row{grid-template-columns:1fr;gap:20px}.price-row p{font-size:1rem}.price-amount{text-align:left}.price-amount>strong{font-size:2.3rem}.cost-details{grid-template-columns:1fr;gap:30px;margin-top:40px}
 .illustrated-hero{grid-template-columns:1fr;gap:36px;padding-block:40px 65px}.illustrated-hero h1{font-size:clamp(1.8rem,7.1vw,2.6rem)}.illustrated-hero .lead{font-size:1rem;margin-top:24px}.illustrated-hero img{border-radius:20px}.illustrated-hero figcaption{font-size:.8125rem;left:14px;bottom:14px;padding:10px 13px}
-.scope-note{font-size:.9375rem;line-height:1.85}.task-row li,.task-result{font-size:1rem}
+.scope-note{font-size:.9375rem;line-height:1.85}.task-row li{font-size:1rem}.task-result{font-size:.875rem}
 .pricing-summary,.preparation{display:block;gap:0}.pricing-summary>div+div,.preparation-list{margin-top:32px}.pricing-summary dd{font-size:1.55rem}
 .preparation-list article{padding-left:38px}.preparation-list h3{font-size:1.2rem}
 .policy-table{font-size:.875rem}.policy-table th,.policy-table td{padding:13px 9px}
@@ -151,7 +151,7 @@
 .hero .underline-lemon{box-decoration-break:clone;background:linear-gradient(var(--lemon),var(--lemon)) 0 96%/100% .11em no-repeat}
 .hero .underline-lemon:after{content:none}
 .trust-banner{background:#f7f8fa;border-block:1px solid var(--border)}
-.trust-facts{display:grid;grid-template-columns:repeat(3,1fr);padding-block:32px;align-items:center;text-align:center}
+.trust-facts{display:grid;grid-template-columns:repeat(4,1fr);padding-block:32px;align-items:center;text-align:center}
 .trust-facts>div{position:relative;padding:8px 24px;min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .trust-facts>div+div:before{content:"·";position:absolute;left:0;color:#a6aeb9;font-size:1.5rem}
 .trust-facts span,.trust-facts p{font-size:.9375rem;color:var(--muted-foreground)}
@@ -351,12 +351,17 @@
 .service-hosting-note p{color:var(--muted-foreground)}
 .service-hosting-note p+p{margin-top:18px}
 .service-case-note{font-size:.9375rem;margin-top:6px;margin-bottom:12px}
+.hero-disclaimer{font-size:.8125rem;color:var(--muted-foreground);margin-top:-18px;margin-bottom:28px}
+.pricing-comparison{display:grid;grid-template-columns:.75fr 1fr 1fr;gap:34px;margin:44px 0 8px;padding:34px 36px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:16px}
+.pricing-comparison .eyebrow{color:var(--blue);margin:0}.pricing-comparison h3{font-size:1.45rem}.pricing-comparison>p:not(.eyebrow){color:var(--muted-foreground);font-size:.9375rem}
+.data-disclaimer{font-size:.875rem!important;color:#aeb8b0!important}
 @media(max-width:1100px){.service-ownership{gap:40px;padding:40px 32px}}
 @media(max-width:760px){
   .service-ownership{grid-template-columns:1fr;gap:28px;padding:30px 24px;margin-bottom:35px}
   .service-ownership h2{font-size:2rem}.service-ownership-copy>p{font-size:1rem}
   .service-hosting-note{margin-top:26px;padding-top:24px}
   .service-hosting-note h3{font-size:1.15rem}.service-case-note{font-size:.875rem}
+  .pricing-comparison{grid-template-columns:1fr;gap:18px;padding:28px 24px;margin-top:32px}.pricing-comparison .eyebrow{margin-bottom:0}
 }
 
 .privacy-delete-list{list-style:disc;padding-left:1.25em;margin:20px 0}.privacy-delete-list li+li{margin-top:8px}

@@ -1,4 +1,4 @@
-export const businessTypes = ['new', 'existing', 'content', 'unsure'] as const;
+export const businessTypes = ['existing', 'new', 'content', 'unsure'] as const;
 export type BusinessType = typeof businessTypes[number];
 export const businessTypeLabels: Record<BusinessType, string> = {
   new: '새 홈페이지 만들기',
@@ -6,7 +6,7 @@ export const businessTypeLabels: Record<BusinessType, string> = {
   content: '콘텐츠·검색 데이터',
   unsure: '아직 잘 모르겠음',
 };
-export const applicationConsentVersion = '2026-09-17-v4';
+export const applicationConsentVersion = '2026-09-17-v5';
 
 export function businessTypeLabel(value: unknown) {
   return typeof value === 'string' && businessTypes.includes(value as BusinessType)
