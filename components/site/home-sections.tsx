@@ -25,6 +25,10 @@ export function CoachIntro() {
 }
 
 export function HomeCases() {
+  const testimonial = websiteCases.find(item => item.slug === 'bondaerohome')!;
+  // 기존 홈 후기는 원문의 첫 문장과 마지막 문장을 발췌합니다.
+  const sentences = testimonial.quote.split(/(?<=[.!?])\s+/);
+  const testimonialExcerpt = sentences.filter((_, index) => index === 0 || index === sentences.length - 1);
   return <>
     <section className="container section home-cases" aria-labelledby="home-cases-title">
       <div className="home-cases-heading">
@@ -37,8 +41,8 @@ export function HomeCases() {
       <a href="/cases" className="text-link">실제 사례 자세히 보기 <ArrowRight size={18} aria-hidden="true" /></a>
     </section>
     <section className="container home-testimonial" aria-label="고객 후기">
-      <blockquote><p>나이도 있고 컴퓨터도 잘 못해서, 모르는 걸 물어보려면 주눅부터 들었습니다.<br/>지금은 사진도 마음껏 바꾸고, 블로그 글도 직접 올립니다.</p></blockquote>
-      <p className="home-testimonial-source">본대로홈 · 맞춤 커튼·블라인드 · 충북 청주 오창</p>
+      <blockquote><p>{testimonialExcerpt[0]}{testimonialExcerpt.length > 1 && <><br/>{testimonialExcerpt[1]}</>}</p></blockquote>
+      <p className="home-testimonial-source">{testimonial.title} · {testimonial.label}</p>
       <a href="/cases" className="text-link">다른 후기도 보기 <ArrowRight size={18} aria-hidden="true" /></a>
     </section>
   </>;

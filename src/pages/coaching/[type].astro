@@ -4,7 +4,7 @@ import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { FAQ, ConsultCTA } from "@/components/site/coaching-blocks";
 import { ServiceOwnership } from "@/components/site/service-sections";
 import { MONTHLY_COACHING, COACHING_COURSES, formatManWon, formatCourseDuration, formatKoreanCount } from "@/lib/coaching-plan";
-import { faqs, faqNumbersByPage } from "@/lib/content";
+import { faqs, faqNumbersByPage, websiteCases } from "@/lib/content";
 
 export const prerender = true;
 export function getStaticPaths(){return [{params:{type:'website'}}];}
@@ -12,6 +12,11 @@ export function getStaticPaths(){return [{params:{type:'website'}}];}
 const {type}=Astro.params;
 if(type!=='website')throw new Error("Unknown content route");
 const extendedCoachingMonths = 3;
+const caseSessionSummary = [...websiteCases]
+  .sort((a, b) => a.sessions - b.sessions)
+  // 회차 설명에서는 괄호 안의 영문 병기를 제외합니다.
+  .map(item => `${item.title.replace(/\s*\([^)]*\)$/, '')} ${item.sessions}회`)
+  .join(', ');
 
 const metadata={
   title: `코칭 ${MONTHLY_COACHING.hoursPerSession}시간에 하는 일`,
@@ -191,7 +196,7 @@ const pageFaqs = faqNumbersByPage.website.map(number => faqs[number - 1]);
           <tr><th scope="row">+ 광고</th><td>{formatCourseDuration(COACHING_COURSES.ads)}</td><td>{formatManWon(COACHING_COURSES.ads.priceWon)}</td><td>네이버 · 구글 · 유튜브 · 메타</td></tr>
         </tbody>
       </table>
-      <p class="coaching-duration-copy">회차는 페이지 수와 기능, 준비된 자료에 따라 달라집니다.<br/>비용은 월 단위입니다. {extendedCoachingMonths}개월이면 {formatManWon(MONTHLY_COACHING.priceWon * extendedCoachingMonths)}입니다.<br/>실제 사례는 바코드넷 7회, 모터리페어 8회, 본대로홈 9회, 리재 12회였습니다.<br/>리재는 영문 사이트라 기획에 시간이 더 걸렸습니다.</p>
+      <p class="coaching-duration-copy">회차는 페이지 수와 기능, 준비된 자료에 따라 달라집니다.<br/>비용은 월 단위입니다. {extendedCoachingMonths}개월이면 {formatManWon(MONTHLY_COACHING.priceWon * extendedCoachingMonths)}입니다.<br/>실제 사례는 {caseSessionSummary}였습니다.<br/>리재는 영문 사이트라 기획에 시간이 더 걸렸습니다.</p>
       <a href="/cases" class="text-link">실제 사례 보기 <ArrowRight size={18}/></a>
       <div class="coaching-duration-foot">
         <p>월 코칭 {formatManWon(MONTHLY_COACHING.priceWon)} (부가세 포함).<br/>한 달 단위로 신청하고, 매달 진행 여부를 다시 정합니다.</p>

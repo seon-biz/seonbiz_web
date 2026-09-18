@@ -107,6 +107,9 @@ export type WebsiteCase = {
   homeTitle?: string;
   label: string;
   homeLabel: string;
+  sessions: number;
+  pages: number;
+  completedAt: string;
   meta: string;
   homeMeta: string;
   body: string;
@@ -125,8 +128,9 @@ export const websiteCases: WebsiteCase[] = [
     homeTitle: '리재(LEEJAE)',
     label: '숙박 · 서울',
     homeLabel: '독채 숙박 · 서울',
-    meta: '코칭 12회 · 9페이지 · 2026년 8월',
-    homeMeta: '코칭 12회 · 9페이지',
+    sessions: 12,
+    pages: 9,
+    completedAt: '2026년 8월',
     body: '영문 직접 예약 사이트입니다. 전체 작업의 약 40%만 코칭으로 함께했고, 나머지는 대표님이 직접 작업하셨습니다. 사진과 문구도 직접 바꾸십니다.',
     quote: '외부 업체에서 만든 사이트는 제가 원하던 것이 아니었습니다. 그동안 에어비앤비나 부킹닷컴을 통해서만 예약이 들어왔는데, 이제 제가 직접 리재를 알릴 수 있게 되어 기쁩니다. 무엇보다 직접 마음껏 수정할 수 있는 점이 좋습니다.',
     image: '/images/cases/leejae.webp', width: 2350, height: 2298,
@@ -138,8 +142,9 @@ export const websiteCases: WebsiteCase[] = [
     title: '본대로홈',
     label: '맞춤 커튼·블라인드 · 충북 청주 오창',
     homeLabel: '맞춤 커튼·블라인드 · 청주 오창',
-    meta: '코칭 9회 · 6페이지 · 2026년 8월',
-    homeMeta: '코칭 9회 · 6페이지',
+    sessions: 9,
+    pages: 6,
+    completedAt: '2026년 8월',
     body: '매장 상담과 시공 과정을 홈페이지의 서비스 소개로 옮겼습니다. 전체 작업의 약 40%만 코칭으로 함께했고, 지금은 사진과 문구를 직접 관리하십니다.',
     quote: '나이도 있고 컴퓨터도 잘 못해서, 모르는 걸 물어보려면 주눅부터 들었습니다. 예전에 남에게 맡겨서 만들어본 적도 있는데, 처음부터 마음에 들지 않았고 고칠 수도 없었습니다. 지금은 사진도 마음껏 바꾸고, 블로그 글도 직접 올립니다.',
     image: '/images/cases/bondaerohome.webp', width: 2112, height: 2030,
@@ -151,8 +156,9 @@ export const websiteCases: WebsiteCase[] = [
     title: '모터리페어',
     label: '수입차 정비 · 경기 동탄',
     homeLabel: '수입차 정비 · 동탄',
-    meta: '코칭 8회 · 7페이지 · 2026년 7월',
-    homeMeta: '코칭 8회 · 7페이지',
+    sessions: 8,
+    pages: 7,
+    completedAt: '2026년 7월',
     body: '전체 구조를 잡는 부분만 코칭으로 함께했고, 나머지 페이지와 문구는 대표님이 직접 완성하셨습니다. 지금은 블로그 글을 매주 3편씩 직접 발행하고 계십니다.',
     quote: '6년 전에는 워드프레스로 만들었는데, 과정이 길고 어려웠습니다. 이번에는 코치님이 기획을 잡아주시고 디자인부터 각 페이지 작업까지 제가 직접 했습니다. 체감으로는 예전의 10분의 1 정도 시간과 노력으로 끝난 것 같습니다. 블로그 글도 예전엔 한 편에 한 시간 넘게 걸렸는데, 지금은 15분이면 써서 올립니다.',
     image: '/images/cases/motorrepair.webp', width: 3412, height: 2302,
@@ -162,17 +168,23 @@ export const websiteCases: WebsiteCase[] = [
   {
     slug: 'barcodenet',
     title: '바코드넷',
-    label: '의료용 라벨 제조',
+    label: '의료용 라벨 제조 · 경기 성남',
     homeLabel: '의료용 라벨 제조 · 경기 성남',
-    meta: '코칭 7회 · 6페이지 · 2026년 3월',
-    homeMeta: '코칭 7회 · 6페이지',
+    sessions: 7,
+    pages: 6,
+    completedAt: '2026년 3월',
     body: '제품 이미지를 AI로 제작해 채운 B2B 제조업 사이트입니다. 코칭이 끝난 뒤에도 대표님이 직접 수정하고 블로그를 발행하고 계십니다.',
     quote: '이런 쪽은 아무것도 모르던 사람이라, 웹사이트를 직접 만들 생각은 꿈에도 못 했어요. 코칭이 끝난 지금도 필요할 때마다 직접 수정하고, 블로그는 매주 한 편씩 발행하고 있습니다. 사이트는 직접 만들어야 직접 관리할 수 있다고 생각합니다.',
     image: '/images/cases/barcodenet.webp', width: 2620, height: 2302,
     alt: '바코드넷 홈페이지 첫 화면',
     href: 'https://barcodenet.co.kr',
   },
-];
+].map(item => {
+  const homeMeta = `코칭 ${item.sessions}회 · ${item.pages}페이지`;
+  return { ...item, meta: `${homeMeta} · ${item.completedAt}`, homeMeta };
+});
+
+const websiteCaseSessions = websiteCases.map(item => item.sessions);
 
 export type CaseSummary = {
   slug: string;
@@ -247,7 +259,7 @@ export const faqs = [
   },
   {
     q: '블로그·SNS나 광고도 꼭 해야 하나요?',
-    a: `아닙니다. 홈페이지만 원하시면 평균 ${formatKoreanCount(COACHING_COURSES.website.months)} 달, ${formatManWon(COACHING_COURSES.website.priceWon)}입니다. 페이지 수와 준비된 자료에 따라 회차가 늘어날 수 있고, 비용은 월 ${formatManWon(MONTHLY_COACHING.priceWon)}씩 월 단위로 이어집니다. 실제로는 7회에서 12회 사이였습니다. 블로그·SNS 발행과 광고는 홈페이지가 끝난 뒤 원하실 때 이어서 진행하는 선택 과정입니다.`,
+    a: `아닙니다. 홈페이지만 원하시면 평균 ${formatKoreanCount(COACHING_COURSES.website.months)} 달, ${formatManWon(COACHING_COURSES.website.priceWon)}입니다. 페이지 수와 준비된 자료에 따라 회차가 늘어날 수 있고, 비용은 월 ${formatManWon(MONTHLY_COACHING.priceWon)}씩 월 단위로 이어집니다. 실제로는 ${Math.min(...websiteCaseSessions)}회에서 ${Math.max(...websiteCaseSessions)}회 사이였습니다. 블로그·SNS 발행과 광고는 홈페이지가 끝난 뒤 원하실 때 이어서 진행하는 선택 과정입니다.`,
   },
   {
     q: '코칭 사이에 제가 해야 할 일은 얼마나 되나요?',
