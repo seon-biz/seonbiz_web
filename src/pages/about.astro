@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { ConsultCTA } from "@/components/site/coaching-blocks";
 import { CaseCard } from "@/components/site/case-card";
 import { caseSummaries } from "@/lib/content";
+import { MONTHLY_COACHING } from "@/lib/coaching-plan";
 const metadata = {
   title: '세온비즈 소개',
   description: '세온비즈를 운영하는 서정옥을 소개합니다. 유료 코칭으로 함께한 35개 회사, 인쇄·디자인과 디지털 마케팅 실무 경력 28년. 대표님이 직접 이어갈 수 있도록 실제 사업 자료로 함께 작업합니다.',
@@ -52,7 +53,7 @@ const legacyCase = caseSummaries.find(item => item.kind === 'search-legacy')!;
           ))}</ol>
           <div class="about-facts">
             <div><span>진행 방식</span><strong>Zoom 일대일</strong></div>
-            <div><span>한 번의 코칭</span><strong>2시간</strong></div>
+            <div><span>한 번의 코칭</span><strong>{MONTHLY_COACHING.hoursPerSession}시간</strong></div>
             <div><span>첫 상담</span><strong>1시간 무료</strong></div>
           </div>
           <a href="/process" class="text-link">자세한 진행 방식과 비용 보기 <ArrowUpRight size={18} aria-hidden="true" /></a>

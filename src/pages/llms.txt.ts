@@ -1,4 +1,9 @@
-# 세온비즈
+import { COACHING_COURSES, formatCourseDuration } from '@/lib/coaching-plan';
+
+// 기존 /llms.txt를 상수와 함께 빌드 시 정적 파일로 생성합니다.
+export const prerender = true;
+
+const body = `# 세온비즈
 
 > 홈페이지를 직접 만들고 관리하려는 분을 위한 일대일 AI 코칭.
 
@@ -16,9 +21,16 @@
 
 ## 안내
 
-- 홈페이지 제작과 초기 SEO·GEO 설정은 약 2개월 (8회)입니다.
+- 홈페이지 제작과 초기 SEO·GEO 설정은 ${formatCourseDuration(COACHING_COURSES.website)}입니다.
 - 측정 설정 후 최소 4주간 기록을 모아 첫 데이터를 분석합니다.
 - 블로그·SNS·유튜브 숏츠 운영 자동화에는 홈페이지 제작과 별도의 시간이 필요합니다.
 - 검색 순위, AI 추천, 콘텐츠 조회·유입, 광고 성과를 보장하지 않습니다.
 - 첫 상담은 Zoom으로 1시간 무료입니다.
 - 운영 주체는 주식회사 티오엠입니다.
+`;
+
+export function GET() {
+  return new Response(body, {
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+  });
+}
