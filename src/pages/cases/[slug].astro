@@ -12,5 +12,5 @@ if(!item)throw new Error("Unknown content route");
 const metadata={title:item.title.replace("\n"," "),description:item.summary};
 ---
 <SiteLayout {...metadata}>
-<main id="main"><section class="inner-hero container"><a href="/cases" class="back-link">실제 데이터</a><p class="eyebrow">{item.tag}</p><h1>{item.title.split('\n').map((line,i)=><span>{i>0&&<br/>}{line}</span>)}</h1><p class="lead">{item.summary}</p></section><CaseDetail kind={item.kind}/><section class="container article-next" aria-label="관련 코칭 노트"><p>데이터를 보기 전에 측정과 정보 정리의 기본 순서를 확인하세요.</p><a class="text-link" href="/notes/ai-search-basics">SEO·AI 검색 최적화 기본 순서 <ArrowRight size={18}/></a></section><ConsultCTA/></main>
+<main id="main"><section class="inner-hero container"><a href="/cases" class="back-link">실제 사례</a><p class="eyebrow">{item.tag}</p><h1>{item.title.split('\n').map((line,i)=><span>{i>0&&<br/>}{line}</span>)}</h1><p class="lead">{item.summary}</p></section><CaseDetail kind={item.kind}/><section class="container article-next" aria-label="관련 코칭 노트"><p>데이터를 보기 전에 측정과 정보 정리의 기본 순서를 확인하세요.</p><a class="text-link" href="/notes/ai-search-basics">SEO·AI 검색 최적화 기본 순서 <ArrowRight size={18}/></a></section><ConsultCTA/></main>
 </SiteLayout>

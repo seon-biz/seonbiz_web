@@ -14,7 +14,7 @@ const body = `# 세온비즈
 - [홈](https://seonbiz.com/): 홈페이지 AI 코칭 소개
 - [홈페이지 코칭](https://seonbiz.com/coaching/website): 제작·수정, SEO·GEO, 데이터 분석과 채널 운영 코칭
 - [진행 방식과 비용](https://seonbiz.com/process): Zoom 진행 방식, 기간, 준비물, 비용과 변경·취소 기준
-- [실제 데이터](https://seonbiz.com/cases): 고객 웹사이트의 GA4 AI 유입과 구글 서치콘솔 기록
+- [실제 사례](https://seonbiz.com/cases): 코칭으로 직접 만든 홈페이지와 고객 웹사이트의 GA4·구글 서치콘솔 기록
 - [코칭 노트](https://seonbiz.com/notes): 홈페이지 제작·운영, 콘텐츠 자동화, 광고 데이터와 AI 검색 가이드
 - [세온비즈 소개](https://seonbiz.com/about): 운영자와 코칭 원칙
 - [무료 상담 신청](https://seonbiz.com/apply): 1시간 무료 상담 신청

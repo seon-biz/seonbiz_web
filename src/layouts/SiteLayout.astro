@@ -13,7 +13,7 @@ const pageTitle = typeof title === 'object' ? title.absolute : title ? `${title}
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const socialImageUrl = new URL(image, canonicalUrl);
 const pathParts = Astro.url.pathname.split('/').filter(Boolean);
-const breadcrumbNames: Record<string, string> = { coaching: '코칭 안내', website: '홈페이지 코칭', process: '진행·비용', cases: '실제 데이터', notes: '코칭 노트', about: '소개', apply: '무료 상담 신청', privacy: '개인정보처리방침' };
+const breadcrumbNames: Record<string, string> = { coaching: '코칭 안내', website: '홈페이지 코칭', process: '진행·비용', cases: '실제 사례', notes: '코칭 노트', about: '소개', apply: '무료 상담 신청', privacy: '개인정보처리방침' };
 const breadcrumbItems = [{ name: '홈', url: new URL('/', canonicalUrl).toString() }, ...pathParts.map((part, index) => ({ name: breadcrumbNames[part] ?? pageTitle, url: new URL(`/${pathParts.slice(0, index + 1).join('/')}`, canonicalUrl).toString() }))];
 const organization = { '@type': 'Organization', name: '세온비즈', url: 'https://seonbiz.com', email: 'cobaltblue872@gmail.com', logo: 'https://seonbiz.com/favicon-seonbiz-approved-192.png', founder: { '@type': 'Person', name: '서정옥' } };
 const structuredData = [
