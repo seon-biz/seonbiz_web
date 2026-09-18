@@ -3,6 +3,8 @@ import SiteLayout from "@/src/layouts/SiteLayout.astro";
 import { PageHero } from "@/components/site/page-hero";
 import { Method, Pricing, FAQ, ConsultCTA } from "@/components/site/coaching-blocks";
 import { MONTHLY_COACHING, MONTHLY_HOURS, REFUND_HOURLY_WON, formatManWon, formatWon } from "@/lib/coaching-plan";
+import { faqs, faqNumbersByPage } from "@/lib/content";
+const pageFaqs = faqNumbersByPage.process.map(number => faqs[number - 1]);
 const refundExampleHours = MONTHLY_COACHING.hoursPerSession;
 const refundExampleWon = MONTHLY_COACHING.priceWon - refundExampleHours * REFUND_HOURLY_WON;
 const metadata={title:'코칭 진행 방식·비용',description:`Zoom으로 회당 ${MONTHLY_COACHING.hoursPerSession}시간, 월 ${MONTHLY_COACHING.sessions}회 코칭 ${formatManWon(MONTHLY_COACHING.priceWon)} (부가세 포함). 준비물과 계정·구독료, 일정 변경·취소·환불 기준을 안내합니다. 첫 상담은 1시간 무료입니다.`};
@@ -23,6 +25,6 @@ const metadata={title:'코칭 진행 방식·비용',description:`Zoom으로 회
 <div class="table-scroll"><table class="policy-table refund-table"><caption>부가세를 포함한 환불 계산 기준</caption><thead><tr><th scope="col">코칭 · 시간당 비용</th><th scope="col">환불 예시</th></tr></thead><tbody><tr><th scope="row">월 코칭<span class="refund-hourly">시간당<br/>{formatWon(REFUND_HOURLY_WON)}</span></th><td><span class="refund-scenario">{MONTHLY_HOURS}시간 중 {refundExampleHours}시간 진행 후 취소</span><div class="refund-calculation"><span>{formatManWon(MONTHLY_COACHING.priceWon)} − </span><span>({refundExampleHours}시간 × {formatWon(REFUND_HOURLY_WON)})</span><strong>= {formatWon(refundExampleWon)} 환불</strong></div></td></tr></tbody></table></div>
 <p>한 시간 미만은 실제 진행한 분 단위로 계산하며, 원 미만의 환불 금액은 올림합니다. 별도로 합의하지 않은 사전 준비 시간은 공제하지 않습니다.</p></article>
 <article><h3>환불을 요청하는 방법</h3><p>상담 일정을 안내받은 카카오톡 또는 <a href="mailto:cobaltblue872@gmail.com">cobaltblue872@gmail.com</a>으로 요청해 주세요. 요청을 접수한 날부터 3영업일 이내에 환불하며, 계좌 확인이 필요하면 연락드립니다.</p><p class="meta">관계 법령에 따라 고객에게 더 유리한 권리가 인정되는 경우에는 해당 기준을 적용합니다. 별도로 의뢰한 제작 계약은 계약 시 안내한 범위와 조건을 따릅니다.</p></article></div></section>
-<FAQ client:load subset={[0,1,2,3,4,5,6,7]}/><ConsultCTA description="지금 필요한 일을 듣고, 어디부터 시작할지 안내해드립니다."/>
+<FAQ client:load items={pageFaqs}/><ConsultCTA description="지금 필요한 일을 듣고, 어디부터 시작할지 안내해드립니다."/>
 </main>
 </SiteLayout>

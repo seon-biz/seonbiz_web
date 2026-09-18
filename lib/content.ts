@@ -1,4 +1,4 @@
-import { COACHING_COURSES, MONTHLY_COACHING, formatCourseDuration, formatKoreanCount } from './coaching-plan';
+import { COACHING_COURSES, MONTHLY_COACHING, formatCourseDuration, formatKoreanCount, formatManWon } from './coaching-plan';
 
 export const coaching = {
   website: {
@@ -241,4 +241,23 @@ export const faqs = [
   { q: '블로그·SNS·유튜브 숏츠도 대신 운영해주나요?', a: '고객이 직접 운영합니다. 홈페이지 내용을 채널별로 바꾸는 맞춤 프롬프트·템플릿·작업 순서를 설정하고, 사용하는 도구가 맞으면 반복 작업 자동화도 연결합니다. 채널 운영에는 홈페이지 제작과 별도의 시간이 필요합니다.' },
   { q: '검색 순위나 AI 추천을 보장하나요?', a: '보장하지 않습니다. 검색엔진과 AI 서비스가 참고할 수 있도록 정확한 정보를 정리하고 기술 상태를 점검한 뒤, 실제 검색·방문 기록을 함께 확인합니다.' },
   { q: '광고도 함께 볼 수 있나요?', a: '원하실 때 네이버·구글·메타 광고의 캠페인 설정, 문구, 연결 페이지, 전환 측정과 결과 해석을 함께 볼 수 있습니다. 광고 운영 대행이나 문의·매출 성과를 보장하는 서비스는 아닙니다.' },
+  {
+    q: '기존 홈페이지 주소를 그대로 쓸 수 있나요?',
+    a: '네. 쓰시던 도메인을 새 홈페이지로 옮겨 씁니다. 기존 사이트를 정리하는 방법도 코칭에서 함께 다룹니다.',
+  },
+  {
+    q: '블로그·SNS나 광고도 꼭 해야 하나요?',
+    a: `아닙니다. 홈페이지만 원하시면 평균 ${formatKoreanCount(COACHING_COURSES.website.months)} 달, ${formatManWon(COACHING_COURSES.website.priceWon)}입니다. 페이지 수와 준비된 자료에 따라 회차가 늘어날 수 있고, 비용은 월 ${formatManWon(MONTHLY_COACHING.priceWon)}씩 월 단위로 이어집니다. 실제로는 7회에서 12회 사이였습니다. 블로그·SNS 발행과 광고는 홈페이지가 끝난 뒤 원하실 때 이어서 진행하는 선택 과정입니다.`,
+  },
+  {
+    q: '코칭 사이에 제가 해야 할 일은 얼마나 되나요?',
+    a: '주 3~4시간 정도입니다. 다음 주까지 하실 일과 방법을 코칭 시간에 정해드리고, 막히시는 부분은 영상으로 만들어 드립니다.',
+  },
 ];
+
+// faqs 배열의 첫 항목을 1번으로 세는 페이지별 표시 번호와 순서입니다.
+export const faqNumbersByPage = {
+  home: [1, 6, 3, 5, 4],
+  website: [10, 9, 15, 17, 2, 12],
+  process: [11, 16, 13, 14, 7, 8],
+} as const;

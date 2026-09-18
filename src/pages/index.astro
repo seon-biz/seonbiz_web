@@ -5,6 +5,8 @@ import { Method, Pricing, FAQ, ConsultCTA, ScopeList } from "@/components/site/c
 import { Hero } from "@/components/site/hero";
 import { CoachIntro, ContentFormats, HomeCases, TrustBanner } from "@/components/site/home-sections";
 import { ServiceProblems } from "@/components/site/service-sections";
+import { faqs, faqNumbersByPage } from "@/lib/content";
+const pageFaqs = faqNumbersByPage.home.map(number => faqs[number - 1]);
 const metadata={
   title: { absolute: '홈페이지 직접 만들고 고치는 AI 코칭 | 세온비즈' },
   description: '외주에 맡긴 홈페이지, 이제 직접 고치십시오. Zoom 일대일로 홈페이지를 함께 만들고, 검색·AI 노출 설정과 수정 방법까지 대표님 계정에 남깁니다. 첫 상담 1시간 무료.',
@@ -12,7 +14,7 @@ const metadata={
 ---
 <SiteLayout {...metadata}>
 <main id="main"><Hero client:load/><TrustBanner/>
-<ServiceProblems homeCopy/><ScopeList/><ContentFormats/><HomeCases/><Method showSessionExample homeCopy/><Pricing homeCopy/><FAQ client:load subset={[0,1,2,3,4,5,6,7]} homeCopy/>
+<ServiceProblems homeCopy/><ScopeList/><ContentFormats/><HomeCases/><Method showSessionExample homeCopy/><Pricing homeCopy/><FAQ client:load items={pageFaqs} homeCopy/>
 <section class="container section home-notes"><div><p class="eyebrow">코칭 노트</p><h2>혼자 해보실 때<br/>열어보세요.</h2></div><div><a href="/notes/website-or-agency">홈페이지를 맡길까, 직접 만들까 <ArrowUpRight size={20}/></a><a href="/notes/content-formats">홈페이지 내용을 블로그·SNS·숏츠로 확장하기 <ArrowUpRight size={20}/></a><a href="/notes/ai-search-basics">AI 검색을 준비하려면 무엇부터 고칠까요? <ArrowUpRight size={20}/></a><a href="/notes/read-ad-numbers">광고 관리 화면에서 무엇부터 봐야 할까요? <ArrowUpRight size={20}/></a><a href="/notes" class="text-link">코칭 노트 모두 보기</a></div></section><CoachIntro/><ConsultCTA title="뭐부터 해야 할지 같이 정해요." note="1영업일 이내 카카오톡 연락 · 코칭 신청은 상담 후 결정하시면 됩니다."/>
 </main>
 </SiteLayout>
