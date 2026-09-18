@@ -28,7 +28,7 @@ export function HomeCases() {
   return <>
     <section className="container section home-cases" aria-labelledby="home-cases-title">
       <div className="home-cases-heading">
-        <div><p className="eyebrow">실제 사례</p><h2 id="home-cases-title">대표님들이 직접 만들고,<br/>직접 고치고 계십니다.</h2></div>
+        <div><p className="eyebrow">실제 사례</p><h2 id="home-cases-title">지금은 다들<br/>혼자 하십니다.</h2></div>
         <p>제작을 대신하지 않습니다. 약 40%만 코칭에서 함께하고,<br/>나머지는 대표님이 직접 만드십니다.</p>
       </div>
       <div className="website-cases-grid home-cases-grid">
@@ -48,7 +48,7 @@ export function ContentFormats() {
   return <section className="container section home-content-formats" aria-labelledby="content-formats-title">
     <div className="content-formats-copy">
       <p className="eyebrow">콘텐츠 제작</p>
-      <h2 id="content-formats-title">한 번 쓴 글로,<br/>세 번 노출됩니다.</h2>
+      <h2 id="content-formats-title">한 번 쓰면<br/>세 군데 올라갑니다.</h2>
       <p>홈페이지에 정확하게 정리한 내용을 블로그 글, SNS 게시물, 유튜브 숏츠로 바꿉니다. 업체에 맞는 AI 지시문과 검토표, 반복 작업 순서를 설정합니다.</p>
       <div className="camera-note"><h3>카메라 앞에 서지 않아도 됩니다.</h3><p>AI로 글과 화면을 준비하고, 최종 내용은 고객이 자기 계정에서 확인해 직접 발행합니다.</p></div>
       <a href="/notes/content-formats" className="text-link"><span>홈페이지 내용을 블로그·SNS·숏츠로 확장하기</span><ArrowRight size={18}/></a>
