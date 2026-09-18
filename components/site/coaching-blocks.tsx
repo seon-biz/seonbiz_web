@@ -1,7 +1,6 @@
 "use client";
 
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { ArrowRight, ArrowUpRight, ChevronDownIcon } from "lucide-react";
 import { coachingSteps, faqs, workAreas } from "@/lib/content";
 import { Reveal } from "./sections";
 import { MONTHLY_COACHING, MONTHLY_HOURS, MONTHLY_SUPPLY_WON, MONTHLY_VAT_WON, REFUND_HOURLY_WON, COACHING_COURSES, formatManAmount, formatManWon, formatKoreanWon, formatCourseDuration } from "@/lib/coaching-plan";
@@ -72,7 +71,12 @@ export function PricingSummary() {
 
 export function FAQ({subset,additions=[],items:customItems,homeCopy=false,showIntro=true}:{subset?:number[];additions?:{q:string;a:string}[];items?:{q:string;a:string}[];homeCopy?:boolean;showIntro?:boolean}={}) {
   const items=customItems??[...(subset?subset.map(i=>faqs[i]):faqs),...additions];
-  return <section className="container section faq-section"><div><p className="eyebrow">신청 전에 궁금한 점</p><h2>{homeCopy?'이런 게 궁금하시죠.':'미리 확인하세요.'}</h2>{showIntro&&<p className="faq-intro">설명으로 충분하지 않은 부분은<br/>무료 상담에서 함께 이야기합니다.</p>}</div><Accordion type="single" collapsible className="faq-list">{items.map((item,i)=><AccordionItem value={`faq-${i}`} key={item.q}><AccordionTrigger id={`faq-question-${i}`}>{item.q}</AccordionTrigger><AccordionContent>{item.a}</AccordionContent></AccordionItem>)}</Accordion></section>;
+  return <section className="container section faq-section"><div><p className="eyebrow">신청 전에 궁금한 점</p><h2>{homeCopy?'이런 게 궁금하시죠.':'미리 확인하세요.'}</h2>{showIntro&&<p className="faq-intro">설명으로 충분하지 않은 부분은<br/>무료 상담에서 함께 이야기합니다.</p>}</div><div className="faq-list">{items.map(item=><details className="faq-item border-b last:border-b-0" key={item.q}>
+    <summary className="faq-question flex items-start justify-between gap-4 rounded-md text-left font-medium hover:underline">
+      <h3>{item.q}<ChevronDownIcon aria-hidden="true" className="faq-icon pointer-events-none size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200"/></h3>
+    </summary>
+    <div className="faq-answer pb-4">{item.a}</div>
+  </details>)}</div></section>;
 }
 
 export function ConsultCTA({title="지금 필요한 일부터\n이야기해 보세요.",description="어떤 도움이 필요한지 듣고, 코칭에서 함께 할 수 있는 일을 안내하겠습니다.",button="1시간 무료 상담 신청",note="코칭 신청은 상담 후 결정하시면 됩니다."}:{title?:string;description?:string;button?:string;note?:string}={}) {
