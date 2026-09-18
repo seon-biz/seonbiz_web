@@ -1,16 +1,16 @@
 import { ArrowRight } from "lucide-react";
 
 const serviceProblems = [
-  { problem: "견적 문의가 오면, 보여줄 게 카톡 사진뿐입니다", solution: "흩어진 사진과 설명을 홈페이지의 서비스 소개와 작업 사례로 옮깁니다." },
-  { problem: "사람은 들어오는데, 전화는 울리지 않습니다", solution: "고객이 확인할 정보와 문의 경로를 한 화면에서 찾을 수 있게 정리합니다." },
-  { problem: "할 말은 많은데, 쓰려고 앉으면 한 줄도 안 나옵니다", solution: "현장 사진·메모·고객 질문을 근거로 AI 초안을 만들고 직접 확인합니다." },
-  { problem: "가격 한 줄 바꾸는 데, 업체 연락하고 사흘을 기다립니다", solution: "대표님 계정에서 직접 고치고, 다음에도 따라 할 수 있는 순서를 남깁니다." },
+  { problem: "견적 문의가 오면, 보여줄 게 카톡 사진뿐입니다", solution: "흩어진 사진과 설명을 홈페이지의 서비스 소개와 작업 사례로 옮깁니다.", homeSolution: "작업 사진을 사례 페이지로 만들어, 링크 하나만 보내시면 됩니다." },
+  { problem: "사람은 들어오는데, 전화는 울리지 않습니다", solution: "고객이 확인할 정보와 문의 경로를 한 화면에서 찾을 수 있게 정리합니다.", homeSolution: "가격과 문의 버튼을 첫 화면에 올려, 보고 바로 전화하게 만듭니다." },
+  { problem: "할 말은 많은데, 쓰려고 앉으면 한 줄도 안 나옵니다", solution: "현장 사진·메모·고객 질문을 근거로 AI 초안을 만들고 직접 확인합니다.", homeSolution: "현장 사진과 고객 질문을 넣으면 AI가 초안을 씁니다. 대표님은 고치기만 하시면 됩니다." },
+  { problem: "가격 한 줄 바꾸는 데, 업체 연락하고 사흘을 기다립니다", solution: "대표님 계정에서 직접 고치고, 다음에도 따라 할 수 있는 순서를 남깁니다.", homeSolution: "오늘 바꾸고 싶으면 오늘 바꾸십니다. 5분이면 됩니다." },
 ];
 
-export function ServiceProblems() {
+export function ServiceProblems({homeCopy=false}:{homeCopy?:boolean}={}) {
   return <section id="coaching" className="container section service-problems" aria-labelledby="service-problems-title">
     <div className="section-heading"><p className="eyebrow">이런 상황이라면</p><h2 id="service-problems-title">만들긴 만들었는데,<br/>손댈 수가 없습니다.</h2><p>외주로 만든 홈페이지가 1년째 그대로라면, 문제는 대표님이 아니라 만든 방식에 있습니다.</p></div>
-    <div className="service-problem-list">{serviceProblems.map(item => <article key={item.problem}><h3>{item.problem}</h3><p><ArrowRight size={18} aria-hidden="true"/><span>{item.solution}</span></p></article>)}</div>
+    <div className="service-problem-list">{serviceProblems.map(item => <article key={item.problem}><h3>{item.problem}</h3><p><ArrowRight size={18} aria-hidden="true"/><span>{homeCopy?item.homeSolution:item.solution}</span></p></article>)}</div>
   </section>;
 }
 
