@@ -1,31 +1,220 @@
 ---
 import SiteLayout from "@/src/layouts/SiteLayout.astro";
-import { ArrowUpRight, Check } from "lucide-react";
-import { coaching } from "@/lib/content";
-import { Reveal } from "@/components/site/sections";
-import { PricingSummary, FAQ, ConsultCTA } from "@/components/site/coaching-blocks";
-import { PageHero } from "@/components/site/page-hero";
-import { ServiceProblems, ServiceOwnership } from "@/components/site/service-sections";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { FAQ, ConsultCTA } from "@/components/site/coaching-blocks";
+import { ServiceOwnership } from "@/components/site/service-sections";
+
 export const prerender = true;
 export function getStaticPaths(){return [{params:{type:'website'}}];}
 
 const {type}=Astro.params;
-const item=coaching[type as keyof typeof coaching];
-if(!item)throw new Error("Unknown content route");
+if(type!=='website')throw new Error("Unknown content route");
+
 const metadata={
-  title: '홈페이지 AI 코칭',
-  description: '웹사이트를 직접 만들고 관리하려는 분을 위한 일대일 AI 코칭. 홈페이지 제작·수정, SEO·AI 검색 최적화(GEO), GA4·서치콘솔 데이터 분석과 콘텐츠 채널 운영 자동화를 함께합니다.',
+  title: '코칭 2시간에 하는 일',
+  description: '매주 두 시간씩 함께 만드는 홈페이지 AI 코칭. 기획과 제작, 검색·AI 정보 정리, GA4·서치콘솔 확인까지 실제 코칭에서 하는 일을 안내합니다.',
 };
+
+const sessionSteps = [
+  '지난주에 직접 하신 것부터 같이 봅니다',
+  '막혔던 부분을 화면 보며 풀어갑니다',
+  '오늘 할 작업을 함께 진행합니다',
+  '다음 주까지 하실 일을 정하고 방법을 남깁니다',
+];
+
+const coreCourse = [
+  {
+    number: '01',
+    label: '기획',
+    title: '화면보다 원고가 먼저입니다.',
+    body: '보통 두 번의 코칭을 씁니다. 이 시간에는 대표님께 질문을 많이 드립니다. 어떤 고객이 가장 좋은 고객인지, 전화로 가장 많이 묻는 게 무엇인지, 고객이 AI에게 우리 업종을 어떻게 물어볼지까지 함께 정리합니다. 여기서 나온 홈페이지 원고가 있어야, AI가 대표님 사업에 맞는 화면을 만듭니다.',
+    items: [
+      '고객의 질문과 리뷰에서 실제로 궁금해하는 것 찾기',
+      '고객이 AI에게 물어볼 질문 모으기',
+      '어떤 페이지를 몇 장 만들지 정하기',
+      '각 페이지에 무슨 말을 쓸지 원고로 정리하기',
+    ],
+  },
+  {
+    number: '02',
+    label: '제작',
+    title: '대표님 계정에서 화면을 만듭니다.',
+    body: '원고가 나오면 화면 작업을 시작합니다. 보통 두세 번째 코칭에서 첫 화면을 보십니다. 세온비즈 계정이 아니라 대표님 계정에서 작업하므로, 만드는 과정을 그대로 보시게 됩니다.',
+    items: [
+      '원고를 바탕으로 화면 만들기',
+      '사업·서비스·비용·진행 과정 설명하기',
+      '휴대전화에서 읽고 문의하기 쉬운지 확인하기',
+      '도메인과 운영 계정을 직접 관리할 수 있게 설정하기',
+    ],
+    note: '쓰시던 홈페이지 주소가 있다면 그대로 옮겨 씁니다. 기존 사이트 정리도 함께 합니다.',
+  },
+  {
+    number: '03',
+    label: '검색과 AI',
+    title: '검색했을 때 우리 업체가 제대로 나오게 합니다.',
+    body: '고객은 이제 검색창 대신 AI에게도 묻습니다. 사람과 AI가 모두 읽을 수 있게 홈페이지 정보를 정리합니다.',
+    items: [
+      '페이지 제목·설명·본문과 내부 연결 점검하기',
+      '검색엔진의 접근·색인 상태와 이미지 설명 확인하기',
+      '고객 질문에 정확하게 답하는 내용 채우기',
+      '구조화된 데이터와 AI가 읽을 수 있는 본문 정보 점검하기',
+    ],
+    note: '검색 순위와 AI 추천을 보장하지는 않습니다. 어떤 정보를 왜 보완했는지 확인하고, 다음 수정에 적용할 기준을 남깁니다.',
+  },
+  {
+    number: '04',
+    label: '데이터',
+    title: '감으로 고치지 않습니다. 기록을 보고 고칩니다.',
+    body: '측정이 제대로 되는지 먼저 확인하고, 4주간 기록을 모읍니다. 그다음 어떤 숫자로 판단할지 함께 읽습니다.',
+    items: [
+      'GA4와 구글 서치콘솔 연결 또는 기존 설정 확인하기',
+      '검색 노출·클릭·유입 경로·문의 행동의 뜻 익히기',
+      '측정 설정 후 최소 4주간 기록 모으기',
+      '같은 조건의 데이터를 비교하고 다음 보완점 정하기',
+    ],
+  },
+];
+
+const websiteFaqs = [
+  {
+    q: '홈페이지가 아직 없어도 상담할 수 있나요?',
+    a: '네. 어떤 사업을 하고 고객에게 무엇을 안내하려는지 말씀해주세요. 준비한 글이나 사진이 있다면 함께 보고 필요한 페이지와 기능부터 정합니다.',
+  },
+  {
+    q: '기존 홈페이지 주소를 그대로 쓸 수 있나요?',
+    a: '네. 쓰시던 도메인을 새 홈페이지로 옮겨 씁니다. 기존 사이트를 정리하는 방법도 코칭에서 함께 다룹니다.',
+  },
+  {
+    q: '블로그·SNS나 광고도 꼭 해야 하나요?',
+    a: '아닙니다. 홈페이지만 원하시면 약 두 달, 264만 원으로 마무리됩니다. 블로그·SNS 발행과 광고는 홈페이지가 끝난 뒤 원하실 때 이어서 진행하는 선택 과정입니다.',
+  },
+  {
+    q: '코칭 사이에 제가 해야 할 일은 얼마나 되나요?',
+    a: '주 3~4시간 정도입니다. 다음 주까지 하실 일과 방법을 코칭 시간에 정해드리고, 막히시는 부분은 영상으로 만들어 드립니다.',
+  },
+];
 ---
 <SiteLayout {...metadata}>
-<main id="main" class="service-coaching">
-<PageHero eyebrow={item.eyebrow} title={item.title} intro={item.intro} image="/images/service-website.webp" alt="사업 자료와 현장 사진을 홈페이지의 서비스 소개와 문의 안내로 정리하는 일러스트" caption="사업의 실제 정보로 만드는 홈페이지"/>
-<ServiceOwnership/>
-<ServiceProblems/>
-<section class="container task-section"><p class="scope-note">필요한 작업과 순서를 첫 상담에서 정합니다. 홈페이지 제작과 초기 SEO·GEO 설정은 보통 4~8회, 약 1~2개월이 걸리며 페이지 수, 기능, 기존 상태와 준비된 자료에 따라 달라집니다.</p>{item.tasks.map((task,i)=><Reveal><article class="task-row"><div><span class="step-index">0{i+1}</span><h2>{task.title}</h2></div><div><h3>{task.problem}</h3><ul>{task.items.map(t=><li><Check size={18}/>{t}</li>)}</ul><p class="task-result">{task.result}</p></div></article></Reveal>)}</section>
-<section class="service-example container"><p class="eyebrow">홈페이지에서 채널 운영까지</p><h2>고객 질문 하나를<br/>여러 채널로 확장합니다.</h2><p>홈페이지에 정확한 답을 먼저 정리한 뒤 블로그 글, SNS 게시물, 유튜브 숏츠에 맞게 나눕니다. 업체에 맞는 AI 지시문과 검토표, 반복 작업 순서를 설정하고 고객이 자기 계정에서 확인해 발행합니다.</p><p class="meta">채널 운영 자동화에는 홈페이지 제작과 별도의 시간이 필요합니다.</p></section>
-<section class="container related-case"><p>실제 GA4와 구글 서치콘솔 기록을 확인하세요.</p><p class="service-case-note">서로 다른 고객 웹사이트의 기록이며 특정 수정 하나의 효과를 뜻하지 않습니다.</p><a href="/cases" class="text-link">실제 데이터 보기 <ArrowUpRight size={18}/></a></section>
-<section class="container related-case related-note-links" aria-label="관련 코칭 노트"><p>홈페이지 제작과 운영에 필요한 글도 함께 읽어보세요.</p><div><a href="/notes/website-or-agency" class="text-link">홈페이지를 맡길까, 직접 만들까 <ArrowUpRight size={18}/></a><a href="/notes/content-formats" class="text-link">홈페이지 내용을 블로그·SNS·숏츠로 확장하기 <ArrowUpRight size={18}/></a><a href="/notes/ai-search-basics" class="text-link">SEO·AI 검색 최적화 기본 순서 <ArrowUpRight size={18}/></a></div></section>
-<PricingSummary/><FAQ client:load/><ConsultCTA title={'만들거나 고치고 싶은\n홈페이지를 알려주세요.'} description="현재 상태와 준비된 자료를 듣고, 홈페이지 제작부터 SEO·GEO와 데이터 분석까지 진행 방향을 함께 정합니다."/>
+<main id="main" class="service-coaching service-coaching-new">
+  <section class="container coaching-detail-hero">
+    <div class="coaching-detail-hero-copy">
+      <p class="eyebrow">코칭 내용</p>
+      <h1>두 달이면, 고객이 찾는<br/>홈페이지가 생깁니다.</h1>
+      <p class="lead">매주 두 시간씩 함께 만듭니다. 기획부터 검색 노출과 방문 기록까지.<br/>완성한 뒤에는 대표님이 직접 고치십니다.</p>
+      <div class="coaching-hero-price">
+        <strong>홈페이지 코칭 · 약 2개월 · 264만 원 <span>(부가세 포함)</span></strong>
+        <small>월 132만 원씩 두 달입니다. 한 달 단위로 신청하고, 매달 다시 정하십니다.</small>
+      </div>
+      <a href="/apply" class="button button-coral">1시간 무료 상담 신청 <ArrowUpRight size={20}/></a>
+      <p class="hero-note">신청 후 1영업일 이내 카카오톡으로 연락드립니다.</p>
+    </div>
+    <figure>
+      <img src="/images/service-website.webp" width="1448" height="1086" alt="사업 자료와 현장 사진을 홈페이지의 서비스 소개와 문의 안내로 정리하는 일러스트" fetchpriority="high"/>
+      <figcaption>회당 2시간 · Zoom 화면 공유</figcaption>
+    </figure>
+  </section>
+
+  <section class="container section coaching-session-flow">
+    <div class="coaching-section-heading">
+      <p class="eyebrow">코칭 한 번은</p>
+      <h2>매주 두 시간,<br/>같이 앉아서 합니다.</h2>
+      <p>설명을 듣고 끝나지 않습니다. 대표님 화면을 공유하고 함께 작업합니다.</p>
+    </div>
+    <ol>
+      {sessionSteps.map((step,index)=><li><span>0{index+1}</span><p>{step}</p></li>)}
+    </ol>
+  </section>
+
+  <div class="coaching-core-course">
+    {coreCourse.map(course =>
+      <section class="container coaching-stage">
+        <div class="coaching-stage-heading">
+          <p class="coaching-stage-label"><span>{course.number}</span><span>{course.label}</span></p>
+          <h2>{course.title}</h2>
+        </div>
+        <div class="coaching-stage-body">
+          <p class="coaching-stage-intro">{course.body}</p>
+          <ul>{course.items.map(item=><li><Check size={18} aria-hidden="true"/><span>{item}</span></li>)}</ul>
+          {course.note&&<p class="coaching-stage-note">{course.note}</p>}
+        </div>
+      </section>
+    )}
+  </div>
+
+  <section class="container coaching-between">
+    <div>
+      <p class="eyebrow">코칭과 코칭 사이</p>
+      <h2>혼자 하시는 시간이 있습니다.</h2>
+    </div>
+    <div>
+      <p>주 3~4시간 정도입니다. 다음 주까지 하실 일을 구체적으로 정하고, 방법도 자세히 남깁니다. 그래도 막히시면, 그 부분만 영상으로 만들어 드립니다. 대표님 화면으로 만든 영상이라, 보면서 그대로 따라 하시면 됩니다.</p>
+      <p class="coaching-stage-note">코칭 사이에 생긴 질문은 카카오톡으로 답변드립니다.</p>
+    </div>
+  </section>
+
+  <section class="coaching-finish">
+    <div class="container">
+      <p class="eyebrow">홈페이지 코칭 완료</p>
+      <h2>여기까지가 홈페이지 코칭입니다.</h2>
+      <p>약 두 달, 264만 원입니다. 여기서 마치셔도 됩니다.<br/>아래 두 가지는 원하실 때 이어서 진행하는 선택 과정입니다.<br/>홈페이지가 완성된 뒤에 다시 결정하시면 됩니다.</p>
+    </div>
+  </section>
+
+  <section class="container section coaching-option coaching-option-content">
+    <div class="coaching-option-heading">
+      <p class="eyebrow">선택 · 원하실 때만</p>
+      <h2>원하시면, 블로그와 SNS까지 이어갑니다.</h2>
+    </div>
+    <div class="coaching-option-body">
+      <p class="coaching-option-intro">홈페이지가 끝난 뒤 이어서 진행합니다. 약 1개월 더 걸립니다. 업체마다 블로그 성격이 다릅니다. 사진이 많이 필요한 곳도 있고, 글 위주인 곳도 있습니다. 대표님 업체에 맞는 발행 방식을 코칭 시간에 함께 만듭니다.</p>
+      <ul>
+        <li><Check size={18} aria-hidden="true"/><span>업체에 맞는 주제와 반복 작업 흐름 정하기</span></li>
+        <li><Check size={18} aria-hidden="true"/><span>업체에 맞는 AI 지시문과 검토표 만들기</span></li>
+        <li><Check size={18} aria-hidden="true"/><span>블로그 글·SNS 게시물·유튜브 숏츠 발행 준비하기</span></li>
+        <li><Check size={18} aria-hidden="true"/><span>대표님 계정에서 직접 발행하는 방법 익히기</span></li>
+      </ul>
+      <p class="coaching-stage-note">카메라 앞에 서지 않아도 됩니다. 글과 화면으로 만듭니다.</p>
+    </div>
+  </section>
+
+  <section class="container coaching-option coaching-option-ad">
+    <div>
+      <p class="eyebrow">선택 · 원하실 때만</p>
+      <h2>원하시면, 광고까지 이어갑니다.</h2>
+    </div>
+    <div>
+      <p>홈페이지와 측정이 갖춰진 다음에 시작합니다. 약 3개월입니다. 네이버·구글·유튜브·메타 광고를 함께 설정하고, 전환 추적과 픽셀 설치는 세온비즈가 해드립니다. 광고 성과를 함께 보면서 다음에 무엇을 바꿀지 정합니다.</p>
+      <p class="coaching-stage-note">광고비는 코칭료에 포함되지 않습니다. 광고 계정은 대표님 것입니다.</p>
+    </div>
+  </section>
+
+  <ServiceOwnership/>
+
+  <section class="container section coaching-duration">
+    <div class="coaching-duration-heading">
+      <p class="eyebrow">얼마나 걸리고 얼마인가요</p>
+      <h2>홈페이지까지 두 달,<br/>264만 원입니다.</h2>
+    </div>
+    <div>
+      <table class="coaching-duration-table">
+        <caption class="sr-only">홈페이지 코칭과 선택 과정의 기간 및 비용</caption>
+        <tbody>
+          <tr class="coaching-duration-primary"><th scope="row">홈페이지</th><td>약 2개월</td><td>264만 원</td><td>기획 · 제작 · 검색과 AI · 데이터</td></tr>
+          <tr class="coaching-duration-divider"><td colspan="4"><span>아래는 선택입니다</span></td></tr>
+          <tr><th scope="row">+ 콘텐츠 자동화</th><td colspan="3">약 1개월 추가</td></tr>
+          <tr><th scope="row">+ 광고</th><td colspan="3">약 3개월</td></tr>
+        </tbody>
+      </table>
+      <p class="coaching-duration-copy">페이지 수와 기능, 준비된 자료에 따라 달라집니다. 보통 8~12회 정도입니다.<br/>실제 사례는 모터리페어 8회, 본대로홈 9회, 리재 12회였습니다.</p>
+      <a href="/cases" class="text-link">실제 사례 보기 <ArrowRight size={18}/></a>
+      <div class="coaching-duration-foot">
+        <p>월 코칭 132만 원 · 단독 코칭 44만 원 (부가세 포함).<br/>한 달 단위로 신청하고, 매달 진행 여부를 다시 정합니다.</p>
+        <a href="/process" class="text-link">진행 방식과 비용 자세히 보기 <ArrowRight size={18}/></a>
+      </div>
+    </div>
+  </section>
+
+  <FAQ client:load items={websiteFaqs} homeCopy showIntro={false}/>
+  <ConsultCTA title={'지금 홈페이지가 어떤 상태인지\n알려주세요.'} description="현재 상태와 준비된 자료를 듣고, 어디부터 시작할지 함께 정합니다." note="1영업일 이내 카카오톡 연락 · 코칭 신청은 상담 후 결정하시면 됩니다."/>
 </main>
 </SiteLayout>

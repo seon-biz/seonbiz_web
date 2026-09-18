@@ -366,6 +366,17 @@
 .pricing-comparison{display:grid;grid-template-columns:.7fr 1fr 1.35fr;gap:34px;margin:44px 0 8px;padding:34px 36px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:16px}
 .pricing-comparison .eyebrow{color:var(--blue);margin:0}.pricing-comparison h3{font-size:1.45rem}.pricing-comparison-copy{display:grid;gap:18px}.pricing-comparison-copy>p{color:var(--muted-foreground);font-size:.9375rem}.pricing-comparison-copy>.pricing-comparison-note{padding-top:15px;border-top:1px solid #cbd5e5;font-size:.8125rem;color:#737b87}
 .comparison-table-block{margin-top:22px}.comparison-table{width:100%;border-collapse:collapse;background:#fff;font-size:.9375rem;text-align:left}.comparison-table th,.comparison-table td{padding:17px 20px;border:1px solid var(--border);vertical-align:top;word-break:keep-all}.comparison-table thead{background:#edf1fa}.comparison-table th{font-weight:500}.comparison-table thead th:first-child,.comparison-table tbody th{width:20%}.comparison-table tbody td:last-child{background:#f7f9ff}.comparison-table-note{margin-top:13px;font-size:.8125rem;color:var(--muted-foreground)}
+.pricing-value-case{margin-top:52px;padding:42px 0 30px;border-top:1px solid var(--foreground);border-bottom:1px solid var(--border)}
+.pricing-value-heading{display:grid;grid-template-columns:.65fr 1.35fr;gap:36px;align-items:start;margin-bottom:36px}
+.pricing-value-heading .eyebrow{margin:7px 0 0;color:var(--blue)}
+.pricing-value-heading h3{font-size:clamp(1.75rem,3vw,2.55rem);line-height:1.35;letter-spacing:-.045em}
+.pricing-value-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.pricing-value-grid article{min-width:0;padding:0 28px}
+.pricing-value-grid article:first-child{padding-left:0}.pricing-value-grid article+article{border-left:1px solid var(--border)}
+.pricing-value-grid article>span{display:block;margin-bottom:15px;color:var(--blue);font-size:.8125rem}
+.pricing-value-grid h4{margin:0 0 14px;font-size:1.125rem;line-height:1.55;letter-spacing:-.035em;word-break:keep-all}
+.pricing-value-grid p{color:var(--muted-foreground);font-size:.9375rem;line-height:1.85;word-break:keep-all}
+.pricing-value-note{margin-top:34px;padding-top:22px;border-top:1px solid var(--border);color:var(--muted-foreground);font-size:.8125rem;line-height:1.8}
 .data-disclaimer{font-size:.875rem!important;color:#aeb8b0!important}
 @media(max-width:1100px){.service-ownership{gap:40px;padding:40px 32px}}
 @media(max-width:760px){
@@ -375,10 +386,106 @@
   .service-hosting-note h3{font-size:1.15rem}.service-case-note{font-size:.875rem}
   .pricing-comparison{grid-template-columns:1fr;gap:18px;padding:28px 24px;margin-top:32px}.pricing-comparison .eyebrow{margin-bottom:0}.pricing-comparison-copy{gap:16px}
   .comparison-table,.comparison-table tbody,.comparison-table tr,.comparison-table th,.comparison-table td{display:block;width:100%}.comparison-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}.comparison-table{background:transparent}.comparison-table tbody{display:grid;gap:16px}.comparison-table tbody tr{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff}.comparison-table tbody th{grid-column:1/-1;width:100%;padding:12px 15px;border:0;border-bottom:1px solid var(--border);background:#edf1fa}.comparison-table tbody td{min-width:0;padding:13px 15px;border:0;font-size:.875rem;word-break:keep-all}.comparison-table tbody td+td{border-left:1px solid var(--border)}.comparison-table tbody td:before{content:attr(data-column);display:block;margin-bottom:7px;font-size:.75rem;color:var(--muted-foreground)}.comparison-table-note{line-height:1.7}
+  .pricing-value-case{margin-top:40px;padding:32px 0 24px}.pricing-value-heading{grid-template-columns:1fr;gap:14px;margin-bottom:28px}.pricing-value-heading .eyebrow{margin:0}.pricing-value-heading h3{font-size:1.8rem}.pricing-value-grid{grid-template-columns:1fr}.pricing-value-grid article,.pricing-value-grid article:first-child{padding:24px 0}.pricing-value-grid article:first-child{padding-top:0}.pricing-value-grid article+article{border-left:0;border-top:1px solid var(--border)}.pricing-value-grid h4{font-size:1.0625rem}.pricing-value-grid p br,.pricing-value-note br{display:none}.pricing-value-note{margin-top:4px}
   .refund-summary{padding:24px 22px}.refund-summary h3{font-size:1.2rem}
 }
 
 .privacy-delete-list{list-style:disc;padding-left:1.25em;margin:20px 0}.privacy-delete-list li+li{margin-top:8px}
+
+/* Website coaching: what happens in each two-hour session */
+.coaching-detail-hero{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center;padding-block:78px 95px}
+.coaching-detail-hero h1{font-size:clamp(2.1rem,3.4vw,3.5rem);line-height:1.4}
+.coaching-detail-hero .lead{margin-top:27px;font-size:1.0625rem}
+.coaching-detail-hero .button{margin-top:28px}
+.coaching-detail-hero figure{position:relative;margin:0}
+.coaching-detail-hero img{aspect-ratio:4/3;width:100%;height:auto;object-fit:cover;border-radius:26px}
+.coaching-detail-hero figcaption{position:absolute;bottom:20px;left:20px;max-width:calc(100% - 40px);padding:12px 17px;background:#fff;border-radius:10px;font-size:.875rem;box-shadow:0 8px 35px #20242b0a}
+.coaching-hero-price{display:grid;gap:6px;margin-top:28px;padding:20px 22px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:12px}
+.coaching-hero-price strong{font-size:1.05rem;font-weight:500;line-height:1.55;word-break:keep-all}
+.coaching-hero-price strong span{font-size:.8125rem;color:var(--muted-foreground);white-space:nowrap}
+.coaching-hero-price small{color:var(--muted-foreground);font-size:.8125rem;line-height:1.7}
+.coaching-session-flow{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;border-top:1px solid var(--border)}
+.coaching-section-heading>p:not(.eyebrow){max-width:460px;margin-top:24px;color:var(--muted-foreground)}
+.coaching-session-flow ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--foreground)}
+.coaching-session-flow li{display:grid;grid-template-columns:34px 1fr;gap:14px;min-height:145px;padding:27px 24px;border-bottom:1px solid var(--border)}
+.coaching-session-flow li:nth-child(odd){border-right:1px solid var(--border);padding-left:0}
+.coaching-session-flow li>span{color:var(--blue);font-size:.8125rem;padding-top:3px}
+.coaching-session-flow li>p{font-size:1.0625rem;line-height:1.75}
+.coaching-core-course{background:#fff;border-block:1px solid var(--border)}
+.coaching-stage{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;padding-block:78px;border-bottom:1px solid var(--border)}
+.coaching-stage:last-child{border-bottom:0}
+.coaching-stage-label{display:flex;align-items:center;gap:12px;margin-bottom:24px;color:var(--blue);font-size:.875rem}
+.coaching-stage-label span+span:before{content:"/";margin-right:12px;color:#9aa4b2}
+.coaching-stage h2{font-size:clamp(1.9rem,3vw,2.8rem)}
+.coaching-stage-intro,.coaching-option-intro{font-size:1.0625rem;line-height:1.95;color:var(--muted-foreground)}
+.coaching-stage-body ul,.coaching-option-body ul{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:14px}
+.coaching-stage-body li,.coaching-option-body li{display:flex;align-items:flex-start;gap:12px;line-height:1.75}
+.coaching-stage-body li svg,.coaching-option-body li svg{flex-shrink:0;margin-top:5px;color:var(--blue)}
+.coaching-stage-note{margin-top:28px;padding-top:20px;border-top:1px solid var(--border);font-size:.8125rem;line-height:1.8;color:var(--muted-foreground)}
+.coaching-between{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;margin-top:90px;margin-bottom:110px;padding:48px 45px;background:#edf1fa;border:1px solid #d9e2f4;border-radius:18px}
+.coaching-between h2{font-size:clamp(1.9rem,3vw,2.8rem)}
+.coaching-between>div:last-child>p:first-child{font-size:1.0625rem;line-height:1.95;color:var(--muted-foreground)}
+.coaching-finish{padding-block:90px;background:var(--blue);color:#fff;text-align:center}
+.coaching-finish .eyebrow{color:#dbe3ff}
+.coaching-finish h2{font-size:clamp(2.1rem,3.5vw,3.5rem)}
+.coaching-finish p:last-child{max-width:740px;margin:28px auto 0;color:#e6ebff;font-size:1.0625rem;line-height:1.95}
+.coaching-option{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px}
+.coaching-option-content{margin-top:35px;margin-bottom:70px;padding-inline:45px;background:#f2f1eb;border-radius:18px}
+.coaching-option .eyebrow{color:var(--blue)}
+.coaching-option h2{font-size:clamp(1.9rem,3vw,2.8rem)}
+.coaching-option-ad{margin-bottom:112px;padding-block:38px;border-block:1px solid var(--border)}
+.coaching-option-ad h2{font-size:1.65rem}
+.coaching-option-ad>div:last-child>p:first-child{color:var(--muted-foreground);font-size:.9375rem;line-height:1.9}
+.service-coaching-new .service-ownership{margin-top:0;margin-bottom:0}
+.coaching-duration{display:grid;grid-template-columns:.78fr 1.22fr;gap:80px;border-top:1px solid var(--border)}
+.coaching-duration-heading h2{font-size:clamp(1.9rem,3vw,2.8rem)}
+.coaching-duration-table{width:100%;border-collapse:collapse;border-top:1px solid var(--foreground)}
+.coaching-duration-table th,.coaching-duration-table td{padding:21px 18px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top;word-break:keep-all}
+.coaching-duration-table th{padding-left:0;font-weight:500}
+.coaching-duration-table td:last-child{padding-right:0;color:var(--muted-foreground)}
+.coaching-duration-primary th,.coaching-duration-primary td{font-size:1.05rem;color:var(--foreground)}
+.coaching-duration-primary td:nth-child(3){font-weight:500;white-space:nowrap}
+.coaching-duration-divider td{position:relative;padding:20px 0;text-align:center;border-bottom:1px solid var(--border);color:var(--blue)}
+.coaching-duration-divider td:before,.coaching-duration-divider td:after{content:"";position:absolute;top:50%;width:calc(50% - 85px);height:1px;background:#cbd5e5}
+.coaching-duration-divider td:before{left:0}.coaching-duration-divider td:after{right:0}
+.coaching-duration-divider span{font-size:.8125rem;background:var(--background);padding-inline:14px}
+.coaching-duration-copy{margin-top:28px;color:var(--muted-foreground);line-height:1.9}
+.coaching-duration .text-link{margin-top:13px;font-size:.9375rem}
+.coaching-duration-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-top:34px;padding-top:24px;border-top:1px solid var(--border)}
+.coaching-duration-foot p{font-size:.8125rem;line-height:1.8;color:var(--muted-foreground)}
+.coaching-duration-foot .text-link{flex-shrink:0;margin-top:0}
+
+@media(max-width:900px){
+  .coaching-detail-hero{gap:38px}
+  .coaching-session-flow,.coaching-stage,.coaching-between,.coaching-option,.coaching-duration{gap:45px}
+  .coaching-option-content{padding-inline:32px}
+}
+@media(max-width:760px){
+  .coaching-detail-hero{grid-template-columns:1fr;gap:36px;padding-block:40px 65px}
+  .coaching-detail-hero h1{font-size:clamp(1.8rem,7.1vw,2.6rem)}
+  .coaching-detail-hero .lead{font-size:1rem;margin-top:24px}.coaching-detail-hero .lead br{display:none}
+  .coaching-detail-hero img{border-radius:20px}.coaching-detail-hero figcaption{font-size:.8125rem;left:14px;bottom:14px;padding:10px 13px}
+  .coaching-hero-price{padding:18px}.coaching-hero-price strong{font-size:1rem}.coaching-hero-price strong span{display:block;margin-top:2px}
+  .coaching-session-flow,.coaching-stage,.coaching-between,.coaching-option,.coaching-duration{display:block}
+  .coaching-session-flow ol{grid-template-columns:1fr;margin-top:35px}
+  .coaching-session-flow li,.coaching-session-flow li:nth-child(odd){min-height:0;padding:22px 0;border-right:0}
+  .coaching-stage{padding-block:55px}.coaching-stage-body{margin-top:28px}
+  .coaching-stage-intro,.coaching-option-intro{font-size:1rem}
+  .coaching-between{margin-block:55px 65px;padding:30px 24px}.coaching-between>div+div{margin-top:25px}
+  .coaching-finish{padding-block:65px;text-align:left}.coaching-finish p:last-child{font-size:1rem;margin-top:24px}.coaching-finish p br{display:none}
+  .coaching-option-content{margin:0;padding:60px 20px;border-radius:0}
+  .coaching-option-body{margin-top:28px}
+  .coaching-option-ad{margin-bottom:65px;padding-block:32px}.coaching-option-ad>div+div{margin-top:22px}
+  .service-coaching-new .service-ownership{margin-bottom:0}
+  .coaching-duration>div+div{margin-top:32px}
+  .coaching-duration-table,.coaching-duration-table tbody,.coaching-duration-table tr,.coaching-duration-table th,.coaching-duration-table td{display:block;width:100%}
+  .coaching-duration-table tr{padding:18px 0;border-bottom:1px solid var(--border)}
+  .coaching-duration-table th,.coaching-duration-table td{padding:3px 0;border:0}
+  .coaching-duration-primary td:last-child{margin-top:8px;font-size:.875rem}
+  .coaching-duration-divider{padding:0!important}.coaching-duration-divider td{padding:20px 0;text-align:center}
+  .coaching-duration-divider td:before,.coaching-duration-divider td:after{width:calc(50% - 75px)}
+  .coaching-duration-foot{align-items:flex-start;flex-direction:column;gap:18px}
+}
 
 /* Website coaching cases */
 .cases-hero .lead{max-width:780px}
