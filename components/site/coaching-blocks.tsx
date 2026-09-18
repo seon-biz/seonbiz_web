@@ -5,6 +5,29 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { coachingSteps, faqs, workAreas } from "@/lib/content";
 import { Reveal } from "./sections";
 
+const homeCoachingSteps = [
+  {
+    label: "상황 확인",
+    title: "무엇부터 손댈지 같이 정합니다.",
+    body: "지금 홈페이지와 사업 자료를 함께 봅니다. 고객이 자주 묻는 것, 현장 사진, 쓰다 만 메모까지 꺼내놓고 어디부터 시작할지 정합니다.",
+  },
+  {
+    label: "제작과 수정",
+    title: "대표님 화면에서 같이 만듭니다.",
+    body: "세온비즈 계정이 아니라 대표님 계정에서 작업합니다. AI가 쓴 내용이 실제 사업과 맞는지 함께 확인하고, 휴대전화에서 읽고 전화하기 쉬운지도 봅니다.",
+  },
+  {
+    label: "검색 기반",
+    title: "검색과 AI에 걸리게 손봅니다.",
+    body: "제목과 본문, 이미지 설명을 정리하고 검색엔진이 읽을 수 있는지 확인합니다. GA4와 구글 서치콘솔을 연결해 기록이 쌓이기 시작합니다.",
+  },
+  {
+    label: "운영과 분석",
+    title: "실제 방문 기록을 같이 읽습니다.",
+    body: "측정이 제대로 되는지 먼저 확인하고 4주간 기록을 모읍니다. 어떤 숫자를 보고 판단할지 함께 익히고 다음 작업을 정합니다. 블로그·SNS 발행까지 원하시면 그다음에 이어서 진행합니다.",
+  },
+];
+
 export function ScopeList() {
   return <section className="container section scope-overview">
     <div className="section-heading"><p className="eyebrow">코칭에서 다루는 일</p><h2>만들고 끝나면,<br/>아무것도 안 남습니다.</h2><p>홈페이지를 만들고, 검색에 걸리게 하고, 실제 방문 기록까지 봅니다. 순서는 첫 상담에서 정합니다.</p></div>
@@ -13,13 +36,14 @@ export function ScopeList() {
 }
 
 export function Method({showSessionExample=false,showProcessLink=true,showProjectEstimate=false,homeCopy=false}:{showSessionExample?:boolean;showProcessLink?:boolean;showProjectEstimate?:boolean;homeCopy?:boolean}={}) {
+  const displayedSteps = homeCopy ? homeCoachingSteps : coachingSteps;
   return <section id="method" className="container section method-section">
     <div className="method-flow">
     <div className="method-sticky"><p className="eyebrow">일대일 코칭 진행 방식</p><h2>{homeCopy?<>보면서 따라<br/>하시면 됩니다.</>:<>실제 작업을 하면서<br/>하나씩 익힙니다.</>}</h2><p className="lead method-lead">한 번에 2시간, Zoom으로 화면을 공유합니다. 월 코칭에서는 직접 해본 결과와 어려웠던 부분을 다음 시간에 다시 살펴봅니다.</p>
       <div className="takeaway-note"><p className="kicker">코칭 후에 남기는 것</p><ul><li>함께 작성하고 수정한 내용</li><li>다시 작업할 때 볼 순서와 메모</li><li>다음에 직접 해볼 일</li></ul></div>
       {showProcessLink&&<a href="/process" className="text-link">진행 방식과 준비물 보기 <ArrowRight size={18}/></a>}
     </div>
-    <div className="method-steps">{coachingSteps.map((step,i)=><Reveal key={step.label}><article className="method-step is-active"><span className="step-index">0{i+1} / {step.label}</span><h3>{step.title}</h3><p>{step.body}</p></article></Reveal>)}</div>
+    <div className="method-steps">{displayedSteps.map((step,i)=><Reveal key={step.label}><article className="method-step is-active"><span className="step-index">{homeCopy?step.label:<>0{i+1} / {step.label}</>}</span><h3>{step.title}</h3><p>{step.body}</p></article></Reveal>)}</div>
     </div>
     {showSessionExample&&<div className="session-example"><div><p className="eyebrow">홈페이지 제작 기간</p><h3>{homeCopy?<>보통 8~12회,<br/>약 2~3개월입니다.</>:<>보통 4~8회,<br/>약 1~2개월입니다.</>}</h3><p>페이지 수와 기능, 기존 상태와 준비된 자료에 따라 달라집니다.<br/>{homeCopy?'월 코칭으로 진행하면 264만~396만 원 선입니다.':'첫 데이터 분석까지는 대체로 약 2~3개월입니다.'}</p></div><dl><div><dt>1~2회차</dt><dd>현재 상태와 필요한 페이지를 정하고 제작을 시작합니다</dd></div><div><dt>{homeCopy?'3~6회차':'3~4회차'}</dt><dd>화면과 내용을 완성하며 SEO·GEO와 측정을 설정합니다</dd></div><div><dt>{homeCopy?'7~12회차':'5~8회차'}</dt><dd>페이지를 보완하고 직접 관리하는 방법을 익힙니다</dd></div><div><dt>측정 후 4주~</dt><dd>GA4·서치콘솔의 첫 데이터를 분석하고 다음 작업을 정합니다</dd></div></dl>{showProjectEstimate&&<p className="session-cost-note">월 코칭으로 진행하면 홈페이지 완성까지 보통 1~2개월, 132만~264만 원 선입니다.<br/>준비된 자료와 페이지 수에 따라 달라지며, 첫 상담에서 범위를 함께 정합니다.</p>}</div>}
   </section>;
