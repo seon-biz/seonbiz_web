@@ -36,7 +36,7 @@ export function ScopeList() {
   </section>;
 }
 
-export function Method({showSessionExample=false,showProcessLink=true,showProjectEstimate=false,homeCopy=false}:{showSessionExample?:boolean;showProcessLink?:boolean;showProjectEstimate?:boolean;homeCopy?:boolean}={}) {
+export function Method({showSessionExample=false,showProcessLink=true,homeCopy=false}:{showSessionExample?:boolean;showProcessLink?:boolean;homeCopy?:boolean}={}) {
   const displayedSteps = homeCopy ? homeCoachingSteps : coachingSteps;
   return <section id="method" className="container section method-section">
     <div className="method-flow">
@@ -46,7 +46,7 @@ export function Method({showSessionExample=false,showProcessLink=true,showProjec
     </div>
     <div className="method-steps">{displayedSteps.map((step,i)=><Reveal key={step.label}><article className="method-step is-active"><span className="step-index">{homeCopy?step.label:<>0{i+1} / {step.label}</>}</span><h3>{step.title}</h3><p>{step.body}</p></article></Reveal>)}</div>
     </div>
-    {showSessionExample&&<div className="session-example"><div><p className="eyebrow">홈페이지 제작 기간</p><h3>{formatCourseDuration(COACHING_COURSES.website)}입니다.</h3><p>페이지 수와 기능, 기존 상태와 준비된 자료에 따라 달라집니다.<br/>{homeCopy?`월 코칭으로 진행하면 ${formatManWon(COACHING_COURSES.website.priceWon)} (부가세 포함)입니다.`:'첫 데이터 분석까지는 대체로 약 2~3개월입니다.'}</p></div><dl><div><dt>1~2회차</dt><dd>현재 상태와 필요한 페이지를 정하고 제작을 시작합니다</dd></div><div><dt>{homeCopy?'3~6회차':'3~4회차'}</dt><dd>화면과 내용을 완성하며 SEO·GEO와 측정을 설정합니다</dd></div><div><dt>{homeCopy?`7~${COACHING_COURSES.website.sessions}회차`:`5~${COACHING_COURSES.website.sessions}회차`}</dt><dd>페이지를 보완하고 직접 관리하는 방법을 익힙니다</dd></div><div><dt>측정 후 4주~</dt><dd>GA4·서치콘솔의 첫 데이터를 분석하고 다음 작업을 정합니다</dd></div></dl>{showProjectEstimate&&<p className="session-cost-note">월 코칭으로 진행하면 홈페이지 완성까지 {formatCourseDuration(COACHING_COURSES.website)}, {formatManWon(COACHING_COURSES.website.priceWon)} (부가세 포함)입니다.<br/>준비된 자료와 페이지 수에 따라 달라지며, 첫 상담에서 범위를 함께 정합니다.</p>}</div>}
+    {showSessionExample&&<div className="session-example"><div><p className="eyebrow">홈페이지 제작 기간</p><h3>{formatCourseDuration(COACHING_COURSES.website)}입니다.</h3><p>페이지 수와 기능, 기존 상태와 준비된 자료에 따라 달라집니다.<br/>{homeCopy?`평균 ${COACHING_COURSES.website.months}개월 기준 ${formatManWon(COACHING_COURSES.website.priceWon)} (부가세 포함)입니다. 회차가 늘어나면 월 단위로 이어집니다.`:'첫 데이터 분석까지는 대체로 약 2~3개월입니다.'}</p></div><dl><div><dt>1~2회차</dt><dd>현재 상태와 필요한 페이지를 정하고 제작을 시작합니다</dd></div><div><dt>{homeCopy?'3~6회차':'3~4회차'}</dt><dd>화면과 내용을 완성하며 SEO·GEO와 측정을 설정합니다</dd></div><div><dt>{homeCopy?`7~${COACHING_COURSES.website.sessions}회차`:`5~${COACHING_COURSES.website.sessions}회차`}</dt><dd>페이지를 보완하고 직접 관리하는 방법을 익힙니다</dd></div><div><dt>측정 후 4주~</dt><dd>GA4·서치콘솔의 첫 데이터를 분석하고 다음 작업을 정합니다</dd></div></dl></div>}
   </section>;
 }
 

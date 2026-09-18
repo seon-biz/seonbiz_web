@@ -11,18 +11,26 @@ export const MONTHLY_HOURS = MONTHLY_COACHING.sessions * MONTHLY_COACHING.hoursP
 export const MONTHLY_SUPPLY_WON = Math.round(MONTHLY_COACHING.priceWon / 1.1);
 export const MONTHLY_VAT_WON = MONTHLY_COACHING.priceWon - MONTHLY_SUPPLY_WON;
 
-function course(months: number) {
+function courseAverage({ months, durationPrefix = '약' }: {
+  months: number;
+  durationPrefix?: '약' | '평균';
+}) {
   return {
     months,
+    durationPrefix,
     sessions: months * MONTHLY_COACHING.sessions,
     priceWon: months * MONTHLY_COACHING.priceWon,
   } as const;
 }
 
 export const COACHING_COURSES = {
-  website: course(2),
-  content: course(1),
-  ads: course(2),
+  website: courseAverage({
+    // 평균값입니다. 업체마다 회차가 달라지며 비용은 월 단위로 늘어납니다.
+    months: 2,
+    durationPrefix: '평균',
+  }),
+  content: courseAverage({ months: 1 }),
+  ads: courseAverage({ months: 2 }),
 } as const;
 
 const numberFormat = new Intl.NumberFormat('ko-KR', { maximumFractionDigits: 4 });
@@ -47,8 +55,8 @@ export function formatKoreanWon(won: number): string {
   return parts.length ? `${parts.join(' ')} 원` : '0원';
 }
 
-export function formatCourseDuration(course: { months: number; sessions: number }): string {
-  return `약 ${course.months}개월 (${course.sessions}회)`;
+export function formatCourseDuration(course: { months: number; sessions: number; durationPrefix: '약' | '평균' }): string {
+  return `${course.durationPrefix} ${course.months}개월 (${course.sessions}회)`;
 }
 
 export function formatKoreanCount(count: number): string {

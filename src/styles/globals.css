@@ -204,7 +204,6 @@
 .session-example dl>div:last-child{padding-bottom:0;border-bottom:0}
 .session-example dt{font-weight:500;color:var(--blue)}
 .session-example dd{margin:0;word-break:keep-all}
-.session-example .session-cost-note{grid-column:1/-1;margin:4px 0 0;padding-top:22px;border-top:1px solid #cbd5e5;color:var(--foreground);font-weight:500}
 .work-showcase[data-scene=content]{background:var(--ink);color:var(--paper)}
 .work-showcase .content-scene{color:var(--ink)}
 .work-heading>p{max-width:365px}
